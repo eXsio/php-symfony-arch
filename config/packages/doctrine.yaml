@@ -1,0 +1,59 @@
+doctrine:
+    dbal:
+        #default_connection: default
+        connections:
+            posts:
+                # configure these for your database server
+                url: '%env(resolve:DATABASE_URL_POSTS)%'
+                dbname: posts
+            tags:
+                # configure these for your database server
+                url: '%env(resolve:DATABASE_URL_TAGS)%'
+                dbname: tags
+            comments:
+                # configure these for your database server
+                url: '%env(resolve:DATABASE_URL_COMMENTS)%'
+                dbname: comments
+            security:
+                # configure these for your database server
+                url: '%env(resolve:DATABASE_URL_SECURITY)%'
+                dbname: security
+    orm:
+        #default_entity_manager: default
+        entity_managers:
+            posts:
+                connection: posts
+                mappings:
+                    Posts:
+                        is_bundle: false
+                        type: attribute
+                        dir: '%kernel.project_dir%/src/Modules/Posts/Persistence/Doctrine/Entity'
+                        prefix: 'App\Modules\Posts\Persistence\Doctrine\Entity'
+                        alias: Posts
+            tags:
+                connection: tags
+                mappings:
+                    Tags:
+                        is_bundle: false
+                        type: attribute
+                        dir: '%kernel.project_dir%/src/Modules/Tags/Persistence/Doctrine/Entity'
+                        prefix: 'App\Modules\Tags\Persistence\Doctrine\Entity'
+                        alias: Tags
+            comments:
+                connection: comments
+                mappings:
+                    Comments:
+                        is_bundle: false
+                        type: attribute
+                        dir: '%kernel.project_dir%/src/Modules/Comments/Persistence/Doctrine/Entity'
+                        prefix: 'App\Modules\Comments\Persistence\Doctrine\Entity'
+                        alias: Comments
+            security:
+                connection: security
+                mappings:
+                    Security:
+                        is_bundle: false
+                        type: attribute
+                        dir: '%kernel.project_dir%/src/Modules/Security/Persistence/Doctrine/Entity'
+                        prefix: 'App\Modules\Security\Persistence\Doctrine\Entity'
+                        alias: Security

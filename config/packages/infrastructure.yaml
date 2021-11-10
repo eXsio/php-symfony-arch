@@ -1,0 +1,40 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Infrastructure\Services\:
+    resource: '../../src/Infrastructure/Services/'
+
+  App\Infrastructure\Security\LoggedInUserProviderInterface:
+    class: App\Infrastructure\Security\JWTLoggedInUserProvider
+
+  App\Infrastructure\Security\JWTCommonListener:
+    class: App\Infrastructure\Security\JWTCommonListener
+    tags:
+      - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_authenticated, method: onAuthenticatedAccess }
+      - { name: kernel.event_listener, event: kernel.response, method: onAuthenticatedResponse }
+
+when@test:
+  services:
+    _defaults:
+      autowire: true
+      autoconfigure: true
+    App\Infrastructure\Events\Api\ApplicationEventPublisherInterface:
+      class: App\Tests\TestUtils\Events\InMemoryEventPublisher
+
+when@dev:
+  services:
+    _defaults:
+      autowire: true
+      autoconfigure: true
+    App\Infrastructure\Events\Api\ApplicationEventPublisherInterface:
+      class: App\Infrastructure\Events\Api\ApplicationEventPublisher
+
+when@prod:
+  services:
+    _defaults:
+      autowire: true
+      autoconfigure: true
+    App\Infrastructure\Events\Api\ApplicationEventPublisherInterface:
+      class: App\Infrastructure\Events\Api\ApplicationEventPublisher

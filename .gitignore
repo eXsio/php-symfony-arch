@@ -53,3 +53,18 @@
 
 # Embedded web-server pid file
 /.web-server-pid
+
+###> symfony/phpunit-bridge ###
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
+
+###> lexik/jwt-authentication-bundle ###
+/config/jwt/private.pem
+/config/jwt/public.pem
+###< lexik/jwt-authentication-bundle ###

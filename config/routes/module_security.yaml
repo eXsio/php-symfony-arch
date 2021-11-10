@@ -1,0 +1,3 @@
+security_controllers:
+  resource: ../../src/Modules/Security/Api/Controller
+  type: annotation

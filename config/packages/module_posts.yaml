@@ -1,0 +1,39 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Modules\Posts\Api\PostsApiInterface:
+    class: App\Modules\Posts\Domain\PostsApi
+
+  App\Modules\Posts\Api\Controller\:
+    resource: '../../src/Modules/Posts/Api/Controller/'
+
+  App\Modules\Posts\Domain\Security\:
+    resource: '../../src/Modules/Posts/Domain/Security/'
+
+  App\Modules\Posts\Domain\Repository\PostsCreationRepositoryInterface:
+    class: App\Modules\Posts\Persistence\Doctrine\Repository\DoctrinePostsCreationRepository
+
+  App\Modules\Posts\Domain\Repository\PostsUpdatingRepositoryInterface:
+    class: App\Modules\Posts\Persistence\Doctrine\Repository\DoctrinePostsUpdatingRepository
+
+  App\Modules\Posts\Domain\Repository\PostsDeletionRepositoryInterface:
+    class: App\Modules\Posts\Persistence\Doctrine\Repository\DoctrinePostsDeletionRepository
+
+  App\Modules\Posts\Domain\Repository\PostsFindingRepositoryInterface:
+    class: App\Modules\Posts\Persistence\Doctrine\Repository\DoctrinePostsFindingRepository
+
+  App\Modules\Posts\Domain\Repository\PostsCommentsEventHandlingRepositoryInterface:
+    class: App\Modules\Posts\Persistence\Doctrine\Repository\DoctrinePostsCommentsEventHandlingRepository
+
+  App\Modules\Posts\Domain\Repository\PostsSecurityEventsHandlingRepositoryInterface:
+    class: App\Modules\Posts\Persistence\Doctrine\Repository\DoctrinePostsSecurityEventsHandlingRepository
+
+  App\Modules\Posts\Domain\Transactions\PostTransactionFactoryInterface:
+    class: App\Modules\Posts\Persistence\Doctrine\Transactions\DoctrinePostTransactionFactory
+
+  App\Modules\Posts\Api\Command\BaselinePostsCommand:
+    class: App\Modules\Posts\Api\Command\BaselinePostsCommand
+    tags: [ 'console.command' ]

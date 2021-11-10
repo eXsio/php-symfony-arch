@@ -1,0 +1,36 @@
+<div class="post-cards" *ngIf="posts">
+  <mat-card class="post-card" *ngFor="let post of posts.data">
+    <mat-card-title class="post-title">
+
+      <span [routerLink]="'/post/'+post.id">{{post.title}}</span>
+      <span class="post-title-spacer"></span>
+      <div class="post-tags" *ngIf="post.tags.length > 0">
+        <span *ngFor="let tag of post.tags">
+          <a [routerLink]="'/tags/'+tag" mat-button>#{{tag}}</a>
+        </span>
+
+      </div>
+    </mat-card-title>
+    <mat-card-subtitle class="post-subtitle">Posted by <span class="created-by" [routerLink]="'/users/'+post.createdById">{{post.createdByName}}</span> at {{post.createdAt}}</mat-card-subtitle>
+    <mat-card-content class="post-summary" [routerLink]="'/post/'+post.id" [innerHTML]="post.summary">
+    </mat-card-content>
+
+
+    <mat-card-footer class="post-footer">
+      <span class="post-comments" [routerLink]="'/post/'+post.id">Comments: {{post.commentsCount}}</span>
+      <span *ngIf="user" class="post-title-spacer"></span>
+      <div *ngIf="user" class="post-actions">
+        <button [routerLink]="'/edit/'+post.id" mat-icon-button class="example-icon favorite-icon"
+                aria-label="Example icon-button with heart icon">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button (click)="delete(post.id)" mat-icon-button class="example-icon favorite-icon"
+                aria-label="Example icon-button with heart icon">
+          <mat-icon>delete</mat-icon>
+        </button>
+
+      </div>
+
+    </mat-card-footer>
+  </mat-card>
+</div>

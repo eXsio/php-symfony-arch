@@ -1,0 +1,49 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Modules\Security\Api\Controller\:
+    resource: '../../src/Modules/Security/Api/Controller/'
+
+  App\Modules\Security\Api\Command\CreateUserCommand:
+    class: App\Modules\Security\Api\Command\CreateUserCommand
+    tags: [ 'console.command' ]
+
+  App\Modules\Security\Api\Command\RenameUserCommand:
+    class: App\Modules\Security\Api\Command\RenameUserCommand
+    tags: [ 'console.command' ]
+
+  App\Modules\Security\Api\Command\ChangeUserPasswordCommand:
+    class: App\Modules\Security\Api\Command\ChangeUserPasswordCommand
+    tags: [ 'console.command' ]
+
+  App\Modules\Security\Api\SecurityApiInterface:
+    class: App\Modules\Security\Domain\SecurityApi
+    tags:
+      - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJwtCreated }
+      - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccess }
+
+  App\Modules\Security\Domain\Transactions\SecurityTransactionFactoryInterface:
+    class: App\Modules\Security\Persistence\Doctrine\Transactions\DoctrineSecurityTransactionFactory
+
+  App\Modules\Security\Domain\Repository\UserCreationRepositoryInterface:
+    class: App\Modules\Security\Persistence\Doctrine\Repository\DoctrineUserCreationRepository
+
+  App\Modules\Security\Domain\Repository\UserUpdatingRepositoryInterface:
+    class: App\Modules\Security\Persistence\Doctrine\Repository\DoctrineUserUpdatingRepository
+
+  App\Modules\Security\Domain\Repository\UserFindingRepositoryInterface:
+    class: App\Modules\Security\Persistence\Doctrine\Repository\DoctrineUserFindingRepository
+
+  App\Modules\Security\Domain\Repository\SecurityPostEventsHandlingRepositoryInterface:
+    class: App\Modules\Security\Persistence\Doctrine\Repository\DoctrineSecurityPostEventsHandlingRepository
+
+  App\Modules\Security\Domain\Repository\SecurityCommentsEventHandlingRepositoryInterface:
+    class: App\Modules\Security\Persistence\Doctrine\Repository\DoctrineSecurityCommentsEventHandlingRepository
+
+  App\Modules\Security\Domain\Repository\UserPostHeadersFindingRepositoryInterface:
+    class: App\Modules\Security\Persistence\Doctrine\Repository\DoctrineUserPostHeadersFindingRepository
+
+  App\Infrastructure\Security\LoggedInUserProviderInterface $databaseLoggedInUserProvider:
+    class: App\Modules\Security\Domain\Provider\SymfonyDatabaseLoggedInUserProvider

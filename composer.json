@@ -1,20 +1,32 @@
 {
     "type": "project",
     "license": "proprietary",
-    "minimum-stability": "beta",
+    "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
         "php": ">=8.0.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "composer/package-versions-deprecated": "1.11.99.4",
+        "doctrine/annotations": "^1.13",
+        "doctrine/doctrine-bundle": "^2.4",
+        "doctrine/doctrine-migrations-bundle": "^3.2",
+        "doctrine/orm": "^2.10",
+        "dusank/knapsack": "^10.0",
+        "lexik/jwt-authentication-bundle": "^2.14",
+        "sensio/framework-extra-bundle": "^6.2",
         "symfony/console": "6.0.*",
         "symfony/dotenv": "6.0.*",
         "symfony/flex": "^1.17",
         "symfony/framework-bundle": "6.0.*",
+        "symfony/messenger": "6.0.*",
+        "symfony/proxy-manager-bridge": "6.0.*",
         "symfony/runtime": "6.0.*",
+        "symfony/security-bundle": "6.0.*",
+        "symfony/serializer": "6.0.*",
+        "symfony/uid": "6.0.*",
+        "symfony/validator": "6.0.*",
         "symfony/yaml": "6.0.*"
-    },
-    "require-dev": {
     },
     "config": {
         "optimize-autoloader": true,
@@ -58,5 +70,14 @@
             "allow-contrib": false,
             "require": "6.0.*"
         }
+    },
+    "require-dev": {
+        "dama/doctrine-test-bundle": "^6.7",
+        "jaschilz/php-coverage-badger": "^2.0",
+        "phpunit/phpunit": "^9.5",
+        "symfony/browser-kit": "6.0.*",
+        "symfony/css-selector": "6.0.*",
+        "symfony/maker-bundle": "^1.35",
+        "symfony/phpunit-bridge": "^5.3"
     }
 }

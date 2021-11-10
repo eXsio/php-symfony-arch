@@ -1,0 +1,50 @@
+
+.post-card {
+  margin-bottom: 10px;
+  min-width: 700px;
+}
+
+.post-cards {
+  margin-top: 20px;
+}
+
+.post-title {
+  display: flex;
+  cursor: pointer;
+}
+
+.post-summary {
+  cursor: pointer;
+}
+
+.post-comments {
+  cursor: pointer;
+}
+
+.post-title-spacer {
+  flex: 1 1 auto;
+}
+
+.post-footer {
+  margin: 20px 10px 10px;
+  font-size: small;
+  color: gray;
+  display: flex;
+}
+
+.post-subtitle {
+  font-size: smaller;
+}
+
+.post-actions {
+  font-size: xx-small;
+}
+
+.created-by {
+  cursor: pointer;
+}
+
+.post-tags .mat-button {
+  color: grey;
+  font-size: 12px;
+}

@@ -1,0 +1,34 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Modules\Tags\Api\TagsApiInterface:
+    class: App\Modules\Tags\Domain\TagsApi
+
+  App\Modules\Tags\Api\Controller\:
+    resource: '../../src/Modules/Tags/Api/Controller/'
+
+  App\Modules\Tags\Domain\Repository\TagsPostEventsHandlingRepositoryInterface:
+    class: App\Modules\Tags\Persistence\Doctrine\Repository\DoctrineTagsPostEventsHandlingRepository
+
+  App\Modules\Tags\Domain\Repository\TagsSecurityEventsHandlingRepositoryInterface:
+    class: App\Modules\Tags\Persistence\Doctrine\Repository\DoctrineTagsSecurityEventsHandlingRepository
+
+  App\Modules\Tags\Domain\Repository\TagsCommentsEventHandlingRepositoryInterface:
+    class: App\Modules\Tags\Persistence\Doctrine\Repository\DoctrineTagsCommentsEventHandlingRepository
+
+  App\Modules\Tags\Domain\Repository\TagsPostHeadersFindingRepositoryInterface:
+    class: App\Modules\Tags\Persistence\Doctrine\Repository\DoctrineTagsPostHeadersFindingRepository
+
+  App\Modules\Tags\Domain\Transactions\TagsTransactionFactoryInterface:
+    class: App\Modules\Tags\Persistence\Doctrine\Transactions\DoctrineTagsTransactionFactory
+
+  App\Modules\Tags\Domain\Repository\TagsDeletingRepositoryInterface:
+    class: App\Modules\Tags\Persistence\Doctrine\Repository\DoctrineTagsDeletingRepository
+
+  App\Modules\Tags\Domain\Repository\TagsUpdatingRepositoryInterface:
+    class: App\Modules\Tags\Persistence\Doctrine\Repository\DoctrineTagsUpdatingRepository
+
+  App\Modules\Tags\Domain\Repository\TagsFindingRepositoryInterface:
+    class: App\Modules\Tags\Persistence\Doctrine\Repository\DoctrineTagsFindingRepository

@@ -1,0 +1,29 @@
+﻿<!-- nav -->
+<mat-toolbar color="primary">
+  <button (click)="sidenav.toggle()" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+   <mat-icon>menu</mat-icon>
+  </button>
+  <h1 class="title" [routerLink]="'/'">Blog - Symfony Modular, Microservice-ready Architecture Demo</h1>
+  <span class="toolbar-spacer"></span>
+  <div class="user-container" *ngIf="user">
+    <mat-icon  class="user-icon">person</mat-icon>
+    <div class="user-name">{{user.login}}</div>
+  </div>
+
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="'/'" (click)="sidenav.toggle()"> <mat-icon class="sidenav-icon">home</mat-icon>Home </a>
+      <a mat-list-item *ngIf="user" [routerLink]="'/create'" (click)="sidenav.toggle()"><mat-icon  class="sidenav-icon">create</mat-icon> Create New Post </a>
+      <a mat-list-item *ngIf="user" [routerLink]="'/latest-comments'" (click)="sidenav.toggle()"><mat-icon  class="sidenav-icon">comment</mat-icon> View Latest Comments </a>
+      <a mat-list-item *ngIf="!user" [routerLink]="'/login'" (click)="sidenav.toggle()"> <mat-icon  class="sidenav-icon">login</mat-icon>Log In </a>
+      <a mat-list-item *ngIf="user" (click)="logout();sidenav.toggle();"> <mat-icon  class="sidenav-icon">logout</mat-icon>Log Out </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div style="height: 88vh;">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

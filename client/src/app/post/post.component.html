@@ -1,0 +1,71 @@
+<mat-card *ngIf="post" class="post-card">
+  <mat-card-title class="post-title">
+    <span>{{post.title}}</span>
+    <span class="post-title-spacer"></span>
+    <div class="post-tags" *ngIf="post.tags.length > 0">
+        <span *ngFor="let tag of post.tags">
+          <a [routerLink]="'/tags/'+tag" mat-button>#{{tag}}</a>
+        </span>
+
+    </div>
+  </mat-card-title>
+  <mat-card-subtitle class="post-subtitle">Posted by <span class="created-by"
+                                                           [routerLink]="'/users/'+post.createdById">{{post.createdByName}}</span>
+    at {{post.createdAt}}</mat-card-subtitle>
+  <mat-card-content class="post-summary" [innerHTML]="post.body">
+  </mat-card-content>
+
+  <div *ngIf="post.comments.length == 0" class="post-comments">
+    <h5>This post has no Comments yet.</h5>
+  </div>
+  <div *ngIf="post.comments.length > 0" class="post-comments">
+    <h5>Comments:</h5>
+    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="comments-tree">
+      <mat-tree-node *matTreeNodeDef="let comment" matTreeNodeToggle>
+        <div class="mat-tree-node">
+          <button class="invisible" mat-icon-button matTreeNodeToggle
+                  [attr.aria-label]="'Toggle ' + comment.name">
+            <mat-icon class="mat-icon-rtl-mirror">
+              {{treeControl.isExpanded(comment) ? 'expand_more' : 'chevron_right'}}
+            </mat-icon>
+          </button>
+          <comment class="comment" [postId]="post.id" [comment]="comment" [onReply]="postComment()"></comment>
+        </div>
+      </mat-tree-node>
+      <mat-nested-tree-node *matTreeNodeDef="let comment; when: hasChild">
+        <div class="mat-tree-node">
+          <button mat-icon-button matTreeNodeToggle
+                  [attr.aria-label]="'Toggle ' + comment.name">
+            <mat-icon class="mat-icon-rtl-mirror">
+              {{treeControl.isExpanded(comment) ? 'expand_more' : 'chevron_right'}}
+            </mat-icon>
+          </button>
+          <comment class="comment" [postId]="post.id" [comment]="comment" [onReply]="postComment()"></comment>
+        </div>
+        <div [class.comments-tree-invisible]="!treeControl.isExpanded(comment)"
+             role="group">
+          <ng-container matTreeNodeOutlet></ng-container>
+        </div>
+      </mat-nested-tree-node>
+    </mat-tree>
+
+  </div>
+
+  <mat-card-footer class="post-footer">
+    <span class="post-title-spacer"></span>
+    <div class="post-actions">
+      <button (click)="postComment()(post.id, null)" mat-icon-button class="example-icon favorite-icon"
+              aria-label="Example icon-button with heart icon">
+        <mat-icon>comment</mat-icon>
+      </button>
+      <button *ngIf="user" [routerLink]="'/edit/'+post.id" mat-icon-button class="example-icon favorite-icon"
+              aria-label="Example icon-button with heart icon">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button *ngIf="user" (click)="delete()(post.id)" mat-icon-button class="example-icon favorite-icon"
+              aria-label="Example icon-button with heart icon">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </mat-card-footer>
+</mat-card>

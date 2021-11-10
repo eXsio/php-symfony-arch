@@ -1,0 +1,9 @@
+language: php
+php:
+  - '8.0.9'
+install:
+  - composer install --dev
+script:
+  - ./vendor/bin/phpunit tests --test-suffix=Spec.php
+  - ./vendor/bin/phpunit tests --test-suffix=IT.php
+  - ./vendor/bin/phpunit tests --test-suffix=Contract.php

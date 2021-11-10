@@ -1,0 +1,36 @@
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+
+  App\Modules\Comments\Api\CommentsApiInterface:
+    class: App\Modules\Comments\Domain\CommentsApi
+
+  App\Modules\Comments\Api\Controller\:
+    resource: '../../src/Modules/Comments/Api/Controller/'
+
+  App\Modules\Comments\Domain\Repository\CommentsPostsEventsHandlingRepositoryInterface:
+    class: App\Modules\Comments\Persistence\Doctrine\Repository\DoctrineCommentsPostsEventsHandlingRepository
+
+  App\Modules\Comments\Domain\Repository\CommentsSecurityEventsHandlingRepositoryInterface:
+    class: App\Modules\Comments\Persistence\Doctrine\Repository\DoctrineCommentsSecurityEventsHandlingRepository
+
+  App\Modules\Comments\Domain\Repository\CommentsPostHeadersFindingRepositoryInterface:
+    class: App\Modules\Comments\Persistence\Doctrine\Repository\DoctrineCommentsPostHeadersFindingRepository
+
+  App\Modules\Comments\Domain\Repository\CommentsCreationRepositoryInterface:
+    class: App\Modules\Comments\Persistence\Doctrine\Repository\DoctrineCommentsCreationRepository
+
+  App\Modules\Comments\Domain\Repository\CommentsFindingRepositoryInterface:
+    class: App\Modules\Comments\Persistence\Doctrine\Repository\DoctrineCommentsFindingRepository
+
+  App\Modules\Comments\Domain\Repository\CommentsDeletionRepositoryInterface:
+    class: App\Modules\Comments\Persistence\Doctrine\Repository\DoctrineCommentsDeletionRepository
+
+  App\Modules\Comments\Domain\Transactions\CommentsTransactionFactoryInterface:
+    class: App\Modules\Comments\Persistence\Doctrine\Transactions\DoctrineCommentsTransactionFactory
+
+  App\Modules\Comments\Api\Command\BaselineCommentsCommand:
+    class: App\Modules\Comments\Api\Command\BaselineCommentsCommand
+    tags: [ 'console.command' ]

@@ -1,0 +1,3 @@
+posts_controllers:
+  resource: ../../src/Modules/Posts/Api/Controller
+  type: annotation

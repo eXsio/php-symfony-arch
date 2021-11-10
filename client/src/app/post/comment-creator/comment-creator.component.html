@@ -1,0 +1,34 @@
+<mat-card>
+  <mat-card-title>Post new Comment</mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="form">
+      <p>
+        <mat-form-field>
+          <input type="text" matInput placeholder="Author" formControlName="author">
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <textarea matInput
+                    placeholder="Comment"
+                    [formControl]="form.controls.body"
+                    cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize"
+                    cdkAutosizeMinRows="2"
+                    cdkAutosizeMaxRows="10"></textarea>
+        </mat-form-field>
+      </p>
+
+      <p *ngIf="error" class="error">
+        {{ error }}
+      </p>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onDismiss()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onConfirm()">Post</button>
+</div>

@@ -1,0 +1,46 @@
+:host {
+  width: 60%;
+  min-width: 700px;
+  justify-content: center;
+  margin: auto;
+  display: grid;
+}
+
+.mat-paginator-container {
+  margin: auto;
+  width: 60%;
+  min-width: 700px;
+}
+
+
+.post-card {
+  margin-bottom: 10px;
+  min-width: 700px;
+}
+
+.post-cards {
+  margin-top: 20px;
+}
+
+.post-title {
+  display: flex;
+}
+
+.post-title-spacer {
+  flex: 1 1 auto;
+}
+
+.post-footer {
+  margin: 20px 10px 10px;
+  font-size: small;
+  color: gray;
+  display: flex;
+}
+
+.post-subtitle {
+  font-size: smaller;
+}
+
+.post-actions {
+  font-size: xx-small;
+}

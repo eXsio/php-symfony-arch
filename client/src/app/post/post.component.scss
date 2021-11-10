@@ -1,0 +1,81 @@
+:host {
+  width: 60%;
+  justify-content: center;
+  margin: auto;
+  display: grid;
+}
+
+.post-card {
+  margin-top: 20px;
+  min-width: 700px;
+}
+
+.post-cards {
+  margin-top: 20px;
+}
+
+.post-title {
+  display: flex;
+}
+
+.post-title-spacer {
+  flex: 1 1 auto;
+}
+
+.post-footer {
+  margin: 20px 10px 10px;
+  font-size: small;
+  color: gray;
+  display: flex;
+}
+
+.post-subtitle {
+  font-size: smaller;
+}
+
+.post-actions {
+  font-size: xx-small;
+}
+
+.created-by {
+  cursor: pointer;
+}
+.mat-tree-node {
+  display: flex;
+}
+
+.comments-tree-invisible {
+  display: none;
+}
+
+.comments-tree ul,
+.comments-tree li {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+
+.comments-tree .mat-nested-tree-node div[role=group] {
+  padding-left: 40px;
+}
+
+.commentstree div[role=group] > .mat-tree-node {
+  padding-left: 40px;
+}
+
+.invisible {
+  visibility: hidden;
+}
+
+.comment {
+  width: 90%;
+}
+
+.post-comments h5 {
+  color: grey;
+}
+
+.post-tags .mat-button {
+  color: grey;
+  font-size: 12px;
+}

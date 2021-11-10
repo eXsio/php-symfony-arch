@@ -1,0 +1,32 @@
+﻿<ng-container *ngIf="comments">
+  <ng-container *ngIf="comments.count > 0">
+    <mat-card class="post-card" *ngFor="let comment of comments.data">
+      <mat-card-title class="post-title">
+
+        <span [routerLink]="'/post/'+comment.postId">{{comment.postTitle}}</span>
+        <span class="post-title-spacer"></span>
+        <div class="post-tags" *ngIf="comment.postTags.length > 0">
+        <span *ngFor="let tag of comment.postTags.tags">
+          <a [routerLink]="'/tags/'+tag" mat-button>#{{tag}}</a>
+        </span>
+
+        </div>
+      </mat-card-title>
+      <mat-card-subtitle class="post-subtitle">Posted by <span class="created-by">{{comment.author}}</span>
+        at {{comment.createdAt}}</mat-card-subtitle>
+      <mat-card-content class="post-summary" [routerLink]="'/post/'+comment.postId" [innerHTML]="comment.body">
+      </mat-card-content>
+    </mat-card>
+    <mat-paginator [pageIndex]="comments.pageNo - 1" [length]="comments.count" [pageSizeOptions]="[10]"
+                   (page)="getPaginatorData($event)"
+                   showFirstLastButtons="false"
+                   aria-label="Select page">
+
+    </mat-paginator>
+  </ng-container>
+  <ng-container *ngIf="comments.count == 0">
+    <h3>There are no Posts with Comments on this Blog</h3>
+  </ng-container>
+</ng-container>
+
+

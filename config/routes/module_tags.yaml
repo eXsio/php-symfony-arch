@@ -1,0 +1,3 @@
+tags_controllers:
+  resource: ../../src/Modules/Tags/Api/Controller
+  type: annotation

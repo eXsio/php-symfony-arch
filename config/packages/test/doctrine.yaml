@@ -1,0 +1,20 @@
+doctrine:
+    dbal:
+        # "TEST_TOKEN" is typically set by ParaTest
+        connections:
+            posts:
+                # configure these for your database server
+                url: '%env(resolve:DATABASE_URL_POSTS_TEST)%'
+                dbname: posts
+            tags:
+                # configure these for your database server
+                url: '%env(resolve:DATABASE_URL_TAGS_TEST)%'
+                dbname: tags
+            comments:
+                # configure these for your database server
+                url: '%env(resolve:DATABASE_URL_COMMENTS_TEST)%'
+                dbname: comments
+            security:
+                # configure these for your database server
+                url: '%env(resolve:DATABASE_URL_SECURITY_TEST)%'
+                dbname: security

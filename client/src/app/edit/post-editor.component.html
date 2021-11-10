@@ -1,0 +1,62 @@
+<mat-card>
+  <mat-card-title *ngIf="postId == null">Create New Post</mat-card-title>
+  <mat-card-title *ngIf="postId != null">Edit Post</mat-card-title>
+  <mat-card-content *ngIf="loading">
+    <mat-progress-spinner
+      class="example-margin"
+      color="primary"
+      mode="indeterminate">
+    </mat-progress-spinner>
+  </mat-card-content>
+  <mat-card-content *ngIf="!loading">
+    <form [formGroup]="form">
+      <p>
+        <mat-form-field>
+          <input type="text" matInput placeholder="Title" formControlName="title">
+        </mat-form-field>
+      </p>
+      <p>
+        <editor
+          apiKey="wxe1uvk4kb3obo4a0c8ev2w5dhgdn5e8xv8hszo8otmitdkn"
+          formControlName="body"
+          [init]="{
+     height: 500,
+     menubar: false,
+     plugins: [
+       'advlist autolink lists link image charmap print preview anchor',
+       'searchreplace visualblocks code fullscreen',
+       'insertdatetime media table paste code help wordcount'
+     ],
+     toolbar:
+       'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help'
+   }"
+        ></editor>
+      </p>
+      <p>
+        <mat-form-field class="tags-list">
+          <mat-chip-list #tagsList aria-label="Tags selection" formControlName="tags">
+            <mat-chip *ngFor="let tag of tags.value" selectable="false"
+                      removable="true" (removed)="removeTag(tag)">
+              {{tag}}
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="Add tags..."
+                   [matChipInputFor]="tagsList"
+                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                   matChipInputAddOnBlur="true"
+                   (matChipInputTokenEnd)="addTag($event)">
+          </mat-chip-list>
+        </mat-form-field>
+      </p>
+      <p *ngIf="error" class="error">
+        {{ error }}
+      </p>
+    </form>
+  </mat-card-content>
+  <mat-card-footer *ngIf="!loading" class="editor-footer">
+    <button class="save-button" mat-raised-button color="primary" (click)="save()">Save</button>
+  </mat-card-footer>
+</mat-card>
+
+
+

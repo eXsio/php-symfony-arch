@@ -1,0 +1,3 @@
+posts_controllers:
+  resource: ../../src/Modules/Comments/Api/Controller
+  type: annotation
