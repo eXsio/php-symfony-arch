@@ -30,6 +30,9 @@
 !bin/console
 !bin/symfony_requirements
 /vendor/
+/var/
+/.idea/
+*.iml
 
 # Assets and user uploads
 /web/bundles/
