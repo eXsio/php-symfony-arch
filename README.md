@@ -14,7 +14,8 @@ For More information please visit [Kode Krunch](https://www.kode-krunch.com/).
 ### Back-end requirements:
 
 - PHP >= 8.0.2
-  - sqlite3 extension
+  - PDO-SQLite PHP extension enabled
+  - the usual [Symfony application requirements](https://symfony.com/doc/current/setup.html#technical-requirements)
 - [Composer CLI installed](https://getcomposer.org/doc/00-intro.md)
 - [Symfony CLI installed](https://symfony.com/download)
 
