@@ -3,6 +3,10 @@ build:
     php:
       version: '8.0.9'
   nodes:
+    analysis:
+      tests:
+        override:
+          - php-scrutinizer-run
     coverage:
       tests:
         override:
