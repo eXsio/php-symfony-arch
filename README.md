@@ -13,6 +13,7 @@ For More information please visit [Kode Krunch](https://www.kode-krunch.com/).
 ### Back-end requirements:
 
 - PHP >= 8.0.2
+  - sqlite3 extension
 - [Composer CLI installed](https://getcomposer.org/doc/00-intro.md)
 - [Symfony CLI installed](https://symfony.com/download)
 
