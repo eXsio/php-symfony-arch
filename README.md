@@ -1,6 +1,6 @@
 [![Build Status](https://app.travis-ci.com/eXsio/php-symfony-arch.svg?branch=main)](https://app.travis-ci.com/eXsio/php-symfony-arch)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/eXsio/php-symfony-arch/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/eXsio/php-symfony-arch/?branch=main)
-[![Coverage](https://raw.githubusercontent.com/eXsio/php-symfony-arch/main/docs/coverage.svg)]
+![Coverage](https://raw.githubusercontent.com/eXsio/php-symfony-arch/main/docs/coverage.svg)
 
 # Blog - Symfony Modular, Microservice-ready Architecture Demo
 
