@@ -15,7 +15,7 @@ abstract class ApplicationOutboundEventContract extends TestCase
         $invalidContracts = [];
         foreach ($contracts as $contract) {
             $msg = $this->verifyContract($event, $contract);
-            if ($msg != null) {
+            if ($msg !== null) {
                 $invalidContracts[$contract] = $msg;
             }
         }

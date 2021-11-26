@@ -33,4 +33,6 @@ trait ApplicationEventContractLoader
     {
         return dirname(__FILE__) . '/../../../contracts';
     }
+
+    public static abstract function fail(string $message);
 }
