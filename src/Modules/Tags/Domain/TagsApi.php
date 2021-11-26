@@ -49,6 +49,17 @@ class TagsApi extends ApplicationEventSubscriber implements TagsApiInterface
         SecurityEventsHandler::__construct as __securityEventsHandlerConstruct;
     }
 
+    /**
+     * @param TagsTransactionFactoryInterface $transactionFactory
+     * @param TagsPostEventsHandlingRepositoryInterface $postEventsTagsRepository
+     * @param TagsPostHeadersFindingRepositoryInterface $headersFindingRepository
+     * @param LoggerInterface $logger
+     * @param TagsUpdatingRepositoryInterface $tagsUpdatingRepository
+     * @param TagsDeletingRepositoryInterface $tagsDeletingRepository
+     * @param TagsFindingRepositoryInterface $tagsFindingRepository
+     * @param TagsCommentsEventHandlingRepositoryInterface $commentsEventHandlingRepository
+     * @param TagsSecurityEventsHandlingRepositoryInterface $securityEventsHandlingRepository
+     */
     public function __construct(
         TagsTransactionFactoryInterface              $transactionFactory,
         TagsPostEventsHandlingRepositoryInterface    $postEventsTagsRepository,

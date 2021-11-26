@@ -9,6 +9,7 @@ use App\Modules\Comments\Api\Query\FindCommentsByPostIdQuery;
 use App\Modules\Comments\Api\Query\FindLatestCommentsQuery;
 use App\Modules\Comments\Api\Query\Response\FindCommentsByPostIdQueryResponse;
 use App\Tests\TestUtils\SerializationTrait;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 
 trait CommentsHttpTrait
 {
@@ -42,4 +43,9 @@ trait CommentsHttpTrait
         $client->request('GET', '/api/comments/' . $query->getPostId());
         return $this->responseObjects($client, FindCommentsByPostIdQueryResponse::class);
     }
+
+    /**
+     * @return KernelBrowser
+     */
+    public abstract function getClient(): KernelBrowser;
 }

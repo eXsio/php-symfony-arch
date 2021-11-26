@@ -6,6 +6,7 @@ use App\Infrastructure\Pagination\Page;
 use App\Modules\Security\Api\Query\FindPostsByUserIdQuery;
 use App\Modules\Security\Api\Query\Response\FindPostsByUserIdQueryResponse;
 use App\Tests\TestUtils\SerializationTrait;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 
 trait SecurityHttpTrait
 {
@@ -22,4 +23,9 @@ trait SecurityHttpTrait
         $client->request('GET', '/api/security/' . $query->getUserId());
         return $this->responseObject($client, Page::class);
     }
+
+    /**
+     * @return KernelBrowser
+     */
+    public abstract function getClient(): KernelBrowser;
 }

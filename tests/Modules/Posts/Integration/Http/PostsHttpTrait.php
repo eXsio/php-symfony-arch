@@ -11,6 +11,7 @@ use App\Modules\Posts\Api\Query\FindAllPostsQuery;
 use App\Modules\Posts\Api\Query\FindPostByIdQuery;
 use App\Modules\Posts\Api\Query\Response\FindPostQueryResponse;
 use App\Tests\TestUtils\SerializationTrait;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 
 trait PostsHttpTrait
 {
@@ -46,4 +47,9 @@ trait PostsHttpTrait
         $client->request('GET', '/api/posts/' . $query->getId());
         return $this->responseObject($client, FindPostQueryResponse::class);
     }
+
+    /**
+     * @return KernelBrowser
+     */
+    public abstract function getClient(): KernelBrowser;
 }

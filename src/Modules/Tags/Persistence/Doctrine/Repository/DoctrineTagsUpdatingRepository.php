@@ -67,7 +67,7 @@ class DoctrineTagsUpdatingRepository extends DoctrineTagsRepository implements T
     private function getTags(Ulid $postId): array
     {
         $em = $this->getEntityManager();
-        $tags = $em
+        return $em
             ->createQueryBuilder()
             ->select('t')
             ->from(Tag::class, 't')
@@ -76,6 +76,5 @@ class DoctrineTagsUpdatingRepository extends DoctrineTagsRepository implements T
             ->getQuery()
             ->setParameter('postId', $postId, 'ulid')
             ->getResult();
-        return $tags;
     }
 }

@@ -7,6 +7,7 @@ use App\Modules\Tags\Api\Query\FindPostsByTagQuery;
 use App\Modules\Tags\Api\Query\Response\FindPostsByTagQueryResponse;
 use App\Modules\Tags\Api\Query\Response\FindTagsQueryResponse;
 use App\Tests\TestUtils\SerializationTrait;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 
 trait TagsHttpTrait
 {
@@ -33,4 +34,9 @@ trait TagsHttpTrait
         $client->request('GET', '/api/tags/' . $query->getTag());
         return $this->responseObject($client, Page::class);
     }
+
+    /**
+     * @return KernelBrowser
+     */
+    public abstract function getClient(): KernelBrowser;
 }
