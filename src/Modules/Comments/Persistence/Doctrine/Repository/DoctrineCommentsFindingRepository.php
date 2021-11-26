@@ -19,11 +19,10 @@ class DoctrineCommentsFindingRepository extends DoctrineCommentsRepository imple
     public function getCommentsCount(Ulid $postId): int
     {
         $commentClass = Comment::class;
-        $singleColumnResult = $this->getEntityManager()
+        return $this->getEntityManager()
             ->createQuery("select count(c.id) as count from $commentClass c join c.post p where p.id = :postId")
             ->setParameter("postId", $postId, 'ulid')
-            ->getSingleColumnResult();
-        return $singleColumnResult[0];
+            ->getResult()[0]["count"];
     }
 
     /**
@@ -42,7 +41,7 @@ class DoctrineCommentsFindingRepository extends DoctrineCommentsRepository imple
                                     where p.id = :postId"
             )
             ->setParameter("postId", $postId, 'ulid')
-            ->getArrayResult();
+            ->getResult();
     }
 
     /**
@@ -81,14 +80,12 @@ class DoctrineCommentsFindingRepository extends DoctrineCommentsRepository imple
         $query = $this->getEntityManager()->createQuery(
             "select count(c.id) as count from $commentClass c"
         );
-        return $query->getSingleResult()["count"];
+        return $query->getResult()[0]["count"];
     }
 
     /**
      * @param Ulid $commentId
      * @return bool
-     * @throws \Doctrine\ORM\NoResultException
-     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function commentExists(Ulid $commentId): bool
     {
@@ -98,7 +95,7 @@ class DoctrineCommentsFindingRepository extends DoctrineCommentsRepository imple
         );
         $count = $query
             ->setParameter("id", $commentId, "ulid")
-            ->getSingleResult()["count"];
+            ->getResult()[0]["count"];
         return $count > 0;
     }
 }

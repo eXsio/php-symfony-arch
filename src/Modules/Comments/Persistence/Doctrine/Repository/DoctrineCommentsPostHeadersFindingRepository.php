@@ -13,7 +13,7 @@ class DoctrineCommentsPostHeadersFindingRepository extends DoctrineCommentsRepos
     /**
      * @return array<CommentsPostHeaderDto>
      */
-   public function findPostHeaders(?\DateTime $from = null): array
+    public function findPostHeaders(?\DateTime $from = null): array
     {
         $headerClass = CommentPostHeader::class;
         $dtoClass = CommentsPostHeaderDto::class;
@@ -31,8 +31,6 @@ class DoctrineCommentsPostHeadersFindingRepository extends DoctrineCommentsRepos
     /**
      * @param Ulid $postId
      * @return bool
-     * @throws \Doctrine\ORM\NoResultException
-     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function postExists(Ulid $postId): bool
     {
@@ -42,6 +40,6 @@ class DoctrineCommentsPostHeadersFindingRepository extends DoctrineCommentsRepos
         );
         return $query
                 ->setParameter("id", $postId, "ulid")
-                ->getSingleResult()["count"] > 0;
+                ->getResult()[0]["count"] > 0;
     }
 }

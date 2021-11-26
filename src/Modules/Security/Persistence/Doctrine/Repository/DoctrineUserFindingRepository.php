@@ -8,13 +8,17 @@ use App\Modules\Security\Persistence\Doctrine\Entity\User;
 class DoctrineUserFindingRepository extends DoctrineSecurityRepository implements UserFindingRepositoryInterface
 {
 
+    /**
+     * @param string $login
+     * @return bool
+     */
     public function exists(string $login): bool
     {
         $entityClass = User::class;
         return $this->getEntityManager()
-                ->createQuery("select count(u.id) as cnt from $entityClass u 
+                ->createQuery("select count(u.id) as count from $entityClass u 
                 where u.email = :login")
                 ->setParameter("login", $login)
-                ->getSingleResult()["cnt"] > 0;
+                ->getResult()[0]["count"] > 0;
     }
 }

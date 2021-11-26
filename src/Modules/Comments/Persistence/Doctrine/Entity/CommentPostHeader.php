@@ -155,33 +155,33 @@ class CommentPostHeader
 
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getVersion()
+    public function getVersion(): int
     {
         return $this->version;
     }
 
     /**
-     * @param mixed $version
+     * @param int $version
      */
-    public function setVersion($version): void
+    public function setVersion(int $version): void
     {
         $this->version = $version;
     }
 
     /**
-     * @return array
+     * @return Collection
      */
-    public function getComments(): array
+    public function getComments(): Collection
     {
         return $this->comments;
     }
 
     /**
-     * @param array $comments
+     * @param Collection $comments
      */
-    public function setComments(array $comments): void
+    public function setComments(Collection $comments): void
     {
         $this->comments = $comments;
     }

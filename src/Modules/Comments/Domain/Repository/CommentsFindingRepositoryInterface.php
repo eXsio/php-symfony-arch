@@ -18,16 +18,16 @@ interface CommentsFindingRepositoryInterface
     public function getCommentsCount(Ulid $postId): int;
 
     /**
-     * @param Ulid $getPostId
+     * @param Ulid $postId
      * @return array
      */
-    public function findCommentsByPostId(Ulid $getPostId): array;
+    public function findCommentsByPostId(Ulid $postId): array;
 
     /**
-     * @param int $getPageNo
+     * @param int $pageNo
      * @return Page<CommentWithPostDto>
      */
-    public function findLatestComments(int $getPageNo): Page;
+    public function findLatestComments(int $pageNo): Page;
 
     /**
      * @param Ulid $commentId

@@ -107,7 +107,7 @@ class FindLatestCommentsQueryResponse
     }
 
     /**
-     * @return int
+     * @return array<string>
      */
     public function getPostTags(): array
     {

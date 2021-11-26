@@ -51,12 +51,16 @@ class DoctrineUserPostHeadersFindingRepository extends DoctrineSecurityRepositor
         );
     }
 
+    /**
+     * @param $userId
+     * @return int
+     */
     private function getCount($userId): int
     {
         $postClass = UserPostHeader::class;
         $query = $this->getEntityManager()->createQuery(
             "select count(p.id) as count from $postClass p join p.user u where u.id = :userId"
         );
-        return $query->setParameter("userId", $userId, "ulid")->getSingleResult()["count"];
+        return $query->setParameter("userId", $userId, "ulid")->getResult()[0]["count"];
     }
 }

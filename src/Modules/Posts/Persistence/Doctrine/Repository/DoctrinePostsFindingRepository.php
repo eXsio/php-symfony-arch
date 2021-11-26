@@ -8,6 +8,8 @@ use App\Modules\Posts\Domain\Dto\PostForBaselineDto;
 use App\Modules\Posts\Domain\Dto\PostHeaderDto;
 use App\Modules\Posts\Domain\Repository\PostsFindingRepositoryInterface;
 use App\Modules\Posts\Persistence\Doctrine\Entity\Post;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Symfony\Component\Uid\Ulid;
 
 class DoctrinePostsFindingRepository extends DoctrinePostsRepository implements PostsFindingRepositoryInterface
@@ -16,7 +18,6 @@ class DoctrinePostsFindingRepository extends DoctrinePostsRepository implements 
     /**
      * @param Ulid $id
      * @return PostDto|null
-     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function findPost(Ulid $id): ?PostDto
     {
@@ -28,7 +29,8 @@ class DoctrinePostsFindingRepository extends DoctrinePostsRepository implements 
              ) from $postClass p join p.comments c where p.deletedAt is null and p.id = :id"
         );
         $query->setParameter("id", $id, "ulid");
-        return $query->getOneOrNullResult();
+        return $query->getResult()[0];
+
     }
 
     /**
@@ -66,7 +68,7 @@ class DoctrinePostsFindingRepository extends DoctrinePostsRepository implements 
         $query = $this->getEntityManager()->createQuery(
             "select count(p.id) as count from $postClass p where p.deletedAt is null"
         );
-        return $query->getSingleResult()["count"];
+        return $query->getScalarResult()[0]["count"];
     }
 
     /**

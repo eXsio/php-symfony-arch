@@ -45,7 +45,7 @@ class JsonParamConverter implements ParamConverterInterface
      */
     public function supports(ParamConverter $configuration): bool
     {
-        return $configuration->getClass() != null ? $configuration->getClass() : false;
+        return $configuration->getClass() != null;
     }
 
     /**

@@ -21,7 +21,7 @@ class DoctrineTagsPostHeadersFindingRepository extends DoctrineTagsRepository im
             "select new $dtoClass(p.id, p.title, p.summary, p.createdById, p.createdByName, p.createdAt, p.version, p.commentsCount) 
                 from $headerClass p order by p.id desc"
         );
-        return $query->getArrayResult();
+        return $query->getResult();
     }
 
     /**
@@ -49,12 +49,16 @@ class DoctrineTagsPostHeadersFindingRepository extends DoctrineTagsRepository im
         );
     }
 
+    /**
+     * @param string $tag
+     * @return int
+     */
     private function getCount(string $tag): int
     {
         $headerClass = TagPostHeader::class;
         $query = $this->getEntityManager()->createQuery(
             "select count(p.id) as count from $headerClass p join p.tags t where t.tag = :tag"
         );
-        return $query->setParameter("tag", $tag)->getSingleResult()["count"];
+        return $query->setParameter("tag", $tag)->getResult()[0]["count"];
     }
 }
