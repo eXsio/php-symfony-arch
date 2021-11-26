@@ -32,7 +32,7 @@ class SecurityEventsCommentsHandlingSpec extends CommentsSpec
         $this->commentsApi->onUserRenamed($event);
 
         //then: Post Header was created - no Exception was thrown
-        $headers = $this->commentsApi->findPostHeaders(new FindCommentsPostHeadersQuery());
+        $headers = $this->commentsApi->findPostHeaders();
         self::assertNotNull($headers);
         self::assertCount(1, $headers);
         self::assertTrue(isset($headers[0]));

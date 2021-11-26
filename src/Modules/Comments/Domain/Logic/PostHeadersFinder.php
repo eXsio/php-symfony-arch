@@ -19,10 +19,9 @@ trait PostHeadersFinder
     }
 
     /**
-     * @param FindCommentsPostHeadersQuery $query
      * @return array<FindCommentsPostHeadersQueryResponse>
      */
-    public function findPostHeaders(FindCommentsPostHeadersQuery $query): array
+    public function findPostHeaders(): array
     {
         return Collection::from($this->headersFindingRepository->findPostHeaders())
             ->map(function ($header) {

@@ -155,7 +155,7 @@ class CommentsIT extends IntegrationTest
         $this->getCommentsApi()->onUserRenamed($event);
 
         //then: Post Header was created - no Exception was thrown
-        $headers = $this->getCommentsApi()->findPostHeaders(new FindCommentsPostHeadersQuery());
+        $headers = $this->getCommentsApi()->findPostHeaders();
         self::assertNotNull($headers);
         self::assertCount(1, $headers);
         self::assertTrue(isset($headers[0]));

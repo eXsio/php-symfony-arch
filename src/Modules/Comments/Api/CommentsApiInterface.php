@@ -33,10 +33,9 @@ interface CommentsApiInterface
     public function onPostDeleted(PostDeletedCommentsIEvent $event): void;
 
     /**
-     * @param FindCommentsPostHeadersQuery $query
      * @return array<FindCommentsPostHeadersQueryResponse>
      */
-    public function findPostHeaders(FindCommentsPostHeadersQuery $query): array;
+    public function findPostHeaders(): array;
 
     /**
      * @param CreateCommentCommand $command

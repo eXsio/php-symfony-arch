@@ -13,7 +13,7 @@ class InMemoryComment
      * @param string $body
      * @param \DateTime $createdAt
      * @param InMemoryComment|null $parentComment
-     * @param CommentPostHeader $post
+     * @param InMemoryCommentPostHeader $post
      */
     public function __construct(
         private Ulid                      $id,

@@ -132,7 +132,7 @@ class CommentsCreationSpec extends CommentsSpec
     {
         $event = new PostCreatedCommentsIEvent($this->getInboundEvent("Comments/PostCreatedCommentsIEvent"));
         $this->commentsApi->onPostCreated($event);
-        $headers = $this->commentsApi->findPostHeaders(new FindCommentsPostHeadersQuery());
+        $headers = $this->commentsApi->findPostHeaders();
         self::assertNotNull($headers);
         self::assertCount(1, $headers);
         self::assertTrue(isset($headers[0]));
