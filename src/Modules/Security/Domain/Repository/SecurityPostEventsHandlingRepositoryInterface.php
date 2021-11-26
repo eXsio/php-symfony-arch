@@ -11,15 +11,15 @@ interface SecurityPostEventsHandlingRepositoryInterface
     /**
      * @param CreateNewUserPostHeaderDto $newPostHeader
      */
-    function createPostHeader(CreateNewUserPostHeaderDto $newPostHeader): void;
+   public function createPostHeader(CreateNewUserPostHeaderDto $newPostHeader): void;
 
     /**
      * @param UpdateExistingUserPostHeaderDto $updatedPostHeader
      */
-    function updatePostHeader(UpdateExistingUserPostHeaderDto $updatedPostHeader): void;
+   public function updatePostHeader(UpdateExistingUserPostHeaderDto $updatedPostHeader): void;
 
     /**
      * @param DeleteExistingUserPostHeaderDto $deletedPostHeader
      */
-    function deletePostHeader(DeleteExistingUserPostHeaderDto $deletedPostHeader): void;
+   public function deletePostHeader(DeleteExistingUserPostHeaderDto $deletedPostHeader): void;
 }

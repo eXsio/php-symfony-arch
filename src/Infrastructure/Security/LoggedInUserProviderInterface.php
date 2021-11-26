@@ -4,5 +4,5 @@ namespace App\Infrastructure\Security;
 
 interface LoggedInUserProviderInterface
 {
-    function getUser(): LoggedInUser;
+   public function getUser(): LoggedInUser;
 }

@@ -29,7 +29,7 @@ trait PostsRemover
     /**
      * @param DeletePostCommand $command
      */
-    function deletePost(DeletePostCommand $command): void
+   public function deletePost(DeletePostCommand $command): void
     {
         $this->validator->preDelete($command);
         $deletedPost = $this->fromDeleteCommand($command);

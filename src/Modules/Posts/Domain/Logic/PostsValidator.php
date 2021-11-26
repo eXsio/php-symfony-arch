@@ -28,7 +28,7 @@ class PostsValidator
     /**
      * @param CreatePostCommand $command
      */
-    function preCreate(CreatePostCommand $command): void
+   public function preCreate(CreatePostCommand $command): void
     {
         $this->validatePostBody($command->getBody());
         $this->validatePostTitle($command->getTitle());

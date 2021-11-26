@@ -12,6 +12,6 @@ interface TransactionFactoryInterface
      * @param $func
      * @return TransactionInterface
      */
-    function createTransaction($func): TransactionInterface;
+   public function createTransaction($func): TransactionInterface;
 
 }

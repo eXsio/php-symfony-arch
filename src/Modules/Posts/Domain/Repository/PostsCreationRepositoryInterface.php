@@ -11,5 +11,5 @@ interface PostsCreationRepositoryInterface
      * @param CreateNewPostDto $newPost
      * @return Ulid - id of the new Post
      */
-    function createPost(CreateNewPostDto $newPost): Ulid;
+   public function createPost(CreateNewPostDto $newPost): Ulid;
 }

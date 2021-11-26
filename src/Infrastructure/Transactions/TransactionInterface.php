@@ -8,9 +8,9 @@ namespace App\Infrastructure\Transactions;
  */
 interface TransactionInterface
 {
-    function afterCommit($func): self;
+   public function afterCommit($func): self;
 
-    function afterRollback($func): self;
+   public function afterRollback($func): self;
 
-    function execute(): mixed;
+   public function execute(): mixed;
 }

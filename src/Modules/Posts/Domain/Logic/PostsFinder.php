@@ -28,7 +28,7 @@ trait PostsFinder
      * @param FindAllPostsQuery $query
      * @return Page<FindPostHeaderQueryResponse>
      */
-    function findAllPosts(FindAllPostsQuery $query): Page
+   public function findAllPosts(FindAllPostsQuery $query): Page
     {
         $page = $this->findingRepository->findPosts($query->getPageNo());
         return new Page(Collection::from(
@@ -48,7 +48,7 @@ trait PostsFinder
      * @param FindPostByIdQuery $query
      * @return FindPostQueryResponse|null
      */
-    function findPostById(FindPostByIdQuery $query): ?FindPostQueryResponse
+   public function findPostById(FindPostByIdQuery $query): ?FindPostQueryResponse
     {
         return $this->toSinglePostResponse(
             $this->findingRepository->findPost($query->getId())

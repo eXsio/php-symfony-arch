@@ -13,7 +13,7 @@ class DoctrineTagsPostHeadersFindingRepository extends DoctrineTagsRepository im
     /**
      * @return array<TagsPostHeaderDto>
      */
-    function findPostHeaders(): array
+   public function findPostHeaders(): array
     {
         $headerClass = TagPostHeader::class;
         $dtoClass = TagsPostHeaderDto::class;

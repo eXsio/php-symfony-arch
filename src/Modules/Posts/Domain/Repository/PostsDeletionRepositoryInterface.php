@@ -9,5 +9,5 @@ interface PostsDeletionRepositoryInterface
     /**
      * @param DeleteExistingPostDto $dto
      */
-    function deletePost(DeleteExistingPostDto $dto): void;
+   public function deletePost(DeleteExistingPostDto $dto): void;
 }

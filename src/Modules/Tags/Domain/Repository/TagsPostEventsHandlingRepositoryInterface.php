@@ -11,15 +11,15 @@ interface TagsPostEventsHandlingRepositoryInterface
     /**
      * @param CreateNewTagsPostHeaderDto $newPostHeader
      */
-    function createPostHeader(CreateNewTagsPostHeaderDto $newPostHeader): void;
+   public function createPostHeader(CreateNewTagsPostHeaderDto $newPostHeader): void;
 
     /**
      * @param UpdateExistingTagsPostHeaderDto $updatedPostHeader
      */
-    function updatePostHeader(UpdateExistingTagsPostHeaderDto $updatedPostHeader): void;
+   public function updatePostHeader(UpdateExistingTagsPostHeaderDto $updatedPostHeader): void;
 
     /**
      * @param DeleteExistingTagsPostHeaderDto $deletedPostHeader
      */
-    function deletePostHeader(DeleteExistingTagsPostHeaderDto $deletedPostHeader): void;
+   public function deletePostHeader(DeleteExistingTagsPostHeaderDto $deletedPostHeader): void;
 }

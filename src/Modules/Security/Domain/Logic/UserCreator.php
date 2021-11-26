@@ -34,7 +34,7 @@ trait UserCreator
      * @param CreateUserCommand $command
      * @return CreateUserCommandResponse
      */
-    function createUser(CreateUserCommand $command): CreateUserCommandResponse
+   public function createUser(CreateUserCommand $command): CreateUserCommandResponse
     {
         $this->validator->preCreateUser($command);
         $newUser = $this->fromCommand($command);

@@ -14,7 +14,7 @@ class DoctrineUserCreationRepository extends DoctrineSecurityRepository implemen
      * @param CreateNewUserDto $newUser
      * @return Ulid
      */
-    function createUser(CreateNewUserDto $newUser): Ulid
+   public function createUser(CreateNewUserDto $newUser): Ulid
     {
         $user = new User();
         $user->setEmail($newUser->getLogin());

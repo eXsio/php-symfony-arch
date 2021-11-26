@@ -30,7 +30,7 @@ trait PostUpdater
     /**
      * @param UpdatePostCommand $command
      */
-    function updatePost(UpdatePostCommand $command): void
+   public function updatePost(UpdatePostCommand $command): void
     {
         $post = $this->validator->preUpdate($command);
         $updatedPost = $this->fromUpdateCommand($command);

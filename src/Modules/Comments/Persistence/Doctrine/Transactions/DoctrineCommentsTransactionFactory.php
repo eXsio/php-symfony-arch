@@ -21,7 +21,7 @@ class DoctrineCommentsTransactionFactory extends DoctrineTransactionFactory impl
     /**
      * @return string
      */
-    function getManagerName(): string
+   public function getManagerName(): string
     {
         return "comments";
     }

@@ -15,7 +15,7 @@ class DoctrinePostsCreationRepository extends DoctrinePostsRepository implements
      * @param CreateNewPostDto $newPost
      * @return Ulid
      */
-    function createPost(CreateNewPostDto $newPost): Ulid
+   public function createPost(CreateNewPostDto $newPost): Ulid
     {
 
         $id = new Ulid();

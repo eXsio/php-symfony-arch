@@ -30,7 +30,7 @@ trait JWTSecurityListener
     /**
      * @param JWTCreatedEvent $event
      */
-    function onJwtCreated(JWTCreatedEvent $event): void
+   public function onJwtCreated(JWTCreatedEvent $event): void
     {
         $payload = $event->getData();
         $user = $this->loggedInUserProvider->getUser();

@@ -28,7 +28,7 @@ class SecurityQueryController extends AbstractController
      * @return Response
      */
     #[Route('/{userId}', methods: ['GET'])]
-    function getPostsByUserId(string $userId, Request $request): Response
+   public function getPostsByUserId(string $userId, Request $request): Response
     {
         $pageNo = $request->query->get("pageNo", "1");
         return $this->json(

@@ -25,7 +25,7 @@ class TagsUpdater
      * @param Ulid $postId
      * @param array $tags
      */
-    function createUpdateTags(Ulid $postId, array $tags): void
+   public function createUpdateTags(Ulid $postId, array $tags): void
     {
         $this->tagsUpdatingRepository->removePostFromTags($postId);
         foreach ($tags as $tag) {
@@ -35,7 +35,7 @@ class TagsUpdater
     }
 
 
-    function deleteEmptyTags(): void
+   public function deleteEmptyTags(): void
     {
         $this->tagsDeletingRepository->deleteEmptyTags();
     }

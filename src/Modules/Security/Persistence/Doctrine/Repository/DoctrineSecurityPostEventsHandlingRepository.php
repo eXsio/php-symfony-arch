@@ -15,7 +15,7 @@ class DoctrineSecurityPostEventsHandlingRepository extends DoctrineSecurityRepos
      * @param CreateNewUserPostHeaderDto $newPostHeader
      * @throws \Doctrine\ORM\ORMException
      */
-    function createPostHeader(CreateNewUserPostHeaderDto $newPostHeader): void
+   public function createPostHeader(CreateNewUserPostHeaderDto $newPostHeader): void
     {
         $post = new UserPostHeader();
         $post->setId($newPostHeader->getId());
@@ -32,7 +32,7 @@ class DoctrineSecurityPostEventsHandlingRepository extends DoctrineSecurityRepos
     /**
      * @param UpdateExistingUserPostHeaderDto $updatedPostHeader
      */
-    function updatePostHeader(UpdateExistingUserPostHeaderDto $updatedPostHeader): void
+   public function updatePostHeader(UpdateExistingUserPostHeaderDto $updatedPostHeader): void
     {
         $this->getEntityManager()
             ->createQueryBuilder()
@@ -54,7 +54,7 @@ class DoctrineSecurityPostEventsHandlingRepository extends DoctrineSecurityRepos
     /**
      * @param DeleteExistingUserPostHeaderDto $deletedPostHeader
      */
-    function deletePostHeader(DeleteExistingUserPostHeaderDto $deletedPostHeader): void
+   public function deletePostHeader(DeleteExistingUserPostHeaderDto $deletedPostHeader): void
     {
         $entityManager = $this->getEntityManager();
         $entityManager

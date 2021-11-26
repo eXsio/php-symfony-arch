@@ -21,39 +21,39 @@ interface PostsApiInterface
      * @param CreatePostCommand $command
      * @return CreatePostCommandResponse
      */
-    function createPost(CreatePostCommand $command): CreatePostCommandResponse;
+   public function createPost(CreatePostCommand $command): CreatePostCommandResponse;
 
     /**
      * @param UpdatePostCommand $command
      */
-    function updatePost(UpdatePostCommand $command): void;
+   public function updatePost(UpdatePostCommand $command): void;
 
     /**
      * @param DeletePostCommand $command
      */
-    function deletePost(DeletePostCommand $command): void;
+   public function deletePost(DeletePostCommand $command): void;
 
     /**
      * @param FindAllPostsQuery $query
      * @return Page<FindPostQueryResponse>
      */
-    function findAllPosts(FindAllPostsQuery $query): Page;
+   public function findAllPosts(FindAllPostsQuery $query): Page;
 
     /**
      * @param FindPostByIdQuery $query
      * @return FindPostQueryResponse|null
      */
-    function findPostById(FindPostByIdQuery $query): ?FindPostQueryResponse;
+   public function findPostById(FindPostByIdQuery $query): ?FindPostQueryResponse;
 
     /**
      * @param CommentCreatedPostsIEvent $event
      */
-    function onCommentCreated(CommentCreatedPostsIEvent $event): void;
+   public function onCommentCreated(CommentCreatedPostsIEvent $event): void;
 
     /**
      * @param CommentsBaselinedPostsIEvent $event
      */
-    function onCommentsBaselined(CommentsBaselinedPostsIEvent $event): void;
+   public function onCommentsBaselined(CommentsBaselinedPostsIEvent $event): void;
 
     /**
      * @param BaselinePostsCommand $command

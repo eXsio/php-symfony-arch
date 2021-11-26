@@ -11,15 +11,15 @@ interface CommentsPostsEventsHandlingRepositoryInterface
     /**
      * @param CreateNewCommentsPostHeaderDto $newPostHeader
      */
-    function createPostHeader(CreateNewCommentsPostHeaderDto $newPostHeader): void;
+   public function createPostHeader(CreateNewCommentsPostHeaderDto $newPostHeader): void;
 
     /**
      * @param UpdateExistingCommentsPostHeaderDto $updatedPostHeader
      */
-    function updatePostHeader(UpdateExistingCommentsPostHeaderDto $updatedPostHeader): void;
+   public function updatePostHeader(UpdateExistingCommentsPostHeaderDto $updatedPostHeader): void;
 
     /**
      * @param DeleteExistingCommentsPostHeaderDto $deletedPostHeader
      */
-    function deletePostHeader(DeleteExistingCommentsPostHeaderDto $deletedPostHeader): void;
+   public function deletePostHeader(DeleteExistingCommentsPostHeaderDto $deletedPostHeader): void;
 }

@@ -22,27 +22,27 @@ interface SecurityApiInterface
      * @param CreateUserCommand $command
      * @return CreateUserCommandResponse
      */
-    function createUser(CreateUserCommand $command): CreateUserCommandResponse;
+   public function createUser(CreateUserCommand $command): CreateUserCommandResponse;
 
     /**
      * @param PostCreatedSecurityIEvent $event
      */
-    function onPostCreated(PostCreatedSecurityIEvent $event): void;
+   public function onPostCreated(PostCreatedSecurityIEvent $event): void;
 
     /**
      * @param PostUpdatedSecurityIEvent $event
      */
-    function onPostUpdated(PostUpdatedSecurityIEvent $event): void;
+   public function onPostUpdated(PostUpdatedSecurityIEvent $event): void;
 
     /**
      * @param PostDeletedSecurityIEvent $event
      */
-    function onPostDeleted(PostDeletedSecurityIEvent $event): void;
+   public function onPostDeleted(PostDeletedSecurityIEvent $event): void;
 
     /**
      * @param CommentsCountUpdatedSecurityIEvent $event
      */
-    function onCommentsCountUpdated(CommentsCountUpdatedSecurityIEvent $event): void;
+   public function onCommentsCountUpdated(CommentsCountUpdatedSecurityIEvent $event): void;
 
     /**
      * @param FindUserPostHeadersQuery $query

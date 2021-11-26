@@ -13,7 +13,7 @@ class DoctrinePostsDeletionRepository extends DoctrinePostsRepository implements
     /**
      * @param DeleteExistingPostDto $dto
      */
-    function deletePost(DeleteExistingPostDto $dto): void
+   public function deletePost(DeleteExistingPostDto $dto): void
     {
         $em = $this->getEntityManager();
         $em

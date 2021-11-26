@@ -13,7 +13,7 @@ class DoctrineTagsPostEventsHandlingRepository extends DoctrineTagsRepository im
     /**
      * @param CreateNewTagsPostHeaderDto $newPostHeader
      */
-    function createPostHeader(CreateNewTagsPostHeaderDto $newPostHeader): void
+   public function createPostHeader(CreateNewTagsPostHeaderDto $newPostHeader): void
     {
         $post = new TagPostHeader();
         $post->setId($newPostHeader->getId());
@@ -31,7 +31,7 @@ class DoctrineTagsPostEventsHandlingRepository extends DoctrineTagsRepository im
     /**
      * @param UpdateExistingTagsPostHeaderDto $updatedPostHeader
      */
-    function updatePostHeader(UpdateExistingTagsPostHeaderDto $updatedPostHeader): void
+   public function updatePostHeader(UpdateExistingTagsPostHeaderDto $updatedPostHeader): void
     {
         $this->getEntityManager()
             ->createQueryBuilder()
@@ -53,7 +53,7 @@ class DoctrineTagsPostEventsHandlingRepository extends DoctrineTagsRepository im
     /**
      * @param DeleteExistingTagsPostHeaderDto $deletedPostHeader
      */
-    function deletePostHeader(DeleteExistingTagsPostHeaderDto $deletedPostHeader): void
+   public function deletePostHeader(DeleteExistingTagsPostHeaderDto $deletedPostHeader): void
     {
         $entityManager = $this->getEntityManager();
         $entityManager

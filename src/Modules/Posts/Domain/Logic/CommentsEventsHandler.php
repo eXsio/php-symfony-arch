@@ -27,7 +27,7 @@ trait CommentsEventsHandler
     /**
      * @param CommentCreatedPostsIEvent $event
      */
-    function onCommentCreated(CommentCreatedPostsIEvent $event): void
+   public function onCommentCreated(CommentCreatedPostsIEvent $event): void
     {
         $this->postValidator->preHandleCommentCreated($event);
         $this->transactionFactory
@@ -42,7 +42,7 @@ trait CommentsEventsHandler
             ->execute();
     }
 
-    function onCommentsBaselined(CommentsBaselinedPostsIEvent $event): void
+   public function onCommentsBaselined(CommentsBaselinedPostsIEvent $event): void
     {
         $this->postValidator->preHandleCommentsBaselined($event);
         $this->transactionFactory

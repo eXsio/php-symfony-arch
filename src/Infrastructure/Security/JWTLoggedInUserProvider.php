@@ -16,7 +16,7 @@ class JWTLoggedInUserProvider implements LoggedInUserProviderInterface
     {
     }
 
-    function getUser(): LoggedInUser
+   public function getUser(): LoggedInUser
     {
         $user = $this->security->getUser();
         if ($user == null) {

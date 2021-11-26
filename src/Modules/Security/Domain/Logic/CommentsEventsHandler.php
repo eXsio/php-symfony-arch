@@ -24,7 +24,7 @@ trait CommentsEventsHandler
     /**
      * @param CommentsCountUpdatedSecurityIEvent $event
      */
-    function onCommentsCountUpdated(CommentsCountUpdatedSecurityIEvent $event): void
+   public function onCommentsCountUpdated(CommentsCountUpdatedSecurityIEvent $event): void
     {
         $this->transactionFactory
             ->createTransaction(function () use ($event) {

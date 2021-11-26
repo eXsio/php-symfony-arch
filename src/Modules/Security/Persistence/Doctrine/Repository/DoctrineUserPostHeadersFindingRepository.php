@@ -14,7 +14,7 @@ class DoctrineUserPostHeadersFindingRepository extends DoctrineSecurityRepositor
     /**
      * @return array<UserPostHeaderDto>
      */
-    function findPostHeaders(): array
+   public function findPostHeaders(): array
     {
         $headerClass = UserPostHeader::class;
         $dtoClass = UserPostHeaderDto::class;

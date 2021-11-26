@@ -21,7 +21,7 @@ class DoctrinePostTransactionFactory extends DoctrineTransactionFactory implemen
     /**
      * @return string
      */
-    function getManagerName(): string
+   public function getManagerName(): string
     {
         return "posts";
     }

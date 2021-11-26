@@ -15,7 +15,7 @@ class DoctrineCommentsPostsEventsHandlingRepository extends DoctrineCommentsRepo
     /**
      * @param CreateNewCommentsPostHeaderDto $newPostHeader
      */
-    function createPostHeader(CreateNewCommentsPostHeaderDto $newPostHeader): void
+   public function createPostHeader(CreateNewCommentsPostHeaderDto $newPostHeader): void
     {
         $post = new CommentPostHeader();
         $post->setId($newPostHeader->getId());
@@ -33,7 +33,7 @@ class DoctrineCommentsPostsEventsHandlingRepository extends DoctrineCommentsRepo
     /**
      * @param UpdateExistingCommentsPostHeaderDto $updatedPostHeader
      */
-    function updatePostHeader(UpdateExistingCommentsPostHeaderDto $updatedPostHeader): void
+   public function updatePostHeader(UpdateExistingCommentsPostHeaderDto $updatedPostHeader): void
     {
         $this->getEntityManager()
             ->createQueryBuilder()
@@ -56,7 +56,7 @@ class DoctrineCommentsPostsEventsHandlingRepository extends DoctrineCommentsRepo
      * @param DeleteExistingCommentsPostHeaderDto $deletedPostHeader
      * @throws \Doctrine\ORM\ORMException
      */
-    function deletePostHeader(DeleteExistingCommentsPostHeaderDto $deletedPostHeader): void
+   public function deletePostHeader(DeleteExistingCommentsPostHeaderDto $deletedPostHeader): void
     {
         $entityManager = $this->getEntityManager();
         $entityManager

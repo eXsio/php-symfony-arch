@@ -13,7 +13,7 @@ class DoctrinePostsUpdatingRepository extends DoctrinePostsRepository implements
     /**
      * @param UpdateExistingPostDto $dto
      */
-    function updatePost(UpdateExistingPostDto $dto): void
+   public function updatePost(UpdateExistingPostDto $dto): void
     {
 
         $this->getEntityManager()

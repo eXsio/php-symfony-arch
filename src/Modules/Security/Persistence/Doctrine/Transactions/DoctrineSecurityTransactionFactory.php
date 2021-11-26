@@ -16,7 +16,7 @@ class DoctrineSecurityTransactionFactory extends DoctrineTransactionFactory impl
     }
 
 
-    function getManagerName(): string
+   public function getManagerName(): string
     {
         return "security";
     }

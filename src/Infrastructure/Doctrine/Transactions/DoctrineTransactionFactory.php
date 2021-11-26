@@ -17,7 +17,7 @@ abstract class DoctrineTransactionFactory extends DoctrineEntityManagerAware imp
         parent::__construct($managerRegistry);
     }
 
-    function createTransaction($func): TransactionInterface
+   public function createTransaction($func): TransactionInterface
     {
         return new DoctrineTransaction($this->getEntityManager(), $func);
     }

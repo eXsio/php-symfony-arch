@@ -13,7 +13,7 @@ class DoctrineCommentsPostHeadersFindingRepository extends DoctrineCommentsRepos
     /**
      * @return array<CommentsPostHeaderDto>
      */
-    function findPostHeaders(?\DateTime $from = null): array
+   public function findPostHeaders(?\DateTime $from = null): array
     {
         $headerClass = CommentPostHeader::class;
         $dtoClass = CommentsPostHeaderDto::class;

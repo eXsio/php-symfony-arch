@@ -13,7 +13,7 @@ interface UserPostHeadersFindingRepositoryInterface
     /**
      * @return array<UserPostHeaderDto>
      */
-    function findPostHeaders(): array;
+   public function findPostHeaders(): array;
 
     /**
      * @return Page<UserPostHeaderDto>

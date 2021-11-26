@@ -28,7 +28,7 @@ class DoctrineTransaction implements TransactionInterface
      * @return mixed
      * @throws \Exception
      */
-    function execute(): mixed
+   public function execute(): mixed
     {
         try {
             $result = $this->entityManager->wrapInTransaction($this->func);
@@ -48,7 +48,7 @@ class DoctrineTransaction implements TransactionInterface
      * @param $func
      * @return $this
      */
-    function afterCommit($func): self
+   public function afterCommit($func): self
     {
         $this->afterCommit->add($func);
         return $this;
@@ -58,7 +58,7 @@ class DoctrineTransaction implements TransactionInterface
      * @param $func
      * @return $this
      */
-    function afterRollback($func): self
+   public function afterRollback($func): self
     {
         $this->afterRollback->add($func);
         return $this;

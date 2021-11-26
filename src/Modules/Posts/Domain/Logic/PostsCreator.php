@@ -36,7 +36,7 @@ trait PostsCreator
      * @param CreatePostCommand $command
      * @return CreatePostCommandResponse
      */
-    function createPost(CreatePostCommand $command): CreatePostCommandResponse
+   public function createPost(CreatePostCommand $command): CreatePostCommandResponse
     {
         $this->validator->preCreate($command);
         $newPost = $this->fromCreateCommand($command);
