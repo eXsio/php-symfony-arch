@@ -36,7 +36,7 @@ trait PostsCreator
      * @param CreatePostCommand $command
      * @return CreatePostCommandResponse
      */
-   public function createPost(CreatePostCommand $command): CreatePostCommandResponse
+    public function createPost(CreatePostCommand $command): CreatePostCommandResponse
     {
         $this->validator->preCreate($command);
         $newPost = $this->fromCreateCommand($command);
@@ -61,7 +61,7 @@ trait PostsCreator
         return new CreateNewPostDto(
             $command->getTitle(),
             $command->getBody(),
-            $this->getSummary($command->getBody()),
+            StringUtil::getSummary($command->getBody()),
             $command->getTags(),
             $this->getUser()->getId(),
             $this->getUser()->getEmail(),
@@ -75,14 +75,5 @@ trait PostsCreator
     private function getUser(): LoggedInUser
     {
         return $this->loggedInUserProvider->getUser();
-    }
-
-    /**
-     * @param string $body
-     * @return string
-     */
-    private function getSummary(string $body): string
-    {
-        return StringUtil::getSummary($body);
     }
 }

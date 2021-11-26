@@ -11,7 +11,7 @@ class StringUtil
      */
     public static function getSummary(?string $body, int $maxLength = 250): string
     {
-        if ($body == null) {
+        if ($body === null) {
             return "";
         }
         $short = strlen($body) - 1 < $maxLength ? $body : trim(substr($body, 0, $maxLength)). "...";

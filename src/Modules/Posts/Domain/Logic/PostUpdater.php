@@ -3,6 +3,7 @@
 namespace App\Modules\Posts\Domain\Logic;
 
 use App\Infrastructure\Events\Api\ApplicationEventPublisherInterface;
+use App\Infrastructure\Utils\StringUtil;
 use App\Modules\Posts\Api\Command\UpdatePostCommand;
 use App\Modules\Posts\Domain\Dto\UpdateExistingPostDto;
 use App\Modules\Posts\Domain\Event\Outbound\PostUpdatedOEvent;
@@ -30,7 +31,7 @@ trait PostUpdater
     /**
      * @param UpdatePostCommand $command
      */
-   public function updatePost(UpdatePostCommand $command): void
+    public function updatePost(UpdatePostCommand $command): void
     {
         $post = $this->validator->preUpdate($command);
         $updatedPost = $this->fromUpdateCommand($command);
@@ -55,7 +56,7 @@ trait PostUpdater
             $command->getId(),
             $command->getTitle(),
             $command->getBody(),
-            $this->getSummary($command->getBody()),
+            StringUtil::getSummary($command->getBody()),
             $command->getTags(),
             new \DateTime()
         );

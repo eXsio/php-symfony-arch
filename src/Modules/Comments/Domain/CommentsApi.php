@@ -60,6 +60,7 @@ class CommentsApi extends ApplicationEventSubscriber implements CommentsApiInter
      * @param CommentsCreationRepositoryInterface $commentsCreationRepository
      * @param CommentsFindingRepositoryInterface $commentsFindingRepository
      * @param CommentsDeletionRepositoryInterface $commentsDeletionRepository
+     * @param CommentsSecurityEventsHandlingRepositoryInterface $securityEventsHandlingRepository
      * @param ApplicationEventPublisherInterface $eventPublisher
      * @param LoggerInterface $logger
      */
