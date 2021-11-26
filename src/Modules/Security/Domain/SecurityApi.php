@@ -64,7 +64,11 @@ class SecurityApi extends ApplicationEventSubscriber implements SecurityApiInter
      * @param SecurityPostEventsHandlingRepositoryInterface $postEventsSecurityRepository
      * @param UserPostHeadersFindingRepositoryInterface $headersFindingRepository
      * @param SecurityCommentsEventHandlingRepositoryInterface $commentsEventHandlingRepository
+     * @param UserUpdatingRepositoryInterface $updatingRepository
+     * @param UserFindingRepositoryInterface $findingRepository
      * @param LoggerInterface $logger
+     * @param ValidatorInterface $validator
+     * @param ApplicationEventPublisherInterface $eventPublisher
      */
     public function __construct(
         SecurityTransactionFactoryInterface              $transactionFactory,

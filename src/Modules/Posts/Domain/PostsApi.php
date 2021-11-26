@@ -66,6 +66,7 @@ class PostsApi extends ApplicationEventSubscriber implements PostsApiInterface
      * @param LoggedInUserProviderInterface $loggedInUserProvider
      * @param PostTransactionFactoryInterface $transactionFactory
      * @param PostsCommentsEventHandlingRepositoryInterface $commentsEventHandlingRepository
+     * @param PostsSecurityEventsHandlingRepositoryInterface $securityEventsHandlingRepository
      * @param LoggerInterface $logger
      */
     public function __construct(
