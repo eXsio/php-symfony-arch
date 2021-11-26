@@ -45,7 +45,7 @@ class InMemorySecurityRepository implements
         ]);
     }
 
-    function createPostHeader(CreateNewUserPostHeaderDto $newPostHeader): void
+   public function createPostHeader(CreateNewUserPostHeaderDto $newPostHeader): void
     {
         self::$postHeaders = self::$postHeaders->append(new InMemoryUserPostHeader(
             $newPostHeader->getId(),
@@ -59,7 +59,7 @@ class InMemorySecurityRepository implements
         ));
     }
 
-    function updatePostHeader(UpdateExistingUserPostHeaderDto $updatedPostHeader): void
+   public function updatePostHeader(UpdateExistingUserPostHeaderDto $updatedPostHeader): void
     {
         foreach (self::$postHeaders
                      ->filter(function ($header) use ($updatedPostHeader) {
@@ -73,16 +73,16 @@ class InMemorySecurityRepository implements
         }
     }
 
-    function deletePostHeader(DeleteExistingUserPostHeaderDto $deletedPostHeader): void
+   public function deletePostHeader(DeleteExistingUserPostHeaderDto $deletedPostHeader): void
     {
         self::$postHeaders = self::$postHeaders->filter(
-            function ($header) use ($deletedPostHeader) {
+           function ($header) use ($deletedPostHeader) {
                 return $header->getId() != $deletedPostHeader->getId();
             }
         )->realize();
     }
 
-    function findPostHeaders(): array
+   public function findPostHeaders(): array
     {
         return self::$postHeaders
             ->map(function ($header) {
@@ -101,7 +101,7 @@ class InMemorySecurityRepository implements
             ->toArray();
     }
 
-    function createUser(CreateNewUserDto $newUser): Ulid
+   public function createUser(CreateNewUserDto $newUser): Ulid
     {
         $id = new Ulid();
         self::$users = self::$users->append(new InMemoryUser($id, $newUser->getLogin(), $newUser->getRoles(), 1));

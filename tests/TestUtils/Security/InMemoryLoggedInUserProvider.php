@@ -20,7 +20,7 @@ class InMemoryLoggedInUserProvider implements LoggedInUserProviderInterface
     }
 
 
-    function getUser(): LoggedInUser
+   public function getUser(): LoggedInUser
     {
         return new LoggedInUser(
             InMemoryLoggedInUserProvider::$USER_ID,

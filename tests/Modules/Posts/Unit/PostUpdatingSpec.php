@@ -18,7 +18,7 @@ class PostUpdatingSpec extends PostsSpec
      * @test
      * @dataProvider getUpdatedValidPostData
      */
-    function shouldUpdateExistingPostWithValidData(string $title, string $body, array $tags, string $expectedSummary)
+    public function shouldUpdateExistingPostWithValidData(string $title, string $body, array $tags, string $expectedSummary)
     {
         //given: there is a new Blog Post already created
         $command = new CreatePostCommand('Post Title', 'Post Body', ['t1', 't2']);
@@ -58,7 +58,7 @@ class PostUpdatingSpec extends PostsSpec
      * @test
      * @dataProvider getUpdatedInvalidPostData
      */
-    function shouldThrowErrorWhenTryingToUpdateExistingPostWithInvalidData(string $title, string $body, array $tags)
+    public function shouldThrowErrorWhenTryingToUpdateExistingPostWithInvalidData(string $title, string $body, array $tags)
     {
         //given: there is a new Blog Post already created
         $command = new CreatePostCommand('Post Title', 'Post Body', ['t1', 't2']);
@@ -78,7 +78,7 @@ class PostUpdatingSpec extends PostsSpec
     /**
      * @test
      */
-    function shouldTrowErrorWhenTryingToUpdateNonExistingPost()
+    public function shouldTrowErrorWhenTryingToUpdateNonExistingPost()
     {
         //given: user wants to update a non-existent Post
         $command = new UpdatePostCommand('Post Title', 'Post Body', ['t1', 't2']);

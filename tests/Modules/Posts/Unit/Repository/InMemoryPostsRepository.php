@@ -41,7 +41,7 @@ class InMemoryPostsRepository implements
     }
 
 
-    function createPost(CreateNewPostDto $newPost): Ulid
+   public function createPost(CreateNewPostDto $newPost): Ulid
     {
         $id = new Ulid();
         self::$posts = self::$posts->append(
@@ -61,7 +61,7 @@ class InMemoryPostsRepository implements
         return $id;
     }
 
-    function deletePost(DeleteExistingPostDto $dto): void
+   public function deletePost(DeleteExistingPostDto $dto): void
     {
         self::$posts = Collection::from(
             self::$posts
@@ -72,7 +72,7 @@ class InMemoryPostsRepository implements
         );
     }
 
-    function updatePost(UpdateExistingPostDto $dto): void
+   public function updatePost(UpdateExistingPostDto $dto): void
     {
         foreach (self::$posts
                      ->filter(function ($post) use ($dto) {

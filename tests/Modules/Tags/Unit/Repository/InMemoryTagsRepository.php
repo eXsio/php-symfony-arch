@@ -45,7 +45,7 @@ class InMemoryTagsRepository implements
         self::$tags = Collection::from([]);
     }
 
-    function createPostHeader(CreateNewTagsPostHeaderDto $newPostHeader): void
+   public function createPostHeader(CreateNewTagsPostHeaderDto $newPostHeader): void
     {
         self::$postHeaders = self::$postHeaders->append(new InMemoryTagPostHeader(
             $newPostHeader->getId(),
@@ -59,7 +59,7 @@ class InMemoryTagsRepository implements
         ));
     }
 
-    function updatePostHeader(UpdateExistingTagsPostHeaderDto $updatedPostHeader): void
+   public function updatePostHeader(UpdateExistingTagsPostHeaderDto $updatedPostHeader): void
     {
         foreach (self::$postHeaders
                      ->filter(function ($header) use ($updatedPostHeader) {
@@ -72,16 +72,16 @@ class InMemoryTagsRepository implements
         }
     }
 
-    function deletePostHeader(DeleteExistingTagsPostHeaderDto $deletedPostHeader): void
+   public function deletePostHeader(DeleteExistingTagsPostHeaderDto $deletedPostHeader): void
     {
         self::$postHeaders = self::$postHeaders->filter(
-            function ($header) use ($deletedPostHeader) {
+           function ($header) use ($deletedPostHeader) {
                 return $header->getId() != $deletedPostHeader->getId();
             }
         )->realize();
     }
 
-    function findPostHeaders(): array
+   public function findPostHeaders(): array
     {
         return self::$postHeaders
             ->map(function ($header) {

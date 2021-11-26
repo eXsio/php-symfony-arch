@@ -16,7 +16,7 @@ class PostDeletionSpec extends PostsSpec
     /**
      * @test
      */
-    function shouldDeleteExistingPost()
+    public function shouldDeleteExistingPost()
     {
         //given: there is a new Blog Post already created
         $command = new CreatePostCommand('Post Title', 'Post Body', ['t1', 't2']);
@@ -47,7 +47,7 @@ class PostDeletionSpec extends PostsSpec
     /**
      * @test
      */
-    function shouldTrowErrorWhenTryingToDeleteNonExistingPost()
+    public function shouldTrowErrorWhenTryingToDeleteNonExistingPost()
     {
         //expect: a Not Found Error
         $this->expectException(NotFoundHttpException::class);

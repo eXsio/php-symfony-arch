@@ -13,7 +13,7 @@ class PostFindingSpec extends PostsSpec
     /**
      * @test
      */
-    function shouldFindExistingPost()
+    public function shouldFindExistingPost()
     {
         //given: there is a new Blog Post already created
         $command = new CreatePostCommand('Post Title', 'Post Body', ['t1', 't2']);
@@ -41,7 +41,7 @@ class PostFindingSpec extends PostsSpec
     /**
      * @test
      */
-    function shouldFindAllPosts()
+    public function shouldFindAllPosts()
     {
         //given: there is a new Blog Post already created
         $command = new CreatePostCommand('Post Title', 'Post Body', ['t1', 't2']);

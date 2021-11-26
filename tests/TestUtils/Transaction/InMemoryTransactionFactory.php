@@ -8,7 +8,7 @@ use App\Infrastructure\Transactions\TransactionInterface;
 class InMemoryTransactionFactory implements TransactionFactoryInterface
 {
 
-    function createTransaction($func): TransactionInterface
+   public function createTransaction($func): TransactionInterface
     {
         return new InMemoryTransaction($func);
     }

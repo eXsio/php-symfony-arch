@@ -16,7 +16,7 @@ class PostCreationSpec extends PostsSpec
      * @test
      * @dataProvider getValidNewPostData
      */
-    function shouldCreateNewValidPost(string $title, string $body, array $tags, string $expectedSummary)
+    public function shouldCreateNewValidPost(string $title, string $body, array $tags, string $expectedSummary)
     {
         //given: there is a new Blog Post to be created with valid data
         $command = new CreatePostCommand($title, $body, $tags);
@@ -53,7 +53,7 @@ class PostCreationSpec extends PostsSpec
      * @test
      * @dataProvider getInvalidNewPostData
      */
-    function shouldThrowErrorWhenTryingToCreateNewInvalidPost(string $title, string $body, array $tags)
+    public function shouldThrowErrorWhenTryingToCreateNewInvalidPost(string $title, string $body, array $tags)
     {
         //given: there is a new Blog Post to be created with invalid data
         $command = new CreatePostCommand($title, $body, $tags);

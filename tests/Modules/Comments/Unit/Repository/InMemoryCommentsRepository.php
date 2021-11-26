@@ -43,7 +43,7 @@ class InMemoryCommentsRepository implements
         self::$comments = Collection::from([]);
     }
 
-    function createPostHeader(CreateNewCommentsPostHeaderDto $newPostHeader): void
+    public function createPostHeader(CreateNewCommentsPostHeaderDto $newPostHeader): void
     {
         self::$postHeaders = self::$postHeaders->append(new InMemoryCommentPostHeader(
             $newPostHeader->getId(),
@@ -57,7 +57,7 @@ class InMemoryCommentsRepository implements
         ));
     }
 
-    function updatePostHeader(UpdateExistingCommentsPostHeaderDto $updatedPostHeader): void
+    public function updatePostHeader(UpdateExistingCommentsPostHeaderDto $updatedPostHeader): void
     {
         foreach (self::$postHeaders
                      ->filter(function ($header) use ($updatedPostHeader) {
@@ -71,16 +71,16 @@ class InMemoryCommentsRepository implements
         }
     }
 
-    function deletePostHeader(DeleteExistingCommentsPostHeaderDto $deletedPostHeader): void
+    public function deletePostHeader(DeleteExistingCommentsPostHeaderDto $deletedPostHeader): void
     {
         self::$postHeaders = self::$postHeaders->filter(
-            function ($header) use ($deletedPostHeader) {
+           function ($header) use ($deletedPostHeader) {
                 return $header->getId() != $deletedPostHeader->getId();
             }
         )->realize();
     }
 
-    function findPostHeaders(?\DateTime $from = null): array
+    public function findPostHeaders(?\DateTime $from = null): array
     {
         return self::$postHeaders
             ->filter(function ($header) use ($from) {

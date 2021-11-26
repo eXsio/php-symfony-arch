@@ -26,7 +26,7 @@ class InMemoryTransaction implements TransactionInterface
      * @return mixed
      * @throws \Exception
      */
-    function execute(): mixed
+   public function execute(): mixed
     {
         try {
             $handler = $this->func;
@@ -48,7 +48,7 @@ class InMemoryTransaction implements TransactionInterface
      * @param $func
      * @return $this
      */
-    function afterCommit($func): TransactionInterface
+   public function afterCommit($func): TransactionInterface
     {
         $this->afterCommit->add($func);
         return $this;
@@ -58,7 +58,7 @@ class InMemoryTransaction implements TransactionInterface
      * @param $func
      * @return $this
      */
-    function afterRollback($func): TransactionInterface
+   public function afterRollback($func): TransactionInterface
     {
         $this->afterRollback->add($func);
         return $this;
