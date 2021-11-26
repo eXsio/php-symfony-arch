@@ -11,7 +11,22 @@ abstract class SecurityIntegrationTest extends IntegrationTest
 
     protected ?string $token = null;
 
-    protected function createToken(KernelBrowser $client, $username, $password): string
+    /**
+     * Create a client with a default Authorization header.
+     *
+     *
+     * @return KernelBrowser
+     */
+    protected function createAuthenticatedClient(): KernelBrowser
+    {
+        $client = static::createClient();
+        $client->setServerParameter('HTTP_Authorization', sprintf('Bearer %s',
+                $this->createToken($client))
+        );
+        return $client;
+    }
+
+    private function createToken(KernelBrowser $client): string
     {
         $client->request(
             'POST',
@@ -20,8 +35,8 @@ abstract class SecurityIntegrationTest extends IntegrationTest
             array(),
             array('CONTENT_TYPE' => 'application/json'),
             json_encode(array(
-                'username' => $username,
-                'password' => $password,
+                'username' => self::DEFAULT_USER_ID,
+                'password' => self::DEFAULT_USER_PASSWORD,
             ))
         );
         $cookies = $client->getResponse()->headers->getCookies();

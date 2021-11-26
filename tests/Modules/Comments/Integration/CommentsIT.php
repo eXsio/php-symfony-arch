@@ -145,7 +145,7 @@ class CommentsIT extends IntegrationTest
     public function shouldRenameUserForPost()
     {
         //given: there was a Post Created
-        $postId = $this->createAndUpdatePost();
+        $this->createAndUpdatePost();
 
         //and: the Header was to be updated
         $event = new UserRenamedCommentsIEvent($this->getInboundEvent("Comments/UserRenamedCommentsIEvent"));

@@ -62,7 +62,7 @@ class PostCreationSpec extends PostsSpec
         $this->expectException(BadRequestHttpException::class);
 
         //when: the Post is created
-        $response = $this->postsApi->createPost($command);
+        $this->postsApi->createPost($command);
 
     }
 

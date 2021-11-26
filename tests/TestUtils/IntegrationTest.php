@@ -30,16 +30,15 @@ abstract class IntegrationTest extends WebTestCase
     /**
      * Create a client with a default Authorization header.
      *
-     * @param string $username
-     * @param string $password
      *
      * @return KernelBrowser
      */
-    private function createAuthenticatedClient($username = self::DEFAULT_USER_ID, $password = self::DEFAULT_USER_PASSWORD): KernelBrowser
+    protected function createAuthenticatedClient(): KernelBrowser
     {
-
         $client = static::createClient();
-        $client->setServerParameter('HTTP_Authorization', sprintf('Bearer %s', $this->createToken($client, $username, $password)));
+        $client->setServerParameter('HTTP_Authorization', sprintf('Bearer %s',
+                $this->createToken())
+        );
         return $client;
     }
 
@@ -51,10 +50,10 @@ abstract class IntegrationTest extends WebTestCase
         return $this->client;
     }
 
-    protected function createToken(KernelBrowser $client, $username, $password): string
+    private function createToken(): string
     {
         $tokenStorage = $this->getContainer()->get('security.token_storage');
-        $user = new LoggedInUser(new Ulid(), $username, ['ROLE_USER']);
+        $user = new LoggedInUser(new Ulid(), self::DEFAULT_USER_ID, ['ROLE_USER']);
         $token = new TestBrowserToken(['ROLE_USER'], $user);
         $tokenStorage->setToken($token);
         $jwtManager = $this->getContainer()->get(JWTTokenManagerInterface::class);
