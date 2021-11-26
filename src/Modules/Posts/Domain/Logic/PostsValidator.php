@@ -28,7 +28,7 @@ class PostsValidator
     /**
      * @param CreatePostCommand $command
      */
-   public function preCreate(CreatePostCommand $command): void
+    public function preCreate(CreatePostCommand $command): void
     {
         $this->validatePostBody($command->getBody());
         $this->validatePostTitle($command->getTitle());
@@ -37,10 +37,13 @@ class PostsValidator
 
     /**
      * @param UpdatePostCommand $command
-     * @return PostDto|null
+     * @return PostDto
      */
-    public function preUpdate(UpdatePostCommand $command): ?PostDto
+    public function preUpdate(UpdatePostCommand $command): PostDto
     {
+        if ($command->getId() == null) {
+            throw new BadRequestHttpException("Post Id cannot be null");
+        }
         $post = $this->validatePostExists($command->getId());
         $this->validatePostBody($command->getBody());
         $this->validatePostTitle($command->getTitle());
@@ -69,9 +72,9 @@ class PostsValidator
 
     /**
      * @param Ulid $id
-     * @return PostDto|null
+     * @return PostDto
      */
-    private function validatePostExists(Ulid $id): ?PostDto
+    private function validatePostExists(Ulid $id): PostDto
     {
         $post = $this->findingRepository->findPost($id);
         if ($post == null) {
