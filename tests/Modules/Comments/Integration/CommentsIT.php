@@ -181,7 +181,10 @@ class CommentsIT extends IntegrationTest
     private function deletePost(Ulid $postId): void
     {
         //and: the Header was to be updated
-        $event = new PostDeletedCommentsIEvent($this->getInboundEvent("Comments/PostDeletedCommentsIEvent"));
+        $data = $this->getInboundEvent("Comments/PostDeletedCommentsIEvent");
+        $data["postId"] = $postId;
+        $event = new PostDeletedCommentsIEvent($data);
+
 
         //and: the Event was published
         $this->getCommentsApi()->onPostDeleted($event);

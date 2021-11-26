@@ -2,7 +2,6 @@
 
 namespace App\Modules\Security\Persistence\Doctrine\Entity;
 
-use App\Modules\Security\Persistence\Doctrine\Repository\DoctrineInternalUserRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
@@ -148,22 +147,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return array
+     * @return Collection
      */
-    public function getPosts(): array
+    public function getPosts(): Collection
     {
         return $this->posts;
     }
 
     /**
-     * @param array $posts
+     * @param Collection $posts
      */
-    public function setPosts(array $posts): void
+    public function setPosts(Collection $posts): void
     {
         $this->posts = $posts;
     }
-
-
 
 
 }

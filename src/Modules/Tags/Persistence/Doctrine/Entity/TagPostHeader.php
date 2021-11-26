@@ -106,17 +106,17 @@ class TagPostHeader
     }
 
     /**
-     * @return array<Tag>
+     * @return Collection<Tag>
      */
-    public function getTags(): array
+    public function getTags(): Collection
     {
         return $this->tags;
     }
 
     /**
-     * @param array<Tag> $tags
+     * @param Collection<Tag> $tags
      */
-    public function setTags(array $tags): void
+    public function setTags(Collection $tags): void
     {
         $this->tags = $tags;
     }
@@ -171,17 +171,17 @@ class TagPostHeader
 
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getVersion()
+    public function getVersion(): int
     {
         return $this->version;
     }
 
     /**
-     * @param mixed $version
+     * @param int $version
      */
-    public function setVersion($version): void
+    public function setVersion(int $version): void
     {
         $this->version = $version;
     }
@@ -201,8 +201,6 @@ class TagPostHeader
     {
         $this->flatTags = $flatTags;
     }
-
-
 
 
 }
