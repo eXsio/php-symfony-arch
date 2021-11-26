@@ -3,7 +3,6 @@
 namespace App\Modules\Security\Persistence\Doctrine\Entity;
 
 use App\Modules\Security\Persistence\Doctrine\Repository\DoctrineInternalUserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;

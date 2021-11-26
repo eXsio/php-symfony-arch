@@ -5,9 +5,7 @@ namespace App\Tests\Modules\Tags\Unit;
 use App\Modules\Tags\Api\Event\Inbound\PostCreatedTagsIEvent;
 use App\Modules\Tags\Api\Event\Inbound\PostDeletedTagsIEvent;
 use App\Modules\Tags\Api\Event\Inbound\PostUpdatedTagsIEvent;
-use App\Modules\Tags\Api\Query\FindTagsPostHeadersQuery;
 use App\Tests\TestUtils\Contracts\ApplicationEventContractLoader;
-use Symfony\Component\Uid\Ulid;
 
 class PostEventsTagsHandlingSpec extends TagsSpec
 {
@@ -25,7 +23,7 @@ class PostEventsTagsHandlingSpec extends TagsSpec
         $this->tagsApi->onPostCreated($event);
 
         //then: Post Header was created - no Exception was thrown
-        $headers = $this->tagsApi->findPostHeaders(new FindTagsPostHeadersQuery());
+        $headers = $this->tagsApi->findPostHeaders();
         self::assertNotNull($headers);
         self::assertCount(1, $headers);
         self::assertTrue(isset($headers[0]));
@@ -56,7 +54,7 @@ class PostEventsTagsHandlingSpec extends TagsSpec
         $this->tagsApi->onPostUpdated($event);
 
         //then: Post Header was created - no Exception was thrown
-        $headers = $this->tagsApi->findPostHeaders(new FindTagsPostHeadersQuery());
+        $headers = $this->tagsApi->findPostHeaders();
         self::assertNotNull($headers);
         self::assertCount(1, $headers);
         self::assertTrue(isset($headers[0]));
@@ -84,7 +82,7 @@ class PostEventsTagsHandlingSpec extends TagsSpec
         $this->tagsApi->onPostDeleted($event);
 
         //then: Post Header was created - no Exception was thrown
-        $headers = $this->tagsApi->findPostHeaders(new FindTagsPostHeadersQuery());
+        $headers = $this->tagsApi->findPostHeaders();
         self::assertNotNull($headers);
         self::assertCount(0, $headers);
     }

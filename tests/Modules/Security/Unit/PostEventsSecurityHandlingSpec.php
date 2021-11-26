@@ -5,9 +5,7 @@ namespace App\Tests\Modules\Security\Unit;
 use App\Modules\Security\Api\Event\Inbound\PostCreatedSecurityIEvent;
 use App\Modules\Security\Api\Event\Inbound\PostDeletedSecurityIEvent;
 use App\Modules\Security\Api\Event\Inbound\PostUpdatedSecurityIEvent;
-use App\Modules\Security\Api\Query\FindUserPostHeadersQuery;
 use App\Tests\TestUtils\Contracts\ApplicationEventContractLoader;
-use Symfony\Component\Uid\Ulid;
 
 class PostEventsSecurityHandlingSpec extends SecuritySpec
 {
@@ -25,7 +23,7 @@ class PostEventsSecurityHandlingSpec extends SecuritySpec
         $this->securityApi->onPostCreated($event);
 
         //then: Post Header was created - no Exception was thrown
-        $headers = $this->securityApi->findPostHeaders(new FindUserPostHeadersQuery());
+        $headers = $this->securityApi->findPostHeaders();
         self::assertNotNull($headers);
         self::assertCount(1, $headers);
         self::assertTrue(isset($headers[0]));
@@ -55,7 +53,7 @@ class PostEventsSecurityHandlingSpec extends SecuritySpec
         $this->securityApi->onPostUpdated($event);
 
         //then: Post Header was created - no Exception was thrown
-        $headers = $this->securityApi->findPostHeaders(new FindUserPostHeadersQuery());
+        $headers = $this->securityApi->findPostHeaders();
         self::assertNotNull($headers);
         self::assertCount(1, $headers);
         self::assertTrue(isset($headers[0]));
@@ -84,7 +82,7 @@ class PostEventsSecurityHandlingSpec extends SecuritySpec
         $this->securityApi->onPostDeleted($event);
 
         //then: Post Header was created - no Exception was thrown
-        $headers = $this->securityApi->findPostHeaders(new FindUserPostHeadersQuery());
+        $headers = $this->securityApi->findPostHeaders();
         self::assertNotNull($headers);
         self::assertCount(0, $headers);
     }

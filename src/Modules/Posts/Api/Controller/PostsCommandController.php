@@ -7,7 +7,6 @@ use App\Modules\Posts\Api\Command\CreatePostCommand;
 use App\Modules\Posts\Api\Command\DeletePostCommand;
 use App\Modules\Posts\Api\Command\UpdatePostCommand;
 use App\Modules\Posts\Api\PostsApiInterface;
-use App\Modules\Posts\Domain\Security\PostsVoter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;

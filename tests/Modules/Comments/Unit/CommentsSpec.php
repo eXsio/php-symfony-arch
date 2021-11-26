@@ -4,7 +4,6 @@ namespace App\Tests\Modules\Comments\Unit;
 
 use App\Modules\Comments\Api\CommentsApiInterface;
 use App\Modules\Comments\Api\Event\Inbound\PostCreatedCommentsIEvent;
-use App\Modules\Comments\Api\Query\FindCommentsPostHeadersQuery;
 use App\Modules\Comments\Domain\CommentsApi;
 use App\Tests\Modules\Comments\Unit\Repository\InMemoryCommentsRepository;
 use App\Tests\Modules\Comments\Unit\Transaction\InMemoryCommentsTransactionFactory;

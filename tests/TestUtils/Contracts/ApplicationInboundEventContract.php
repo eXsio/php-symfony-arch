@@ -3,7 +3,6 @@
 namespace App\Tests\TestUtils\Contracts;
 
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Uid\Ulid;
 
 abstract class ApplicationInboundEventContract extends TestCase
 {

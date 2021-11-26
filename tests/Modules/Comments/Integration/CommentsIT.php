@@ -10,7 +10,6 @@ use App\Modules\Comments\Api\Event\Inbound\PostDeletedCommentsIEvent;
 use App\Modules\Comments\Api\Event\Inbound\PostUpdatedCommentsIEvent;
 use App\Modules\Comments\Api\Event\Inbound\UserRenamedCommentsIEvent;
 use App\Modules\Comments\Api\Query\FindCommentsByPostIdQuery;
-use App\Modules\Comments\Api\Query\FindCommentsPostHeadersQuery;
 use App\Modules\Comments\Api\Query\FindLatestCommentsQuery;
 use App\Modules\Comments\Api\Query\Response\FindLatestCommentsQueryResponse;
 use App\Modules\Comments\Domain\Event\Outbound\CommentsBaselinedOEvent;

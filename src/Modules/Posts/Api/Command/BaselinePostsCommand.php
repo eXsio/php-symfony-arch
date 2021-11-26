@@ -2,7 +2,6 @@
 
 namespace App\Modules\Posts\Api\Command;
 
-use App\Modules\Comments\Api\CommentsApiInterface;
 use App\Modules\Posts\Api\PostsApiInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;

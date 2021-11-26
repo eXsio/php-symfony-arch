@@ -12,7 +12,6 @@ use App\Modules\Security\Api\Event\Inbound\PostCreatedSecurityIEvent;
 use App\Modules\Security\Api\Event\Inbound\PostDeletedSecurityIEvent;
 use App\Modules\Security\Api\Event\Inbound\PostUpdatedSecurityIEvent;
 use App\Modules\Security\Api\Query\FindPostsByUserIdQuery;
-use App\Modules\Security\Api\Query\FindUserPostHeadersQuery;
 use App\Modules\Security\Api\Query\Response\FindPostsByUserIdQueryResponse;
 use App\Modules\Security\Api\Query\Response\FindUserPostHeadersQueryResponse;
 
@@ -45,10 +44,9 @@ interface SecurityApiInterface
    public function onCommentsCountUpdated(CommentsCountUpdatedSecurityIEvent $event): void;
 
     /**
-     * @param FindUserPostHeadersQuery $query
      * @return array<FindUserPostHeadersQueryResponse>
      */
-    public function findPostHeaders(FindUserPostHeadersQuery $query): array;
+    public function findPostHeaders(): array;
 
     /**
      * @param FindPostsByUserIdQuery $query

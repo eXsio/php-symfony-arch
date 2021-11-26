@@ -2,7 +2,6 @@
 
 namespace App\Tests\Modules\Comments\Contracts\Inbound;
 
-use App\Modules\Comments\Api\Event\Inbound\PostCreatedCommentsIEvent;
 use App\Modules\Comments\Api\Event\Inbound\UserRenamedCommentsIEvent;
 use App\Tests\TestUtils\Contracts\ApplicationInboundEventContract;
 

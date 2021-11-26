@@ -5,10 +5,8 @@ namespace App\Tests\Modules\Tags\Unit;
 use App\Modules\Tags\Api\Event\Inbound\PostCreatedTagsIEvent;
 use App\Modules\Tags\Api\Event\Inbound\PostDeletedTagsIEvent;
 use App\Modules\Tags\Api\Event\Inbound\PostUpdatedTagsIEvent;
-use App\Modules\Tags\Api\Query\FindTagsPostHeadersQuery;
 use App\Modules\Tags\Api\Query\FindTagsQuery;
 use App\Tests\TestUtils\Contracts\ApplicationEventContractLoader;
-use Symfony\Component\Uid\Ulid;
 
 class TagsUpdateAndFindingSpec extends TagsSpec
 {

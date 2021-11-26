@@ -3,11 +3,6 @@
 namespace App\Tests\TestUtils;
 
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Normalizer\UidNormalizer;
-use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\SerializerInterface;
 
 trait SerializationTrait

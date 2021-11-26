@@ -3,7 +3,6 @@
 namespace App\Tests\Infrastructure\Events;
 
 use App\Infrastructure\Events\ApplicationInboundEvent;
-use Symfony\Component\Uid\Ulid;
 
 class TestApplicationInboundErrorEvent extends ApplicationInboundEvent
 {

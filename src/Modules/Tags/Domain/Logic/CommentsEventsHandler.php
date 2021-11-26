@@ -2,9 +2,9 @@
 
 namespace App\Modules\Tags\Domain\Logic;
 
-use App\Modules\Tags\Domain\Repository\TagsCommentsEventHandlingRepositoryInterface;
 use App\Modules\Tags\Api\Event\Inbound\CommentsCountUpdatedTagsIEvent;
 use App\Modules\Tags\Domain\Dto\UpdatePostsCommentsCountDto;
+use App\Modules\Tags\Domain\Repository\TagsCommentsEventHandlingRepositoryInterface;
 use App\Modules\Tags\Domain\Transactions\TagsTransactionFactoryInterface;
 
 trait CommentsEventsHandler

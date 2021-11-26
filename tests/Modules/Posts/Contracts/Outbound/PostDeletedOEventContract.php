@@ -2,9 +2,7 @@
 
 namespace App\Tests\Modules\Posts\Contracts\Outbound;
 
-use App\Modules\Posts\Domain\Dto\CreateNewPostDto;
 use App\Modules\Posts\Domain\Dto\DeleteExistingPostDto;
-use App\Modules\Posts\Domain\Event\Outbound\PostCreatedOEvent;
 use App\Modules\Posts\Domain\Event\Outbound\PostDeletedOEvent;
 use App\Tests\TestUtils\Contracts\ApplicationOutboundEventContract;
 use Symfony\Component\Uid\Ulid;

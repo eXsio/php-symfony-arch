@@ -8,8 +8,6 @@ use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\TestBrowserToken;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\UsageTrackingTokenStorage;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Uid\Ulid;
 
 abstract class IntegrationTest extends WebTestCase

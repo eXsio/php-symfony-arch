@@ -11,7 +11,7 @@ class DoctrinePostsSecurityEventsHandlingRepository extends DoctrinePostsReposit
 
     public function updateUserName(UpdatedPostsUserNameDto $updatedUserName): void
     {
-        $res = $this->getEntityManager()
+        $this->getEntityManager()
             ->createQueryBuilder()
             ->update(Post::class, 'p')
             ->set('p.createdByName', ':newUserName')

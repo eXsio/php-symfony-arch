@@ -4,7 +4,6 @@ namespace App\Modules\Tags\Domain\Logic;
 
 use App\Infrastructure\Pagination\Page;
 use App\Modules\Tags\Api\Query\FindPostsByTagQuery;
-use App\Modules\Tags\Api\Query\FindTagsPostHeadersQuery;
 use App\Modules\Tags\Api\Query\Response\FindPostsByTagQueryResponse;
 use App\Modules\Tags\Api\Query\Response\FindTagsPostHeadersQueryResponse;
 use App\Modules\Tags\Domain\Repository\TagsPostHeadersFindingRepositoryInterface;
@@ -22,10 +21,9 @@ trait PostHeadersFinder
     }
 
     /**
-     * @param FindTagsPostHeadersQuery $query
      * @return array<FindTagsPostHeadersQueryResponse>
      */
-    public function findPostHeaders(FindTagsPostHeadersQuery $query): array
+    public function findPostHeaders(): array
     {
         return Collection::from($this->headersFindingRepository->findPostHeaders())
             ->map(function ($header) {

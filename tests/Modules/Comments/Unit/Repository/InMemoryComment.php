@@ -2,7 +2,6 @@
 
 namespace App\Tests\Modules\Comments\Unit\Repository;
 
-use App\Modules\Comments\Persistence\Doctrine\Entity\CommentPostHeader;
 use Symfony\Component\Uid\Ulid;
 
 class InMemoryComment

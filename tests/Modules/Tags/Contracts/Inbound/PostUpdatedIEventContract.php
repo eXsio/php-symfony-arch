@@ -2,7 +2,6 @@
 
 namespace App\Tests\Modules\Tags\Contracts\Inbound;
 
-use App\Modules\Tags\Api\Event\Inbound\PostDeletedTagsIEvent;
 use App\Modules\Tags\Api\Event\Inbound\PostUpdatedTagsIEvent;
 use App\Tests\TestUtils\Contracts\ApplicationInboundEventContract;
 

@@ -2,11 +2,8 @@
 
 namespace App\Tests\Modules\Security\Contracts\Outbound;
 
-use App\Modules\Comments\Domain\Dto\CommentDto;
-use App\Modules\Comments\Domain\Event\Outbound\CommentCreatedOEvent;
 use App\Modules\Security\Domain\Event\Outbound\UserRenamedOEvent;
 use App\Tests\TestUtils\Contracts\ApplicationOutboundEventContract;
-use Symfony\Component\Uid\Ulid;
 
 class UserRenamedOEventContract extends ApplicationOutboundEventContract
 {

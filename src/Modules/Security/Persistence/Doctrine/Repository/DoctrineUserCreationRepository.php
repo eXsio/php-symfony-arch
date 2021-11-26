@@ -5,7 +5,6 @@ namespace App\Modules\Security\Persistence\Doctrine\Repository;
 use App\Modules\Security\Domain\Dto\CreateNewUserDto;
 use App\Modules\Security\Domain\Repository\UserCreationRepositoryInterface;
 use App\Modules\Security\Persistence\Doctrine\Entity\User;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Uid\Ulid;
 
 class DoctrineUserCreationRepository extends DoctrineSecurityRepository implements UserCreationRepositoryInterface

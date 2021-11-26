@@ -2,10 +2,8 @@
 
 namespace App\Modules\Tags\Persistence\Doctrine\Entity;
 
-use App\Modules\Tags\Persistence\Doctrine\Entity\Tag;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Component\Uid\Ulid;
 
 #[ORM\Entity]

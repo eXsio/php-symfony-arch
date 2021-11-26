@@ -2,7 +2,6 @@
 
 namespace App\Tests\Modules\Posts\Contracts\Inbound;
 
-use App\Modules\Posts\Api\Event\Inbound\CommentCreatedPostsIEvent;
 use App\Modules\Posts\Api\Event\Inbound\CommentsBaselinedPostsIEvent;
 use App\Tests\TestUtils\Contracts\ApplicationInboundEventContract;
 

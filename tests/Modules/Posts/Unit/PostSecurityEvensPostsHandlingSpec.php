@@ -3,7 +3,6 @@
 namespace App\Tests\Modules\Posts\Unit;
 
 use App\Modules\Posts\Api\Command\CreatePostCommand;
-use App\Modules\Posts\Api\Event\Inbound\CommentCreatedPostsIEvent;
 use App\Modules\Posts\Api\Event\Inbound\UserRenamedPostsIEvent;
 use App\Modules\Posts\Api\Query\FindPostByIdQuery;
 use App\Tests\TestUtils\Contracts\ApplicationEventContractLoader;

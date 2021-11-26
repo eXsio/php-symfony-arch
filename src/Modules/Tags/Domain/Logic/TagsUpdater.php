@@ -3,7 +3,6 @@
 namespace App\Modules\Tags\Domain\Logic;
 
 use App\Modules\Tags\Domain\Repository\TagsDeletingRepositoryInterface;
-use App\Modules\Tags\Domain\Repository\TagsFindingRepositoryInterface;
 use App\Modules\Tags\Domain\Repository\TagsUpdatingRepositoryInterface;
 use Symfony\Component\Uid\Ulid;
 

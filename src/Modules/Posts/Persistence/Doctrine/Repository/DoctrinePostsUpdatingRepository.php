@@ -5,7 +5,6 @@ namespace App\Modules\Posts\Persistence\Doctrine\Repository;
 use App\Modules\Posts\Domain\Dto\UpdateExistingPostDto;
 use App\Modules\Posts\Domain\Repository\PostsUpdatingRepositoryInterface;
 use App\Modules\Posts\Persistence\Doctrine\Entity\Post;
-use Doctrine\Persistence\ManagerRegistry;
 
 class DoctrinePostsUpdatingRepository extends DoctrinePostsRepository implements PostsUpdatingRepositoryInterface
 {

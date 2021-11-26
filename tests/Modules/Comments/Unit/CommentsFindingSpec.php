@@ -3,16 +3,8 @@
 namespace App\Tests\Modules\Comments\Unit;
 
 use App\Modules\Comments\Api\Command\CreateCommentCommand;
-use App\Modules\Comments\Api\Event\Inbound\PostCreatedCommentsIEvent;
 use App\Modules\Comments\Api\Query\FindCommentsByPostIdQuery;
-use App\Modules\Comments\Api\Query\FindCommentsPostHeadersQuery;
 use App\Modules\Comments\Api\Query\FindLatestCommentsQuery;
-use App\Modules\Comments\Domain\Event\Outbound\CommentCreatedOEvent;
-use App\Modules\Comments\Domain\Event\Outbound\CommentsCountUpdatedOEvent;
-use App\Tests\TestUtils\Contracts\ApplicationEventContractLoader;
-use App\Tests\TestUtils\Events\InMemoryEventPublisher;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\Uid\Ulid;
 
 class CommentsFindingSpec extends CommentsSpec
 {

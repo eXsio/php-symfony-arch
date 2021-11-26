@@ -2,8 +2,6 @@
 
 namespace App\Tests\Modules\Comments\Contracts\Outbound;
 
-use App\Modules\Comments\Domain\Dto\CreateNewCommentDto;
-use App\Modules\Comments\Domain\Event\Outbound\CommentCreatedOEvent;
 use App\Modules\Comments\Domain\Event\Outbound\CommentsCountUpdatedOEvent;
 use App\Tests\TestUtils\Contracts\ApplicationOutboundEventContract;
 use Symfony\Component\Uid\Ulid;

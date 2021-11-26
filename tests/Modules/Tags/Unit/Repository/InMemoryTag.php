@@ -2,8 +2,6 @@
 
 namespace App\Tests\Modules\Tags\Unit\Repository;
 
-use App\Modules\Tags\Persistence\Doctrine\Entity\Tag;
-use App\Modules\Tags\Persistence\Doctrine\Entity\TagPostHeader;
 use Symfony\Component\Uid\Ulid;
 
 class InMemoryTag

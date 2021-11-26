@@ -3,7 +3,6 @@
 namespace App\Modules\Tags\Domain\Repository;
 
 use App\Modules\Tags\Domain\Dto\TagDto;
-use Symfony\Component\Uid\Ulid;
 
 interface TagsFindingRepositoryInterface
 {

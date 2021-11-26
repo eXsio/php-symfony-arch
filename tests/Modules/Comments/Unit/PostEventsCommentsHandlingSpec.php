@@ -5,9 +5,7 @@ namespace App\Tests\Modules\Comments\Unit;
 use App\Modules\Comments\Api\Event\Inbound\PostCreatedCommentsIEvent;
 use App\Modules\Comments\Api\Event\Inbound\PostDeletedCommentsIEvent;
 use App\Modules\Comments\Api\Event\Inbound\PostUpdatedCommentsIEvent;
-use App\Modules\Comments\Api\Query\FindCommentsPostHeadersQuery;
 use App\Tests\TestUtils\Contracts\ApplicationEventContractLoader;
-use Symfony\Component\Uid\Ulid;
 
 class PostEventsCommentsHandlingSpec extends CommentsSpec
 {

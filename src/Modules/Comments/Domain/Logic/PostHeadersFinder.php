@@ -2,7 +2,6 @@
 
 namespace App\Modules\Comments\Domain\Logic;
 
-use App\Modules\Comments\Api\Query\FindCommentsPostHeadersQuery;
 use App\Modules\Comments\Api\Query\Response\FindCommentsPostHeadersQueryResponse;
 use App\Modules\Comments\Domain\Repository\CommentsPostHeadersFindingRepositoryInterface;
 use DusanKasan\Knapsack\Collection;
