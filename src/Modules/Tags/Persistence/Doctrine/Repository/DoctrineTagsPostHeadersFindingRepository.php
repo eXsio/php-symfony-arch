@@ -19,7 +19,7 @@ class DoctrineTagsPostHeadersFindingRepository extends DoctrineTagsRepository im
         $dtoClass = TagsPostHeaderDto::class;
         $query = $this->getEntityManager()->createQuery(
             "select new $dtoClass(p.id, p.title, p.summary, p.createdById, p.createdByName, p.createdAt, p.version, p.commentsCount) 
-                from $headerClass p order by p.createdAt desc"
+                from $headerClass p order by p.id desc"
         );
         return $query->getArrayResult();
     }
@@ -34,7 +34,7 @@ class DoctrineTagsPostHeadersFindingRepository extends DoctrineTagsRepository im
         $dtoClass = TagsPostHeaderDto::class;
         $query = $this->getEntityManager()->createQuery(
             "select new $dtoClass(p.id, p.title, p.summary, p.createdById, p.createdByName, p.createdAt, p.version, p.commentsCount, p.flatTags) 
-                from $headerClass p join p.tags t where t.tag=:tag order by p.createdAt desc"
+                from $headerClass p join p.tags t where t.tag=:tag order by p.id desc"
         );
         $data = $query
             ->setParameter("tag", $tag)

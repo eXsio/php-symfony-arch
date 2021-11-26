@@ -78,8 +78,8 @@ class CommentsIT extends IntegrationTest
         self::assertTrue(isset($comments->getData()[0]));
         self::assertTrue(isset($comments->getData()[1]));
 
-        $parentComment = $this->convert($comments->getData()[0], FindLatestCommentsQueryResponse::class);
-        $comment = $this->convert($comments->getData()[1], FindLatestCommentsQueryResponse::class);
+        $parentComment = $this->convert($comments->getData()[1], FindLatestCommentsQueryResponse::class);
+        $comment = $this->convert($comments->getData()[0], FindLatestCommentsQueryResponse::class);
 
         self::assertEquals($parentCommentId, $parentComment->getId());
         self::assertEquals('Parent Author', $parentComment->getAuthor());

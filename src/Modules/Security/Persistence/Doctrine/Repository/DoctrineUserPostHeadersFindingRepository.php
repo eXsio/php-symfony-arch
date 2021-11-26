@@ -36,7 +36,7 @@ class DoctrineUserPostHeadersFindingRepository extends DoctrineSecurityRepositor
             "select new $dtoClass(p.id, p.title, p.summary, p.tags, u.id, u.email, p.createdAt, p.version, p.commentsCount) 
                 from $headerClass p join p.user u
                 where u.id = :userId
-                order by p.createdAt desc"
+                order by p.id desc"
         );
         $data = $query
             ->setParameter("userId", $userId, "ulid")

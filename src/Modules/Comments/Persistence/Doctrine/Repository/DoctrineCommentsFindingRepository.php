@@ -59,7 +59,7 @@ class DoctrineCommentsFindingRepository extends DoctrineCommentsRepository imple
                             from $commentClass c 
                                 join c.post p 
                                 left join c.parentComment pc
-                                order by c.createdAt desc"
+                                order by c.id desc"
             )
             ->setFirstResult(($pageNo - 1) * self::PAGE_SIZE)
             ->setMaxResults(self::PAGE_SIZE)
