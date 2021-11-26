@@ -3,7 +3,6 @@
 namespace App\Modules\Tags\Api\Controller;
 
 use App\Modules\Tags\Api\Query\FindPostsByTagQuery;
-use App\Modules\Tags\Api\Query\FindTagsQuery;
 use App\Modules\Tags\Api\TagsApiInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,7 +29,7 @@ class TagsQueryController extends AbstractController
     public function findTags(): Response
     {
         return $this->json(
-            $this->tagsApi->findTags(new FindTagsQuery())
+            $this->tagsApi->findTags()
         );
     }
 

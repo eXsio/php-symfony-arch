@@ -5,7 +5,6 @@ namespace App\Tests\Modules\Tags\Unit;
 use App\Modules\Tags\Api\Event\Inbound\PostCreatedTagsIEvent;
 use App\Modules\Tags\Api\Event\Inbound\PostDeletedTagsIEvent;
 use App\Modules\Tags\Api\Event\Inbound\PostUpdatedTagsIEvent;
-use App\Modules\Tags\Api\Query\FindTagsQuery;
 use App\Tests\TestUtils\Contracts\ApplicationEventContractLoader;
 
 class TagsUpdateAndFindingSpec extends TagsSpec
@@ -25,7 +24,7 @@ class TagsUpdateAndFindingSpec extends TagsSpec
         $this->tagsApi->onPostCreated($event);
 
         //when: tags are queried
-        $result = $this->tagsApi->findTags(new FindTagsQuery());
+        $result = $this->tagsApi->findTags();
 
         //then: Post Header was created - no Exception was thrown
         self::assertNotNull($result);
@@ -53,7 +52,7 @@ class TagsUpdateAndFindingSpec extends TagsSpec
         $this->tagsApi->onPostUpdated($event);
 
         //when: tags are queried
-        $result = $this->tagsApi->findTags(new FindTagsQuery());
+        $result = $this->tagsApi->findTags();
 
         //then: Post Header was created - no Exception was thrown
         self::assertNotNull($result);
@@ -81,7 +80,7 @@ class TagsUpdateAndFindingSpec extends TagsSpec
         $this->tagsApi->onPostDeleted($event);
 
         //when: tags are queried
-        $result = $this->tagsApi->findTags(new FindTagsQuery());
+        $result = $this->tagsApi->findTags();
 
         //then: Post Header was created - no Exception was thrown
         self::assertNotNull($result);

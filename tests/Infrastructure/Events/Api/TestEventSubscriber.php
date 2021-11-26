@@ -25,7 +25,7 @@ class TestEventSubscriber extends ApplicationEventSubscriber
         $this->event = $event;
     }
 
-    public function handleEventError(TestApplicationInboundErrorEvent $event)
+    public function handleEventError()
     {
         throw new \RuntimeException("error");
     }

@@ -23,16 +23,16 @@ class ApplicationInboundEventSpec extends TestCase
 
         //when:
         $resultVal = null;
-        $exeption = null;
+        $exception = null;
         try {
             $resultVal = $event->$methodName("val", $nullable);
         } catch (\Exception $e) {
-            $exeption = $e;
+            $exception = $e;
         }
 
         //then:
         if (!$nullable && $resultVal == null) {
-            self::assertNotNull($exeption);
+            self::assertNotNull($exception);
         } else {
             self::assertEquals($expectedVal, $resultVal);
         }

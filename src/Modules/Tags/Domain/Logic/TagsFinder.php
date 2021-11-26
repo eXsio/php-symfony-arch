@@ -2,7 +2,6 @@
 
 namespace App\Modules\Tags\Domain\Logic;
 
-use App\Modules\Tags\Api\Query\FindTagsQuery;
 use App\Modules\Tags\Api\Query\Response\FindTagsQueryResponse;
 use App\Modules\Tags\Domain\Repository\TagsFindingRepositoryInterface;
 use DusanKasan\Knapsack\Collection;
@@ -19,10 +18,9 @@ trait TagsFinder
     }
 
     /**
-     * @param FindTagsQuery $query
      * @return array<FindTagsQueryResponse>
      */
-    public function findTags(FindTagsQuery $query): array
+    public function findTags(): array
     {
         return
             Collection::from($this->tagsFindingRepository->findTags())

@@ -9,7 +9,6 @@ use App\Modules\Tags\Api\Event\Inbound\PostDeletedTagsIEvent;
 use App\Modules\Tags\Api\Event\Inbound\PostUpdatedTagsIEvent;
 use App\Modules\Tags\Api\Event\Inbound\UserRenamedTagsIEvent;
 use App\Modules\Tags\Api\Query\FindPostsByTagQuery;
-use App\Modules\Tags\Api\Query\FindTagsQuery;
 use App\Modules\Tags\Api\Query\Response\FindPostsByTagQueryResponse;
 use App\Modules\Tags\Api\Query\Response\FindTagsPostHeadersQueryResponse;
 use App\Modules\Tags\Api\Query\Response\FindTagsQueryResponse;
@@ -43,10 +42,9 @@ interface TagsApiInterface
     public function findPostsByTag(FindPostsByTagQuery $query): Page;
 
     /**
-     * @param FindTagsQuery $query
      * @return array<FindTagsQueryResponse>
      */
-    public function findTags(FindTagsQuery $query): array;
+    public function findTags(): array;
 
     /**
      * @param CommentsCountUpdatedTagsIEvent $event
