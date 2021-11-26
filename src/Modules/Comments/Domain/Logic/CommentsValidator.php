@@ -44,9 +44,9 @@ class CommentsValidator
     }
 
     /**
-     * @param Ulid|null $commentId
+     * @param Ulid $commentId
      */
-    private function validateCommentExists(?Ulid $commentId): void
+    private function validateCommentExists(Ulid $commentId): void
     {
         if(!$this->commentsFindingRepository->commentExists($commentId)) {
             throw new BadRequestHttpException("Requested Parent Comment doesn't exist");
