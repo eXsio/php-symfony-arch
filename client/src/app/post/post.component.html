@@ -2,12 +2,7 @@
   <mat-card-title class="post-title">
     <span>{{post.title}}</span>
     <span class="post-title-spacer"></span>
-    <div class="post-tags" *ngIf="post.tags.length > 0">
-        <span *ngFor="let tag of post.tags">
-          <a [routerLink]="'/tags/'+tag" mat-button>#{{tag}}</a>
-        </span>
-
-    </div>
+    <post-tags [tags]="post.tags"></post-tags>
   </mat-card-title>
   <mat-card-subtitle class="post-subtitle">Posted by <span class="created-by"
                                                            [routerLink]="'/users/'+post.createdById">{{post.createdByName}}</span>

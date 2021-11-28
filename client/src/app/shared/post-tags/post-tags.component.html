@@ -1,0 +1,5 @@
+<div class="post-tags" *ngIf="tags.length > 0">
+        <span *ngFor="let tag of tags">
+          <a [routerLink]="'/tags/'+tag" mat-button>#{{tag}}</a>
+        </span>
+</div>

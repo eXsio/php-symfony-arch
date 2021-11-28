@@ -28,7 +28,6 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {ConfirmDialogComponent} from "@app/shared/confirm-dialog/confirm-dialog.component";
 import {PostComponent} from "@app/post/post.component";
 import {TagsComponent} from "@app/tags";
-import {UsersComponent} from "@app/users";
 import {CommentCreatorComponent} from "@app/post/comment-creator/comment-creator.component";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {CommentComponent} from "@app/post/comment/comment.component";
@@ -37,6 +36,7 @@ import {PostEditorComponent} from "@app/edit/post-editor.component";
 import {EditorModule} from "@tinymce/tinymce-angular";
 import {LatestCommentsComponent} from "@app/latest-comments/latest-comments.component";
 import {MatChipsModule} from "@angular/material/chips";
+import {PostTagsComponent} from "@app/shared/post-tags/post-tags.component";
 
 ;
 
@@ -74,11 +74,11 @@ import {MatChipsModule} from "@angular/material/chips";
     ConfirmDialogComponent,
     PostComponent,
     TagsComponent,
-    UsersComponent,
     CommentCreatorComponent,
     CommentComponent,
     PostEditorComponent,
-    LatestCommentsComponent
+    LatestCommentsComponent,
+    PostTagsComponent
   ],
   entryComponents: [ConfirmDialogComponent],
   providers: [

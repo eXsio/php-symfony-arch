@@ -1,5 +1,6 @@
 ﻿<ng-container *ngIf="posts">
   <ng-container *ngIf="posts.count > 0">
+    <h1>Posts related to #{{tag}}</h1>
     <posts-list [posts]="posts" [user]="user" [onDelete]="delete()"></posts-list>
     <mat-paginator [pageIndex]="posts.pageNo - 1" [length]="posts.count" [pageSizeOptions]="[10]"
                    (page)="getPaginatorData($event)"

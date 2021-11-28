@@ -6,7 +6,5 @@
   parentId: string | null;
   postId: string;
   postTitle: string;
-  postSummary: string;
-  postCommentsCount: number;
   postTags: string[];
 }
