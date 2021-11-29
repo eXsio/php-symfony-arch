@@ -25,21 +25,26 @@ class DoctrineTransaction implements TransactionInterface
     }
 
     /**
+     * After Transaction has been executed, the related Entity Manager
+     * is cleaned and closed, so it cannot be re-used.
+     *
      * @return mixed
      * @throws \Exception
      */
-   public function execute(): mixed
+    public function execute(): mixed
     {
         try {
             $result = $this->entityManager->wrapInTransaction($this->func);
             foreach ($this->afterCommit->toArray() as $rollbackFn) {
                 $rollbackFn($result);
             }
+            $this->cleanup();
             return $result;
         } catch (\Exception $e) {
             foreach ($this->afterRollback->toArray() as $rollbackFn) {
                 $rollbackFn();
             }
+            $this->cleanup();
             throw $e;
         }
     }
@@ -48,7 +53,7 @@ class DoctrineTransaction implements TransactionInterface
      * @param $func
      * @return $this
      */
-   public function afterCommit($func): self
+    public function afterCommit($func): self
     {
         $this->afterCommit->add($func);
         return $this;
@@ -58,9 +63,17 @@ class DoctrineTransaction implements TransactionInterface
      * @param $func
      * @return $this
      */
-   public function afterRollback($func): self
+    public function afterRollback($func): self
     {
         $this->afterRollback->add($func);
         return $this;
+    }
+
+    private function cleanup(): void
+    {
+        if ($this->entityManager->isOpen()) {
+            $this->entityManager->clear();
+            $this->entityManager->close();
+        }
     }
 }

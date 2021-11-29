@@ -17,9 +17,18 @@ abstract class DoctrineTransactionFactory extends DoctrineEntityManagerAware imp
         parent::__construct($managerRegistry);
     }
 
+    /**
+     * Resets Entity Manager, if the current one is closed.
+     *
+     * @param $func
+     * @return TransactionInterface
+     */
    public function createTransaction($func): TransactionInterface
     {
-        $em = $this->managerRegistry->resetManager($this->getManagerName());
+        $em = $this->getEntityManager();
+        if(!$em->isOpen()) {
+            $em = $this->managerRegistry->resetManager($this->getManagerName());
+        }
         return new DoctrineTransaction($em, $func);
     }
 }
