@@ -26,20 +26,26 @@ final class Version20211122072414 extends DoctrineMigration
         , PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE TAGS (id BLOB NOT NULL --(DC2Type:ulid)
         , tag VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_59297992389B783 ON TAGS (tag)');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_T1 ON TAGS (tag)');
         $this->addSql('CREATE TABLE TAGS_POSTS (tagId BLOB NOT NULL --(DC2Type:ulid)
         , postId BLOB NOT NULL --(DC2Type:ulid)
-        , PRIMARY KEY(tagId, postId))');
-        $this->addSql('CREATE INDEX IDX_EF0A54AB6F16ADDC ON TAGS_POSTS (tagId)');
-        $this->addSql('CREATE INDEX IDX_EF0A54ABE094D20D ON TAGS_POSTS (postId)');
+        , PRIMARY KEY(tagId, postId)
+        , FOREIGN KEY(tagId) REFERENCES TAGS(id)
+        , FOREIGN KEY(postId) REFERENCES POST_HEADERS(id))
+        
+        ');
+        $this->addSql('CREATE INDEX IDX_TP1 ON TAGS_POSTS (tagId)');
+        $this->addSql('CREATE INDEX IDX_TP2 ON TAGS_POSTS (postId)');
+        $this->addSql('CREATE INDEX IDX_TP3 ON TAGS_POSTS (tagId, postId)');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
+        $this->addSql('DROP TABLE TAGS_POSTS');
         $this->addSql('DROP TABLE POST_HEADERS');
         $this->addSql('DROP TABLE TAGS');
-        $this->addSql('DROP TABLE TAGS_POSTS');
+
     }
 
     protected function getDbName(): string

@@ -34,7 +34,6 @@ trait PostsBaseliner
     protected function baselineDeletedPosts(BaselinePostsCommand $command): void
     {
         $deletedPostIds = $this->findingRepository->findDeletedPostIdsForBaseline($command->getFrom());
-
         foreach ($deletedPostIds as $postId) {
             $this->eventPublisher->publish(new PostDeletedOEvent(new DeleteExistingPostDto($postId)));
         }

@@ -14,7 +14,7 @@ abstract class DoctrineEntityManagerAware
     private EntityManagerInterface $entityManager;
 
     public function __construct(
-        ManagerRegistry $managerRegistry
+        protected ManagerRegistry $managerRegistry
     )
     {
         $this->entityManager = $this->getManager($managerRegistry);

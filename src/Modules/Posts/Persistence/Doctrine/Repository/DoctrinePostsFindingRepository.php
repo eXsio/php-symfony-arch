@@ -101,7 +101,7 @@ class DoctrinePostsFindingRepository extends DoctrinePostsRepository implements 
     public function findDeletedPostIdsForBaseline(?\DateTime $from): array
     {
         $postClass = Post::class;
-        $dql = "select p.id from $postClass p where p.deletedAt is not null";
+        $dql = "select p.id as postId from $postClass p where p.deletedAt is not null";
         if ($from != null) {
             $dql = $dql . " and p.deletedAt >= :from";
         }
@@ -111,6 +111,6 @@ class DoctrinePostsFindingRepository extends DoctrinePostsRepository implements 
         if ($from != null) {
             $query->setParameter("from", $from);
         }
-        return $query->getResult();
+        return array_column($query->getArrayResult(), 'postId');
     }
 }

@@ -20,16 +20,17 @@ final class Version20211121154234 extends DoctrineMigration
 
     public function up(Schema $schema): void
     {
-        // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE COMMENTS (id BLOB NOT NULL --(DC2Type:ulid)
-        , author VARCHAR(255) NOT NULL, body VARCHAR(255) NOT NULL, createdAt DATETIME NOT NULL, parentId BLOB DEFAULT NULL --(DC2Type:ulid)
-        , postId BLOB DEFAULT NULL --(DC2Type:ulid)
-        , PRIMARY KEY(id))');
-        $this->addSql('CREATE INDEX IDX_99AD0A6610EE4CEE ON COMMENTS (parentId)');
-        $this->addSql('CREATE INDEX IDX_99AD0A66E094D20D ON COMMENTS (postId)');
         $this->addSql('CREATE TABLE POST_HEADERS (id BLOB NOT NULL --(DC2Type:ulid)
         , title VARCHAR(255) NOT NULL,  tags CLOB NOT NULL --(DC2Type:json)
         , version INTEGER NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE COMMENTS (id BLOB NOT NULL --(DC2Type:ulid)
+        , author VARCHAR(255) NOT NULL, body VARCHAR(255) NOT NULL, createdAt DATETIME NOT NULL, parentId BLOB DEFAULT NULL --(DC2Type:ulid)
+        , postId BLOB DEFAULT NULL --(DC2Type:ulid)
+        , PRIMARY KEY(id)
+        , FOREIGN KEY (postId) REFERENCES POST_HEADERS(id))');
+        $this->addSql('CREATE INDEX IDX_C1 ON COMMENTS (parentId)');
+        $this->addSql('CREATE INDEX IDX_C2 ON COMMENTS (postId)');
+
     }
 
     public function down(Schema $schema): void

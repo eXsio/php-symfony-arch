@@ -35,8 +35,8 @@ class TagPostHeader
     #[ORM\Column(type: "integer")]
     private int $version;
 
-    #[ORM\ManyToMany(targetEntity: Tag::class, mappedBy: 'posts')]
-    private Collection $tags;
+    #[ORM\OneToMany(mappedBy: 'post', targetEntity: TagPost::class)]
+    private Collection $tagPosts;
 
     #[ORM\Column(type: "json")]
     private array $flatTags;
@@ -106,19 +106,19 @@ class TagPostHeader
     }
 
     /**
-     * @return Collection<Tag>
+     * @return Collection
      */
-    public function getTags(): Collection
+    public function getTagPosts(): Collection
     {
-        return $this->tags;
+        return $this->tagPosts;
     }
 
     /**
-     * @param Collection<Tag> $tags
+     * @param Collection $tagPosts
      */
-    public function setTags(Collection $tags): void
+    public function setTagPosts(Collection $tagPosts): void
     {
-        $this->tags = $tags;
+        $this->tagPosts = $tagPosts;
     }
 
     /**

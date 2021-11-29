@@ -10,6 +10,13 @@ class EventIdHolderSpec extends TestCase
 {
 
     /**
+     * @before
+     */
+    public function setup(): void {
+        EventIdHolder::clear();
+    }
+
+    /**
      * @test
      */
     public function testEventIdHolder()

@@ -34,7 +34,7 @@ class DoctrineTagsPostHeadersFindingRepository extends DoctrineTagsRepository im
         $dtoClass = TagsPostHeaderDto::class;
         $query = $this->getEntityManager()->createQuery(
             "select new $dtoClass(p.id, p.title, p.summary, p.createdById, p.createdByName, p.createdAt, p.version, p.commentsCount, p.flatTags) 
-                from $headerClass p join p.tags t where t.tag=:tag order by p.id desc"
+                from $headerClass p join p.tagPosts tp join tp.tag t where t.tag=:tag order by p.id desc"
         );
         $data = $query
             ->setParameter("tag", $tag)
@@ -57,7 +57,7 @@ class DoctrineTagsPostHeadersFindingRepository extends DoctrineTagsRepository im
     {
         $headerClass = TagPostHeader::class;
         $query = $this->getEntityManager()->createQuery(
-            "select count(p.id) as count from $headerClass p join p.tags t where t.tag = :tag"
+            "select count(p.id) as count from $headerClass p join p.tagPosts tp join tp.tag t where t.tag = :tag"
         );
         return $query->setParameter("tag", $tag)->getResult()[0]["count"];
     }

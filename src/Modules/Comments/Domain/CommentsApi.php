@@ -77,14 +77,14 @@ class CommentsApi extends ApplicationEventSubscriber implements CommentsApiInter
     }
 
     /**
-     * @return array<string, EventHandlerReference>
+     * @return array<string, string>
      */
     protected function subscribe(): array
     {
         return [
-            EventHandlerReference::create('onPostCreated', PostCreatedCommentsIEvent::class),
-            EventHandlerReference::create('onPostUpdated', PostUpdatedCommentsIEvent::class),
-            EventHandlerReference::create('onPostDeleted', PostDeletedCommentsIEvent::class),
+            PostCreatedCommentsIEvent::class => 'onPostCreated',
+            PostUpdatedCommentsIEvent::class => 'onPostUpdated',
+            PostDeletedCommentsIEvent::class => 'onPostDeleted',
         ];
     }
 }

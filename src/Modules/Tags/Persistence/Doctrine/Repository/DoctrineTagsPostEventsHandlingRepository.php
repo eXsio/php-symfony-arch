@@ -6,6 +6,7 @@ use App\Modules\Tags\Domain\Dto\CreateNewTagsPostHeaderDto;
 use App\Modules\Tags\Domain\Dto\DeleteExistingTagsPostHeaderDto;
 use App\Modules\Tags\Domain\Dto\UpdateExistingTagsPostHeaderDto;
 use App\Modules\Tags\Domain\Repository\TagsPostEventsHandlingRepositoryInterface;
+use App\Modules\Tags\Persistence\Doctrine\Entity\TagPost;
 use App\Modules\Tags\Persistence\Doctrine\Entity\TagPostHeader;
 
 class DoctrineTagsPostEventsHandlingRepository extends DoctrineTagsRepository implements TagsPostEventsHandlingRepositoryInterface
@@ -56,6 +57,16 @@ class DoctrineTagsPostEventsHandlingRepository extends DoctrineTagsRepository im
    public function deletePostHeader(DeleteExistingTagsPostHeaderDto $deletedPostHeader): void
     {
         $entityManager = $this->getEntityManager();
+        $entityManager
+            ->createQueryBuilder()
+            ->delete(TagPost::class, 'tp')
+            ->where('tp.post = :post')
+            ->setParameter('post', $entityManager->getReference(TagPostHeader::class, $deletedPostHeader->getId()))
+            ->getQuery()
+            ->execute();
+
+        $entityManager->flush();
+
         $entityManager
             ->createQueryBuilder()
             ->delete(TagPostHeader::class, 'p')

@@ -19,7 +19,8 @@ class DoctrineTagsFindingRepository extends DoctrineTagsRepository implements Ta
             $this->getEntityManager()
                 ->createQuery("select new $dtoClass(tag.tag, count(post.id)) 
                         from $tagClass tag 
-                            join tag.posts post 
+                            join tag.tagPosts tp 
+                            join tp.post post 
                         group by tag.tag 
                         order by count(post.id) desc")
                 ->getArrayResult();

@@ -18,9 +18,10 @@ class DoctrineTagsDeletingRepository extends DoctrineTagsRepository implements T
             ->where(
                 $expr->notIn('tag.id',
                     $em->createQueryBuilder()
-                        ->select('tagPost.id')
-                        ->from(Tag::class, 'tagPost')
-                        ->innerJoin('tagPost.posts', 'post')
+                        ->select('subPost.id')
+                        ->from(Tag::class, 'subTag')
+                        ->innerJoin('subTag.tagPosts', 'subTp')
+                        ->innerJoin('subTp.post', 'subPost')
                         ->getDQL()
                 )
             )

@@ -87,11 +87,11 @@ class TagsApi extends ApplicationEventSubscriber implements TagsApiInterface
     protected function subscribe(): array
     {
         return [
-            EventHandlerReference::create('onPostCreated', PostCreatedTagsIEvent::class),
-            EventHandlerReference::create('onPostUpdated', PostUpdatedTagsIEvent::class),
-            EventHandlerReference::create('onPostDeleted', PostDeletedTagsIEvent::class),
-            EventHandlerReference::create('onCommentsCountUpdated', CommentsCountUpdatedTagsIEvent::class),
-            EventHandlerReference::create('onUserRenamed', UserRenamedTagsIEvent::class),
+            PostCreatedTagsIEvent::class => 'onPostCreated',
+            PostUpdatedTagsIEvent::class => 'onPostUpdated',
+            PostDeletedTagsIEvent::class => 'onPostDeleted',
+            CommentsCountUpdatedTagsIEvent::class => 'onCommentsCountUpdated',
+            UserRenamedTagsIEvent::class => 'onUserRenamed',
         ];
     }
 }

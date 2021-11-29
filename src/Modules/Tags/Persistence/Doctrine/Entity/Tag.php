@@ -22,11 +22,8 @@ class Tag
     #[ORM\Column(type: "string", unique: true)]
     private string $tag;
 
-    #[ORM\ManyToMany(targetEntity: TagPostHeader::class)]
-    #[ORM\JoinTable(name: "TAGS_POSTS")]
-    #[ORM\JoinColumn(name: "tagId", referencedColumnName: "id")]
-    #[ORM\InverseJoinColumn(name: "postId", referencedColumnName: "id")]
-    private ?Collection $posts = null;
+    #[ORM\OneToMany(mappedBy: 'tag', targetEntity: TagPost::class)]
+    private Collection $tagPosts;
 
 
     /**
@@ -62,23 +59,22 @@ class Tag
     }
 
     /**
-     * @return Collection<TagPostHeader>
+     * @return Collection
      */
-    public function getPosts(): Collection
+    public function getTagPosts(): Collection
     {
-        if ($this->posts == null) {
-            $this->posts = new ArrayCollection();
-        }
-        return $this->posts;
+        return $this->tagPosts;
     }
 
     /**
-     * @param Collection<TagPostHeader> $posts
+     * @param Collection $tagPosts
      */
-    public function setPosts(Collection $posts): void
+    public function setTagPosts(Collection $tagPosts): void
     {
-        $this->posts = $posts;
+        $this->tagPosts = $tagPosts;
     }
+
+
 
 
 }

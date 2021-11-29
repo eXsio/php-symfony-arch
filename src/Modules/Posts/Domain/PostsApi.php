@@ -4,7 +4,6 @@ namespace App\Modules\Posts\Domain;
 
 use App\Infrastructure\Events\Api\ApplicationEventPublisherInterface;
 use App\Infrastructure\Events\Api\ApplicationEventSubscriber;
-use App\Infrastructure\Events\Api\EventHandlerReference;
 use App\Infrastructure\Security\LoggedInUserProviderInterface;
 use App\Modules\Posts\Api\Event\Inbound\CommentCreatedPostsIEvent;
 use App\Modules\Posts\Api\Event\Inbound\CommentsBaselinedPostsIEvent;
@@ -93,12 +92,15 @@ class PostsApi extends ApplicationEventSubscriber implements PostsApiInterface
         $this->__securityEventsHandlerConstruct($transactionFactory, $securityEventsHandlingRepository);
     }
 
+    /**
+     * @return array<string, string>
+     */
     protected function subscribe(): array
     {
         return [
-            EventHandlerReference::create('onCommentCreated', CommentCreatedPostsIEvent::class),
-            EventHandlerReference::create('onCommentsBaselined', CommentsBaselinedPostsIEvent::class),
-            EventHandlerReference::create('onUserRenamed', UserRenamedPostsIEvent::class),
+            CommentCreatedPostsIEvent::class => 'onCommentCreated',
+            CommentsBaselinedPostsIEvent::class => 'onCommentsBaselined',
+            UserRenamedPostsIEvent::class => 'onUserRenamed',
         ];
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Tests\Infrastructure\Events\Api;
 
 use App\Infrastructure\Events\Api\ApplicationEventSubscriber;
-use App\Infrastructure\Events\Api\EventHandlerReference;
 use App\Tests\Infrastructure\Events\TestApplicationInboundErrorEvent;
 use App\Tests\Infrastructure\Events\TestApplicationInboundEvent;
 
@@ -15,8 +14,8 @@ class TestEventSubscriber extends ApplicationEventSubscriber
     public function subscribe(): array
     {
         return [
-            EventHandlerReference::create('handleEvent', TestApplicationInboundEvent::class),
-            EventHandlerReference::create('handleEventError', TestApplicationInboundErrorEvent::class)
+            TestApplicationInboundEvent::class => 'handleEvent',
+            TestApplicationInboundErrorEvent::class => 'handleEventError',
         ];
     }
 

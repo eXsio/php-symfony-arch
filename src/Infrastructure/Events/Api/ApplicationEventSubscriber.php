@@ -21,7 +21,11 @@ abstract class ApplicationEventSubscriber implements MessageHandlerInterface
         private LoggerInterface $logger
     )
     {
-        $this->subscribedHandlers = Collection::from($this->subscribe());
+        $this->subscribedHandlers = Collection::from($this->subscribe())
+            ->map(function ($handlerMethodName, $eventClass) {
+                return EventHandlerReference::create($handlerMethodName, $eventClass);
+            })
+            ->realize();
     }
 
 
@@ -62,7 +66,7 @@ abstract class ApplicationEventSubscriber implements MessageHandlerInterface
     }
 
     /**
-     * @return array<EventHandlerReference>
+     * @return array<string, string>
      */
     protected abstract function subscribe(): array;
 

@@ -11,7 +11,7 @@ abstract class DoctrineTransactionFactory extends DoctrineEntityManagerAware imp
 {
 
     public function __construct(
-        ManagerRegistry $managerRegistry
+        ManagerRegistry $managerRegistry,
     )
     {
         parent::__construct($managerRegistry);
@@ -19,6 +19,10 @@ abstract class DoctrineTransactionFactory extends DoctrineEntityManagerAware imp
 
    public function createTransaction($func): TransactionInterface
     {
-        return new DoctrineTransaction($this->getEntityManager(), $func);
+        $em = $this->getEntityManager();
+        if(!$em->isOpen()) {
+            $em = $this->managerRegistry->resetManager($this->getManagerName());
+        }
+        return new DoctrineTransaction($em, $func);
     }
 }

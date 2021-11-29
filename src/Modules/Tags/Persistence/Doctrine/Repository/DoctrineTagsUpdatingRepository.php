@@ -4,7 +4,9 @@ namespace App\Modules\Tags\Persistence\Doctrine\Repository;
 
 use App\Modules\Tags\Domain\Repository\TagsUpdatingRepositoryInterface;
 use App\Modules\Tags\Persistence\Doctrine\Entity\Tag;
+use App\Modules\Tags\Persistence\Doctrine\Entity\TagPost;
 use App\Modules\Tags\Persistence\Doctrine\Entity\TagPostHeader;
+use Doctrine\ORM\ORMException;
 use Symfony\Component\Uid\Ulid;
 
 class DoctrineTagsUpdatingRepository extends DoctrineTagsRepository implements TagsUpdatingRepositoryInterface
@@ -12,12 +14,15 @@ class DoctrineTagsUpdatingRepository extends DoctrineTagsRepository implements T
     /**
      * @param string $tag
      * @param Ulid $postId
-     * @throws \Doctrine\ORM\ORMException
+     * @throws ORMException
      */
     public function addPostToTag(string $tag, Ulid $postId): void
     {
         $tag = $this->fetchTag($tag);
-        $tag->getPosts()->add($this->getEntityManager()->getReference(TagPostHeader::class, $postId));
+        $tagPost = new TagPost();
+        $tagPost->setTag($tag);
+        $tagPost->setPost($this->getEntityManager()->getReference(TagPostHeader::class, $postId));
+        $this->getEntityManager()->persist($tagPost);
     }
 
     /**
@@ -48,33 +53,25 @@ class DoctrineTagsUpdatingRepository extends DoctrineTagsRepository implements T
 
     /**
      * @param Ulid $postId
-     * @throws \Doctrine\ORM\ORMException
+     * @throws ORMException
      */
     public function removePostFromTags(Ulid $postId): void
     {
         $em = $this->getEntityManager();
         $post = $em->getReference(TagPostHeader::class, $postId);
-        $tags = $this->getTags($postId);
-        foreach ($tags as $tag) {
-            $tag->getPosts()->removeElement($post);
-        }
-    }
-
-    /**
-     * @param Ulid $postId
-     * @return array<Tag>
-     */
-    private function getTags(Ulid $postId): array
-    {
-        $em = $this->getEntityManager();
-        return $em
-            ->createQueryBuilder()
-            ->select('t')
-            ->from(Tag::class, 't')
-            ->innerJoin('t.posts', 'p')
-            ->where('p.id = :postId')
+        $delRes = $em->createQueryBuilder()
+            ->delete(TagPost::class, 'tp')
+            ->where('tp.post = :post')
             ->getQuery()
-            ->setParameter('postId', $postId, 'ulid')
-            ->getResult();
+            ->setParameter("post", $post)
+            ->execute();
+
+        ///var_dump("Del Res for $postId: ".$delRes);
+        $em->flush();
+//        foreach ($em->getRepository(TagPost::class)->findAll() as $tagPost) {
+//            var_dump("existent tp for post: ".$tagPost->getPost()->getTitle());
+//            var_dump("existent tp for post: ".$tagPost->getTag()->getTag());
+//
+//        }
     }
 }

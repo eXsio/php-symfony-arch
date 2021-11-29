@@ -28,7 +28,8 @@ final class Version20211121154003 extends DoctrineMigration
         , PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE POST_COMMENTS (postId BLOB NOT NULL --(DC2Type:ulid)
         , commentsCount INTEGER NOT NULL, comments CLOB NOT NULL --(DC2Type:json)
-        , PRIMARY KEY(postId))');
+        , PRIMARY KEY(postId)
+        , FOREIGN KEY (postId) REFERENCES POSTS(id))');
     }
 
     public function down(Schema $schema): void
