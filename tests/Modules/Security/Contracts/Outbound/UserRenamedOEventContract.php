@@ -13,7 +13,6 @@ class UserRenamedOEventContract extends ApplicationOutboundEventContract
         self::assertTrue(
             $this->verifyContracts($this->createEvent(), [
                 'Posts/UserRenamedPostsIEvent',
-                'Comments/UserRenamedCommentsIEvent',
                 'Tags/UserRenamedTagsIEvent',
             ])
         );

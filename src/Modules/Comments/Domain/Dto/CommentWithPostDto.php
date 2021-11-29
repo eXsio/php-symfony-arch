@@ -15,8 +15,6 @@ class CommentWithPostDto
      * @param \DateTime $createdAt
      * @param Ulid $postId
      * @param string $postTitle
-     * @param string $postSummary
-     * @param int $postCommentsCount
      * @param array $postTags
      */
     public function __construct(
@@ -27,8 +25,6 @@ class CommentWithPostDto
         private \DateTime $createdAt,
         private Ulid      $postId,
         private string    $postTitle,
-        private string    $postSummary,
-        private int       $postCommentsCount,
         private array     $postTags
     )
     {
@@ -88,22 +84,6 @@ class CommentWithPostDto
     public function getPostTitle(): string
     {
         return $this->postTitle;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPostSummary(): string
-    {
-        return $this->postSummary;
-    }
-
-    /**
-     * @return int
-     */
-    public function getPostCommentsCount(): int
-    {
-        return $this->postCommentsCount;
     }
 
     /**

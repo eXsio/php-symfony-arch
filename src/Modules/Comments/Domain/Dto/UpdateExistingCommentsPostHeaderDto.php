@@ -9,13 +9,11 @@ class UpdateExistingCommentsPostHeaderDto
     /**
      * @param Ulid $id
      * @param string $title
-     * @param string $summary
      * @param array $tags
      * @param int $version
      */
     public function __construct(private Ulid      $id,
                                 private string    $title,
-                                private string    $summary,
                                 private array     $tags,
                                 private int       $version)
     {
@@ -36,14 +34,6 @@ class UpdateExistingCommentsPostHeaderDto
     public function getTitle(): string
     {
         return $this->title;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSummary(): string
-    {
-        return $this->summary;
     }
 
     /**

@@ -16,7 +16,6 @@ class PostUpdatedOEventContract extends ApplicationOutboundEventContract
             $this->verifyContracts($this->createEvent(), [
                 'Comments/PostUpdatedCommentsIEvent',
                 'Tags/PostUpdatedTagsIEvent',
-                'Security/PostUpdatedSecurityIEvent',
             ])
         );
     }

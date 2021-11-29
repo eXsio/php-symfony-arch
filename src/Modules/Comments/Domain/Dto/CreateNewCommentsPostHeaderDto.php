@@ -9,23 +9,13 @@ class CreateNewCommentsPostHeaderDto
     /**
      * @param Ulid $id
      * @param string $title
-     * @param string $summary
      * @param array $tags
-     * @param Ulid $createdById
-     * @param string $createdByName
-     * @param \DateTime $createdAt
      * @param int $version
-     * @param int $commentsCount
      */
-    public function __construct(private Ulid      $id,
-                                private string    $title,
-                                private string    $summary,
-                                private array     $tags,
-                                private Ulid      $createdById,
-                                private string    $createdByName,
-                                private \DateTime $createdAt,
-                                private int       $version = 1,
-                                private int       $commentsCount = 0)
+    public function __construct(private Ulid   $id,
+                                private string $title,
+                                private array  $tags,
+                                private int    $version = 1)
     {
     }
 
@@ -47,43 +37,11 @@ class CreateNewCommentsPostHeaderDto
     }
 
     /**
-     * @return string
-     */
-    public function getSummary(): string
-    {
-        return $this->summary;
-    }
-
-    /**
      * @return array
      */
     public function getTags(): array
     {
         return $this->tags;
-    }
-
-    /**
-     * @return Ulid
-     */
-    public function getCreatedById(): Ulid
-    {
-        return $this->createdById;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCreatedByName(): string
-    {
-        return $this->createdByName;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreatedAt(): \DateTime
-    {
-        return $this->createdAt;
     }
 
     /**
@@ -94,11 +52,4 @@ class CreateNewCommentsPostHeaderDto
         return $this->version;
     }
 
-    /**
-     * @return int
-     */
-    public function getCommentsCount(): int
-    {
-        return $this->commentsCount;
-    }
 }

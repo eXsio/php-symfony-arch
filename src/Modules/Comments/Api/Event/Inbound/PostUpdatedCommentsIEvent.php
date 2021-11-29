@@ -13,9 +13,6 @@ class PostUpdatedCommentsIEvent extends ApplicationInboundEvent
 
     private string $title;
 
-    private string $summary;
-
-    private \DateTime $updatedAt;
 
     private array $tags;
 
@@ -26,12 +23,10 @@ class PostUpdatedCommentsIEvent extends ApplicationInboundEvent
      */
     public function __construct(array $data)
     {
-        parent::__construct(PostDeletedCommentsIEvent::EVENT_NAME, $data);
+        parent::__construct(self::EVENT_NAME, $data);
         $this->id = $this->ulid('id');
         $this->title = $this->string('title');
-        $this->summary = $this->string('summary');
         $this->tags = $this->array('tags');
-        $this->updatedAt = $this->dateTime('updatedAt');
         $this->lastVersion = $this->int('lastVersion');
     }
 
@@ -53,27 +48,11 @@ class PostUpdatedCommentsIEvent extends ApplicationInboundEvent
     }
 
     /**
-     * @return mixed|string
-     */
-    public function getSummary(): mixed
-    {
-        return $this->summary;
-    }
-
-    /**
      * @return array
      */
     public function getTags(): array
     {
         return $this->tags;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt(): \DateTime
-    {
-        return $this->updatedAt;
     }
 
     /**

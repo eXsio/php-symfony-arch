@@ -17,29 +17,14 @@ class CommentPostHeader
     #[ORM\Column(type: "string")]
     private string $title;
 
-    #[ORM\Column(type: "string")]
-    private string $summary;
-
     #[ORM\Column(type: "json")]
     private array $tags = [];
-
-    #[ORM\Column(type: "ulid")]
-    private Ulid $createdById;
-
-    #[ORM\Column(type: "string")]
-    private string $createdByName;
-
-    #[ORM\Column(type: "datetime")]
-    private \DateTime $createdAt;
 
     #[ORM\Column(type: "integer")]
     private int $version;
 
     #[ORM\OneToMany(mappedBy: 'post', targetEntity: Comment::class)]
     private Collection $comments;
-
-    #[ORM\Column(type: "integer")]
-    private int $commentsCount;
 
     /**
      * @return Ulid
@@ -74,22 +59,6 @@ class CommentPostHeader
     }
 
     /**
-     * @return string
-     */
-    public function getSummary(): string
-    {
-        return $this->summary;
-    }
-
-    /**
-     * @param string $summary
-     */
-    public function setSummary(string $summary): void
-    {
-        $this->summary = $summary;
-    }
-
-    /**
      * @return array
      */
     public function getTags(): array
@@ -104,55 +73,6 @@ class CommentPostHeader
     {
         $this->tags = $tags;
     }
-
-    /**
-     * @return Ulid
-     */
-    public function getCreatedById(): Ulid
-    {
-        return $this->createdById;
-    }
-
-    /**
-     * @param Ulid $createdById
-     */
-    public function setCreatedById(Ulid $createdById): void
-    {
-        $this->createdById = $createdById;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCreatedByName(): string
-    {
-        return $this->createdByName;
-    }
-
-    /**
-     * @param string $createdByName
-     */
-    public function setCreatedByName(string $createdByName): void
-    {
-        $this->createdByName = $createdByName;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreatedAt(): \DateTime
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @param \DateTime $createdAt
-     */
-    public function setCreatedAt(\DateTime $createdAt): void
-    {
-        $this->createdAt = $createdAt;
-    }
-
 
     /**
      * @return int
@@ -185,24 +105,4 @@ class CommentPostHeader
     {
         $this->comments = $comments;
     }
-
-    /**
-     * @return int
-     */
-    public function getCommentsCount(): int
-    {
-        return $this->commentsCount;
-    }
-
-    /**
-     * @param int $commentsCount
-     */
-    public function setCommentsCount(int $commentsCount): void
-    {
-        $this->commentsCount = $commentsCount;
-    }
-
-
-
-
 }

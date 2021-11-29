@@ -45,9 +45,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: "integer")]
     private $version;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: UserPostHeader::class)]
-    private Collection $posts;
-
 
     public function getId(): ?Ulid
     {
@@ -126,8 +123,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function eraseCredentials()
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
     }
 
     /**
@@ -145,22 +140,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->version = $version;
     }
-
-    /**
-     * @return Collection
-     */
-    public function getPosts(): Collection
-    {
-        return $this->posts;
-    }
-
-    /**
-     * @param Collection $posts
-     */
-    public function setPosts(Collection $posts): void
-    {
-        $this->posts = $posts;
-    }
-
-
 }

@@ -20,13 +20,8 @@ class DoctrineCommentsPostsEventsHandlingRepository extends DoctrineCommentsRepo
         $post = new CommentPostHeader();
         $post->setId($newPostHeader->getId());
         $post->setTitle($newPostHeader->getTitle());
-        $post->setSummary($newPostHeader->getSummary());
         $post->setVersion($newPostHeader->getVersion());
         $post->setTags($newPostHeader->getTags());
-        $post->setCreatedAt($newPostHeader->getCreatedAt());
-        $post->setCreatedById($newPostHeader->getCreatedById());
-        $post->setCreatedByName($newPostHeader->getCreatedByName());
-        $post->setCommentsCount($newPostHeader->getCommentsCount());
         $this->getEntityManager()->persist($post);
     }
 
@@ -39,14 +34,12 @@ class DoctrineCommentsPostsEventsHandlingRepository extends DoctrineCommentsRepo
             ->createQueryBuilder()
             ->update(CommentPostHeader::class, 'p')
             ->set('p.title', ':title')
-            ->set('p.summary', ':summary')
             ->set('p.tags', ':tags')
             ->set('p.version', ':version')
             ->where('p.id = :id and p.version <= :version')
             ->setParameter("id", $updatedPostHeader->getId(), 'ulid')
             ->setParameter("version", $updatedPostHeader->getVersion(),)
             ->setParameter("title", $updatedPostHeader->getTitle())
-            ->setParameter("summary", $updatedPostHeader->getSummary())
             ->setParameter("tags", json_encode($updatedPostHeader->getTags()))
             ->getQuery()
             ->execute();

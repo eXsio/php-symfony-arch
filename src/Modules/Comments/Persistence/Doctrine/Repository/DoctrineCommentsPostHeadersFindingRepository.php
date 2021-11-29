@@ -17,7 +17,7 @@ class DoctrineCommentsPostHeadersFindingRepository extends DoctrineCommentsRepos
     {
         $headerClass = CommentPostHeader::class;
         $dtoClass = CommentsPostHeaderDto::class;
-        $dql = "select new $dtoClass(p.id, p.title, p.summary, p.tags, p.createdById, p.createdByName, p.createdAt, p.version) from $headerClass p";
+        $dql = "select new $dtoClass(p.id, p.title, p.tags, p.version) from $headerClass p";
         if ($from != null) {
             $dql = $dql . " where p.createdAt >= :from";
         }

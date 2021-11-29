@@ -16,7 +16,6 @@ class PostDeletedOEventContract extends ApplicationOutboundEventContract
             $this->verifyContracts($this->createEvent(), [
                 'Comments/PostDeletedCommentsIEvent',
                 'Tags/PostDeletedTagsIEvent',
-                'Security/PostDeletedSecurityIEvent',
             ])
         );
     }

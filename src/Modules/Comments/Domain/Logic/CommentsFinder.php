@@ -60,8 +60,6 @@ trait CommentsFinder
                 $comment->getCreatedAt(),
                 $comment->getPostId(),
                 $comment->getPostTitle(),
-                $comment->getPostSummary(),
-                $comment->getPostCommentsCount(),
                 $comment->getPostTags()
             );
         })

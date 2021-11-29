@@ -33,7 +33,6 @@ abstract class CommentsSpec extends TestCase
             $repository,
             $repository,
             $repository,
-            $repository,
             $publisher,
             $this->createMock(LoggerInterface::class)
         );

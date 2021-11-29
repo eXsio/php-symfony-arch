@@ -25,8 +25,7 @@ class InMemoryCommentsRepository implements
     CommentsPostHeadersFindingRepositoryInterface,
     CommentsCreationRepositoryInterface,
     CommentsFindingRepositoryInterface,
-    CommentsDeletionRepositoryInterface,
-    CommentsSecurityEventsHandlingRepositoryInterface
+    CommentsDeletionRepositoryInterface
 {
 
     private static Collection $postHeaders;
@@ -48,11 +47,7 @@ class InMemoryCommentsRepository implements
         self::$postHeaders = self::$postHeaders->append(new InMemoryCommentPostHeader(
             $newPostHeader->getId(),
             $newPostHeader->getTitle(),
-            $newPostHeader->getSummary(),
             $newPostHeader->getTags(),
-            $newPostHeader->getCreatedById(),
-            $newPostHeader->getCreatedByName(),
-            $newPostHeader->getCreatedAt(),
             $newPostHeader->getVersion()
         ));
     }
@@ -65,7 +60,6 @@ class InMemoryCommentsRepository implements
                      })
                      ->toArray() as $header) {
             $header->setTitle($updatedPostHeader->getTitle());
-            $header->setSummary($updatedPostHeader->getSummary());
             $header->setTags($updatedPostHeader->getTags());
             $header->setVersion($updatedPostHeader->getVersion());
         }
@@ -90,11 +84,7 @@ class InMemoryCommentsRepository implements
                 return new CommentsPostHeaderDto(
                     $header->getId(),
                     $header->getTitle(),
-                    $header->getSummary(),
                     $header->getTags(),
-                    $header->getCreatedById(),
-                    $header->getCreatedByName(),
-                    $header->getCreatedAt(),
                     $header->getVersion()
                 );
             })
@@ -177,11 +167,6 @@ class InMemoryCommentsRepository implements
                     $comment->getCreatedAt(),
                     $comment->getPost()->getId(),
                     $comment->getPost()->getTitle(),
-                    $comment->getPost()->getSummary(),
-                    self::$postHeaders
-                        ->filter(function ($post) use ($comment) {
-                            return $post->getId() == $comment->getPost()->getId();
-                        })->size(),
                     $comment->getPost()->getTags(),
 
                 );
@@ -224,17 +209,5 @@ class InMemoryCommentsRepository implements
             $post->setComments([]);
         }
 
-    }
-
-    public function updateUserName(UpdatedCommentsPostHeadersUserNameDto $updatedUserName): void
-    {
-        self::$postHeaders
-            ->filter(function ($post) use ($updatedUserName) {
-                return $post->getCreatedByName() == $updatedUserName->getOldUserName();
-            })
-            ->each(function ($post) use ($updatedUserName) {
-                $post->setCreatedByName($updatedUserName->getNewUserName());
-            })
-            ->realize();
     }
 }

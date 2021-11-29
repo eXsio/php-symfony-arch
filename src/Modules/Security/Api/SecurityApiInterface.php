@@ -2,18 +2,10 @@
 
 namespace App\Modules\Security\Api;
 
-use App\Infrastructure\Pagination\Page;
 use App\Modules\Security\Api\Command\ChangeUserPasswordCommand;
 use App\Modules\Security\Api\Command\CreateUserCommand;
 use App\Modules\Security\Api\Command\RenameUserCommand;
 use App\Modules\Security\Api\Command\Response\CreateUserCommandResponse;
-use App\Modules\Security\Api\Event\Inbound\CommentsCountUpdatedSecurityIEvent;
-use App\Modules\Security\Api\Event\Inbound\PostCreatedSecurityIEvent;
-use App\Modules\Security\Api\Event\Inbound\PostDeletedSecurityIEvent;
-use App\Modules\Security\Api\Event\Inbound\PostUpdatedSecurityIEvent;
-use App\Modules\Security\Api\Query\FindPostsByUserIdQuery;
-use App\Modules\Security\Api\Query\Response\FindPostsByUserIdQueryResponse;
-use App\Modules\Security\Api\Query\Response\FindUserPostHeadersQueryResponse;
 
 interface SecurityApiInterface
 {
@@ -21,38 +13,7 @@ interface SecurityApiInterface
      * @param CreateUserCommand $command
      * @return CreateUserCommandResponse
      */
-   public function createUser(CreateUserCommand $command): CreateUserCommandResponse;
-
-    /**
-     * @param PostCreatedSecurityIEvent $event
-     */
-   public function onPostCreated(PostCreatedSecurityIEvent $event): void;
-
-    /**
-     * @param PostUpdatedSecurityIEvent $event
-     */
-   public function onPostUpdated(PostUpdatedSecurityIEvent $event): void;
-
-    /**
-     * @param PostDeletedSecurityIEvent $event
-     */
-   public function onPostDeleted(PostDeletedSecurityIEvent $event): void;
-
-    /**
-     * @param CommentsCountUpdatedSecurityIEvent $event
-     */
-   public function onCommentsCountUpdated(CommentsCountUpdatedSecurityIEvent $event): void;
-
-    /**
-     * @return array<FindUserPostHeadersQueryResponse>
-     */
-    public function findPostHeaders(): array;
-
-    /**
-     * @param FindPostsByUserIdQuery $query
-     * @return Page<FindPostsByUserIdQueryResponse>
-     */
-    public function findPostsByUserId(FindPostsByUserIdQuery $query): Page;
+    public function createUser(CreateUserCommand $command): CreateUserCommandResponse;
 
     /**
      * @param RenameUserCommand $command

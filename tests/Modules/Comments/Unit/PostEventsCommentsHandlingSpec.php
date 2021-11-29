@@ -29,11 +29,7 @@ class PostEventsCommentsHandlingSpec extends CommentsSpec
         self::assertTrue(isset($headers[0]));
         self::assertEquals($event->getId(), $headers[0]->getId());
         self::assertEquals($event->getTitle(), $headers[0]->getTitle());
-        self::assertEquals($event->getSummary(), $headers[0]->getSummary());
         self::assertEquals($event->getTags(), $headers[0]->getTags());
-        self::assertEquals($event->getCreatedById(), $headers[0]->getCreatedById());
-        self::assertEquals($event->getCreatedByName(), $headers[0]->getCreatedByName());
-        self::assertEquals($event->getCreatedAt(), $headers[0]->getCreatedAt());
         self::assertEquals(1, $headers[0]->getVersion());
     }
 
@@ -61,7 +57,6 @@ class PostEventsCommentsHandlingSpec extends CommentsSpec
         self::assertTrue(isset($headers[0]));
         self::assertEquals($event->getId(), $headers[0]->getId());
         self::assertEquals($event->getTitle(), $headers[0]->getTitle());
-        self::assertEquals($event->getSummary(), $headers[0]->getSummary());
         self::assertEquals($event->getTags(), $headers[0]->getTags());
         self::assertEquals($event->getLastVersion(), $headers[0]->getVersion());
     }

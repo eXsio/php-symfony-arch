@@ -30,32 +30,6 @@ class DoctrineCommentsCreationRepository extends DoctrineCommentsRepository impl
             $comment->setParentComment($em->getReference(Comment::class, $newComment->getParentId()));
         }
         $em->persist($comment);
-        $em->flush();
-        $this->updateCommentsCount($newComment->getPostId());
         return $id;
-    }
-
-    /**
-     * @param Ulid $postId
-     */
-    private function updateCommentsCount(Ulid $postId): void
-    {
-        $em = $this->getEntityManager();
-        $expr = $em->getExpressionBuilder();
-        $countQuery = $em->createQueryBuilder()
-            ->select($expr->count("sc.id"))
-            ->from(CommentPostHeader::class, "sp")
-            ->join("sp.comments","sc")
-            ->where("sp.id = :id")
-            ->getDQL();
-
-        $em
-            ->createQueryBuilder()
-            ->update(CommentPostHeader::class, 'p')
-            ->set('p.commentsCount', "($countQuery)")
-            ->where('p.id = :id')
-            ->setParameter("id", $postId, 'ulid')
-            ->getQuery()
-            ->execute();
     }
 }

@@ -28,9 +28,8 @@ final class Version20211121154234 extends DoctrineMigration
         $this->addSql('CREATE INDEX IDX_99AD0A6610EE4CEE ON COMMENTS (parentId)');
         $this->addSql('CREATE INDEX IDX_99AD0A66E094D20D ON COMMENTS (postId)');
         $this->addSql('CREATE TABLE POST_HEADERS (id BLOB NOT NULL --(DC2Type:ulid)
-        , title VARCHAR(255) NOT NULL, summary VARCHAR(255) NOT NULL, tags CLOB NOT NULL --(DC2Type:json)
-        , createdById BLOB NOT NULL --(DC2Type:ulid)
-        , createdByName VARCHAR(255) NOT NULL, createdAt DATETIME NOT NULL, version INTEGER NOT NULL, commentsCount INTEGER NOT NULL, PRIMARY KEY(id))');
+        , title VARCHAR(255) NOT NULL,  tags CLOB NOT NULL --(DC2Type:json)
+        , version INTEGER NOT NULL, PRIMARY KEY(id))');
     }
 
     public function down(Schema $schema): void

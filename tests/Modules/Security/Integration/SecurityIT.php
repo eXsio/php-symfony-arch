@@ -5,11 +5,6 @@ namespace App\Tests\Modules\Security\Integration;
 use App\Modules\Security\Api\Command\ChangeUserPasswordCommand;
 use App\Modules\Security\Api\Command\CreateUserCommand;
 use App\Modules\Security\Api\Command\RenameUserCommand;
-use App\Modules\Security\Api\Event\Inbound\CommentsCountUpdatedSecurityIEvent;
-use App\Modules\Security\Api\Event\Inbound\PostCreatedSecurityIEvent;
-use App\Modules\Security\Api\Event\Inbound\PostUpdatedSecurityIEvent;
-use App\Modules\Security\Api\Query\FindPostsByUserIdQuery;
-use App\Modules\Security\Api\Query\Response\FindPostsByUserIdQueryResponse;
 use App\Modules\Security\Api\SecurityApiInterface;
 use App\Modules\Security\Domain\Event\Outbound\UserRenamedOEvent;
 use App\Tests\Modules\Security\Integration\Http\SecurityHttpTrait;
@@ -23,54 +18,6 @@ class SecurityIT extends SecurityIntegrationTest
 {
     use SecurityHttpTrait;
     use ApplicationEventContractLoader;
-
-    /**
-     * @test
-     */
-    public function shouldUpdateCommentsCountUponCommentsCountUpdatedIEvent(): void
-    {
-        //given: there was a PostCreatedIEvent to be published
-        $event = new PostCreatedSecurityIEvent($this->getInboundEvent("Security/PostCreatedSecurityIEvent"));
-
-        //and: the Event was already published
-        $this->getSecurityApi()->onPostCreated($event);
-
-        //and: the Header was to be updated
-        $event = new PostUpdatedSecurityIEvent($this->getInboundEvent("Security/PostUpdatedSecurityIEvent"));
-
-        //when: the Event was published
-        $this->getSecurityApi()->onPostUpdated($event);
-
-        //and: the Header was to be updated
-        $event = new CommentsCountUpdatedSecurityIEvent($this->getInboundEvent("Security/CommentsCountUpdatedSecurityIEvent"));
-
-        //when: the Event was published
-        $this->getSecurityApi()->onCommentsCountUpdated($event);
-
-        //then: Post Header was created - no Exception was thrown
-        $headers = $this->findPostsByUserId(new FindPostsByUserIdQuery($this->getUserId(), 1));
-        self::assertNotNull($headers);
-        self::assertCount(1, $headers->getData());
-        self::assertEquals(1, $headers->getCount());
-        self::assertTrue(isset($headers->getData()[0]));
-        $post = $this->convert($headers->getData()[0], FindPostsByUserIdQueryResponse::class);
-        self::assertEquals($event->getPostId(), $post->getId());
-        self::assertEquals($event->getCommentsCount(), $post->getCommentsCount());
-
-    }
-
-    private function getSecurityApi(): SecurityApiInterface
-    {
-        return $this->getContainer()->get(SecurityApiInterface::class);
-    }
-
-    private function getUserId(): Ulid
-    {
-        $tokenParts = explode(".", $this->token);
-        $tokenPayload = base64_decode($tokenParts[1]);
-        $jwtPayload = json_decode($tokenPayload, true);
-        return new Ulid($jwtPayload['id']);
-    }
 
     /**
      * @test

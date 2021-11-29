@@ -54,7 +54,7 @@ class DoctrineCommentsFindingRepository extends DoctrineCommentsRepository imple
         $dtoClass = CommentWithPostDto::class;
         $result = $this->getEntityManager()
             ->createQuery("select new $dtoClass(c.id, c.author, c.body, pc.id, c.createdAt, 
-                                p.id, p.title, p.summary, p.commentsCount, p.tags)
+                                p.id, p.title, p.tags)
                             from $commentClass c 
                                 join c.post p 
                                 left join c.parentComment pc

@@ -1,9 +1,5 @@
 {
   "id": "01FMMW4A1VAFVNARENVSXNF0V7",
   "title": "Post Title",
-  "summary": "Post Body",
-  "tags": ["t1"],
-  "createdById": "01FMMW7M0HG0MMT5R9FKPHYKQ1",
-  "createdByName": "user@exsio.com",
-  "createdAt": "2016-06-06 15:35:00"
+  "tags": ["t1"]
 }

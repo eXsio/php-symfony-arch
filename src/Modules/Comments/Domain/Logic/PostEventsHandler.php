@@ -37,11 +37,7 @@ trait PostEventsHandler
                 new CreateNewCommentsPostHeaderDto(
                     $event->getId(),
                     $event->getTitle(),
-                    $event->getSummary(),
-                    $event->getTags(),
-                    $event->getCreatedById(),
-                    $event->getCreatedByName(),
-                    $event->getCreatedAt()
+                    $event->getTags()
                 )
             );
         })->execute();
@@ -58,7 +54,6 @@ trait PostEventsHandler
                 new UpdateExistingCommentsPostHeaderDto(
                     $event->getId(),
                     $event->getTitle(),
-                    $event->getSummary(),
                     $event->getTags(),
                     $event->getLastVersion()
                 )

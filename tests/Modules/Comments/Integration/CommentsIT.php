@@ -139,28 +139,6 @@ class CommentsIT extends IntegrationTest
         self::assertCount(2, json_decode($events[0]->getData()['comments']));
     }
 
-    /**
-     * @test
-     */
-    public function shouldRenameUserForPost()
-    {
-        //given: there was a Post Created
-        $this->createAndUpdatePost();
-
-        //and: the Header was to be updated
-        $event = new UserRenamedCommentsIEvent($this->getInboundEvent("Comments/UserRenamedCommentsIEvent"));
-
-        //when: the Event was published
-        $this->getCommentsApi()->onUserRenamed($event);
-
-        //then: Post Header was created - no Exception was thrown
-        $headers = $this->getCommentsApi()->findPostHeaders();
-        self::assertNotNull($headers);
-        self::assertCount(1, $headers);
-        self::assertTrue(isset($headers[0]));
-        self::assertEquals($event->getNewLogin(), $headers[0]->getCreatedByName());
-    }
-
     private function createAndUpdatePost(): Ulid
     {
         //given: there was a PostCreatedIEvent to be published

@@ -58,10 +58,4 @@ interface CommentsApiInterface
      */
     public function baseline(BaselineCommentsCommand $command): void;
 
-    /**
-     * @param UserRenamedCommentsIEvent $event
-     */
-    public function onUserRenamed(UserRenamedCommentsIEvent $event): void;
-
-
 }

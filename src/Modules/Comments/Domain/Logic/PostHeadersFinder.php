@@ -27,11 +27,7 @@ trait PostHeadersFinder
                 return new FindCommentsPostHeadersQueryResponse(
                     $header->getId(),
                     $header->getTitle(),
-                    $header->getSummary(),
                     $header->getTags(),
-                    $header->getCreatedById(),
-                    $header->getCreatedByName(),
-                    $header->getCreatedAt(),
                     $header->getVersion()
                 );
             })

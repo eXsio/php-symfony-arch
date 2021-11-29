@@ -13,7 +13,6 @@ class CommentsCountUpdatedOEventContract extends ApplicationOutboundEventContrac
     {
         self::assertTrue(
             $this->verifyContracts($this->createEvent(), [
-                'Security/CommentsCountUpdatedSecurityIEvent',
                 'Tags/CommentsCountUpdatedTagsIEvent',
             ])
         );
