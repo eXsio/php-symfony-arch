@@ -13,7 +13,6 @@ use App\Modules\Security\Domain\Repository\UserCreationRepositoryInterface;
 use App\Modules\Security\Domain\Repository\UserFindingRepositoryInterface;
 use App\Modules\Security\Domain\Repository\UserUpdatingRepositoryInterface;
 use App\Modules\Security\Domain\Transactions\SecurityTransactionFactoryInterface;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 

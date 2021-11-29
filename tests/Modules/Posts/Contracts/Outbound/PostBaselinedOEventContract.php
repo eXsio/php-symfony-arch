@@ -2,10 +2,8 @@
 
 namespace App\Tests\Modules\Posts\Contracts\Outbound;
 
-use App\Modules\Posts\Domain\Dto\CreateNewPostDto;
 use App\Modules\Posts\Domain\Dto\PostForBaselineDto;
 use App\Modules\Posts\Domain\Event\Outbound\PostBaselinedOEvent;
-use App\Modules\Posts\Domain\Event\Outbound\PostCreatedOEvent;
 use App\Tests\TestUtils\Contracts\ApplicationOutboundEventContract;
 use Symfony\Component\Uid\Ulid;
 

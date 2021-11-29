@@ -9,8 +9,6 @@ use App\Modules\Posts\Domain\Dto\PostHeaderDto;
 use App\Modules\Posts\Domain\Repository\PostsFindingRepositoryInterface;
 use App\Modules\Posts\Persistence\Doctrine\Entity\Post;
 use App\Modules\Posts\Persistence\Doctrine\Entity\PostComments;
-use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\NoResultException;
 use Symfony\Component\Uid\Ulid;
 
 class DoctrinePostsFindingRepository extends DoctrinePostsRepository implements PostsFindingRepositoryInterface

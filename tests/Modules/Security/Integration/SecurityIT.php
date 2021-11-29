@@ -12,7 +12,6 @@ use App\Tests\TestUtils\Contracts\ApplicationEventContractLoader;
 use App\Tests\TestUtils\Events\InMemoryEventPublisher;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
-use Symfony\Component\Uid\Ulid;
 
 class SecurityIT extends SecurityIntegrationTest
 {

@@ -3,7 +3,6 @@
 namespace App\Modules\Tags\Domain;
 
 use App\Infrastructure\Events\Api\ApplicationEventSubscriber;
-use App\Infrastructure\Events\Api\EventHandlerReference;
 use App\Modules\Tags\Api\Event\Inbound\CommentsCountUpdatedTagsIEvent;
 use App\Modules\Tags\Api\Event\Inbound\PostCreatedTagsIEvent;
 use App\Modules\Tags\Api\Event\Inbound\PostDeletedTagsIEvent;

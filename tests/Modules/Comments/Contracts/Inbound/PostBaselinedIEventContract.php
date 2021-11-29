@@ -3,7 +3,6 @@
 namespace App\Tests\Modules\Comments\Contracts\Inbound;
 
 use App\Modules\Comments\Api\Event\Inbound\PostBaselinedCommentsIEvent;
-use App\Modules\Comments\Api\Event\Inbound\PostCreatedCommentsIEvent;
 use App\Tests\TestUtils\Contracts\ApplicationInboundEventContract;
 
 class PostBaselinedIEventContract extends ApplicationInboundEventContract

@@ -7,9 +7,6 @@ namespace DoctrineMigrations;
 use App\Infrastructure\Doctrine\Migrations\DoctrineMigration;
 use Doctrine\DBAL\Schema\Schema;
 
-/**
- * Auto-generated Migration: Please modify to your needs!
- */
 final class Version20211116075551 extends DoctrineMigration
 {
     public function getDescription(): string
@@ -19,7 +16,6 @@ final class Version20211116075551 extends DoctrineMigration
 
     public function up(Schema $schema): void
     {
-        // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE USERS (id BLOB NOT NULL --(DC2Type:ulid)
         , email VARCHAR(180) NOT NULL, roles CLOB NOT NULL --(DC2Type:json)
         , password VARCHAR(255) NOT NULL, version INTEGER DEFAULT 1 NOT NULL, PRIMARY KEY(id))');
@@ -28,7 +24,6 @@ final class Version20211116075551 extends DoctrineMigration
 
     public function down(Schema $schema): void
     {
-        // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('DROP TABLE USERS');
     }
 

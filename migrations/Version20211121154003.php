@@ -6,11 +6,7 @@ namespace DoctrineMigrations;
 
 use App\Infrastructure\Doctrine\Migrations\DoctrineMigration;
 use Doctrine\DBAL\Schema\Schema;
-use Doctrine\Migrations\AbstractMigration;
 
-/**
- * Auto-generated Migration: Please modify to your needs!
- */
 final class Version20211121154003 extends DoctrineMigration
 {
     public function getDescription(): string
@@ -34,7 +30,6 @@ final class Version20211121154003 extends DoctrineMigration
 
     public function down(Schema $schema): void
     {
-        // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('DROP TABLE POSTS');
         $this->addSql('DROP TABLE POST_COMMENTS');
     }

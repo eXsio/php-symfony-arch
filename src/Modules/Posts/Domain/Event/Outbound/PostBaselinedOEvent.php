@@ -4,7 +4,6 @@ namespace App\Modules\Posts\Domain\Event\Outbound;
 
 use App\Infrastructure\Events\ApplicationOutboundEvent;
 use App\Modules\Posts\Domain\Dto\PostForBaselineDto;
-use Symfony\Component\Uid\Ulid;
 
 class PostBaselinedOEvent extends ApplicationOutboundEvent
 {
