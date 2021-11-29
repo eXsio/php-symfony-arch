@@ -6,6 +6,7 @@ use App\Infrastructure\Pagination\Page;
 use App\Modules\Comments\Api\Command\BaselineCommentsCommand;
 use App\Modules\Comments\Api\Command\CreateCommentCommand;
 use App\Modules\Comments\Api\Command\Response\CreateCommentCommandResponse;
+use App\Modules\Comments\Api\Event\Inbound\PostBaselinedCommentsIEvent;
 use App\Modules\Comments\Api\Event\Inbound\PostCreatedCommentsIEvent;
 use App\Modules\Comments\Api\Event\Inbound\PostDeletedCommentsIEvent;
 use App\Modules\Comments\Api\Event\Inbound\PostUpdatedCommentsIEvent;
@@ -16,6 +17,11 @@ use App\Modules\Comments\Api\Query\Response\FindLatestCommentsQueryResponse;
 
 interface CommentsApiInterface
 {
+    /**
+     * @param PostBaselinedCommentsIEvent $event
+     */
+    public function onPostBaselined(PostBaselinedCommentsIEvent $event): void;
+
     /**
      * @param PostCreatedCommentsIEvent $event
      */

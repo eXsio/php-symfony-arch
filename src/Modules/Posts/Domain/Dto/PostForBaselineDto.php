@@ -2,6 +2,8 @@
 
 namespace App\Modules\Posts\Domain\Dto;
 
+use Symfony\Component\Uid\Ulid;
+
 class PostForBaselineDto
 {
     /**
@@ -10,7 +12,11 @@ class PostForBaselineDto
      * @param string $body
      * @param string $summary
      * @param array<string> $tags
+     * @param Ulid $createdById
+     * @param string $createdByName
+     * @param \DateTime $createdAt
      * @param \DateTime $updatedAt
+     * @param int $version
      */
     public function __construct(
         private string    $id,
@@ -18,6 +24,9 @@ class PostForBaselineDto
         private string    $body,
         private string    $summary,
         private array     $tags,
+        private Ulid      $createdById,
+        private string    $createdByName,
+        private \DateTime $createdAt,
         private \DateTime $updatedAt,
         private int       $version
     )
@@ -63,6 +72,32 @@ class PostForBaselineDto
     {
         return $this->tags;
     }
+
+    /**
+     * @return Ulid
+     */
+    public function getCreatedById(): Ulid
+    {
+        return $this->createdById;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCreatedByName(): string
+    {
+        return $this->createdByName;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt(): \DateTime
+    {
+        return $this->createdAt;
+    }
+
+
 
     /**
      * @return \DateTime

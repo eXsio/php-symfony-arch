@@ -3,6 +3,7 @@
 namespace App\Tests\Modules\Tags\Integration;
 
 use App\Modules\Tags\Api\Event\Inbound\CommentsCountUpdatedTagsIEvent;
+use App\Modules\Tags\Api\Event\Inbound\PostBaselinedTagsIEvent;
 use App\Modules\Tags\Api\Event\Inbound\PostCreatedTagsIEvent;
 use App\Modules\Tags\Api\Event\Inbound\PostDeletedTagsIEvent;
 use App\Modules\Tags\Api\Event\Inbound\PostUpdatedTagsIEvent;
@@ -53,6 +54,50 @@ class TagsIT extends IntegrationTest
         self::assertEquals('Post Title', $post->getTitle());
         self::assertEquals('Post Body', $post->getSummary());
         self::assertEquals(1, $post->getVersion());
+    }
+
+    /**
+     * @test
+     */
+    public function shouldBaselineNonExistentPost()
+    {
+        //given: there was a PostCreatedIEvent to be published
+        $event = new PostBaselinedTagsIEvent($this->getInboundEvent("Tags/PostBaselinedTagsIEvent"));
+
+        //when: the Event was already published
+        $this->getTagsApi()->onPostBaselined($event);
+
+        //then: Non-existent post was Baselined
+        $posts = $this->getTagsApi()->findPostHeaders();
+        self::assertCount(1, $posts);
+        self::assertEquals(3, $posts[0]->getVersion());
+
+    }
+
+    /**
+     * @test
+     */
+    public function shouldBaselineAlreadyExistentPost()
+    {
+        //given: there was a Post Created
+        //given: there was a PostCreatedIEvent to be published
+        $event = new PostCreatedTagsIEvent($this->getInboundEvent("Tags/PostCreatedTagsIEvent"));
+
+        //and: the Event was already published
+        $this->getTagsApi()->onPostCreated($event);
+
+        //given: there was a PostCreatedIEvent to be published
+        $data = $this->getInboundEvent("Tags/PostBaselinedTagsIEvent");
+        $event = new PostBaselinedTagsIEvent($data);
+
+        //when: the Event was already published
+        $this->getTagsApi()->onPostBaselined($event);
+
+        //then: Non-existent post was Baselined
+        $posts = $this->getTagsApi()->findPostHeaders();
+        self::assertCount(1, $posts);
+        self::assertEquals(3, $posts[0]->getVersion());
+
     }
 
     /**

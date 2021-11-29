@@ -5,9 +5,8 @@ namespace App\Modules\Posts\Domain\Logic;
 use App\Infrastructure\Events\Api\ApplicationEventPublisherInterface;
 use App\Modules\Posts\Api\Command\BaselinePostsCommand;
 use App\Modules\Posts\Domain\Dto\DeleteExistingPostDto;
-use App\Modules\Posts\Domain\Dto\UpdateExistingPostDto;
+use App\Modules\Posts\Domain\Event\Outbound\PostBaselinedOEvent;
 use App\Modules\Posts\Domain\Event\Outbound\PostDeletedOEvent;
-use App\Modules\Posts\Domain\Event\Outbound\PostUpdatedOEvent;
 use App\Modules\Posts\Domain\Repository\PostsFindingRepositoryInterface;
 
 trait PostsBaseliner
@@ -46,17 +45,7 @@ trait PostsBaseliner
     {
         $posts = $this->findingRepository->findExistingPostsForBaseline($command->getFrom());
         foreach ($posts as $post) {
-            $this->eventPublisher->publish(new PostUpdatedOEvent(
-                new UpdateExistingPostDto(
-                    $post->getId(),
-                    $post->getTitle(),
-                    $post->getBody(),
-                    $post->getSummary(),
-                    $post->getTags(),
-                    $post->getUpdatedAt()
-                ),
-                $post->getVersion()
-            ));
+            $this->eventPublisher->publish(new PostBaselinedOEvent($post));
         }
     }
 }

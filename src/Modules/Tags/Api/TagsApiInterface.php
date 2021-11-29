@@ -4,6 +4,7 @@ namespace App\Modules\Tags\Api;
 
 use App\Infrastructure\Pagination\Page;
 use App\Modules\Tags\Api\Event\Inbound\CommentsCountUpdatedTagsIEvent;
+use App\Modules\Tags\Api\Event\Inbound\PostBaselinedTagsIEvent;
 use App\Modules\Tags\Api\Event\Inbound\PostCreatedTagsIEvent;
 use App\Modules\Tags\Api\Event\Inbound\PostDeletedTagsIEvent;
 use App\Modules\Tags\Api\Event\Inbound\PostUpdatedTagsIEvent;
@@ -15,6 +16,11 @@ use App\Modules\Tags\Api\Query\Response\FindTagsQueryResponse;
 
 interface TagsApiInterface
 {
+    /**
+     * @param PostBaselinedTagsIEvent $event
+     */
+    public function onPostBaselined(PostBaselinedTagsIEvent $event): void;
+
     /**
      * @param PostCreatedTagsIEvent $event
      */

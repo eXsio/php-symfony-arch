@@ -246,4 +246,12 @@ class InMemoryTagsRepository implements
             })
             ->realize();
     }
+
+    public function postExists(Ulid $postId): bool
+    {
+        return self::$postHeaders
+            ->filter(function ($post) use ($postId) {
+                return $post->getId() == $postId;
+            })->sizeIsGreaterThan(0);
+    }
 }

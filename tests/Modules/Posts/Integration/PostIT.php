@@ -14,6 +14,7 @@ use App\Modules\Posts\Api\PostsApiInterface;
 use App\Modules\Posts\Api\Query\FindAllPostsQuery;
 use App\Modules\Posts\Api\Query\FindPostByIdQuery;
 use App\Modules\Posts\Api\Query\Response\FindPostHeaderQueryResponse;
+use App\Modules\Posts\Domain\Event\Outbound\PostBaselinedOEvent;
 use App\Modules\Posts\Domain\Event\Outbound\PostCreatedOEvent;
 use App\Modules\Posts\Domain\Event\Outbound\PostDeletedOEvent;
 use App\Modules\Posts\Domain\Event\Outbound\PostUpdatedOEvent;
@@ -293,7 +294,7 @@ class PostIT extends IntegrationTest
 
         //then: Comments were baselined correctly
         self::assertStringStartsWith('Successfully base-lined all Posts', $output);
-        $events = InMemoryEventPublisher::get(PostUpdatedOEvent::class);
+        $events = InMemoryEventPublisher::get(PostBaselinedOEvent::class);
         self::assertCount(1, $events);
         self::assertEquals($createResponse->getId(), $events[0]->getData()['id']);
     }

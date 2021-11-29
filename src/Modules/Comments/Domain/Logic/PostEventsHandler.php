@@ -2,6 +2,7 @@
 
 namespace App\Modules\Comments\Domain\Logic;
 
+use App\Modules\Comments\Api\Event\Inbound\PostBaselinedCommentsIEvent;
 use App\Modules\Comments\Api\Event\Inbound\PostCreatedCommentsIEvent;
 use App\Modules\Comments\Api\Event\Inbound\PostDeletedCommentsIEvent;
 use App\Modules\Comments\Api\Event\Inbound\PostUpdatedCommentsIEvent;
@@ -9,6 +10,7 @@ use App\Modules\Comments\Domain\Dto\CreateNewCommentsPostHeaderDto;
 use App\Modules\Comments\Domain\Dto\DeleteExistingCommentsPostHeaderDto;
 use App\Modules\Comments\Domain\Dto\UpdateExistingCommentsPostHeaderDto;
 use App\Modules\Comments\Domain\Repository\CommentsDeletionRepositoryInterface;
+use App\Modules\Comments\Domain\Repository\CommentsPostHeadersFindingRepositoryInterface;
 use App\Modules\Comments\Domain\Repository\CommentsPostsEventsHandlingRepositoryInterface;
 use App\Modules\Comments\Domain\Transactions\CommentsTransactionFactoryInterface;
 
@@ -22,9 +24,40 @@ trait PostEventsHandler
     public function __construct(
         private CommentsTransactionFactoryInterface            $transactionFactory,
         private CommentsPostsEventsHandlingRepositoryInterface $postEventsCommentsRepository,
-        private CommentsDeletionRepositoryInterface            $commentsDeletionRepository
+        private CommentsDeletionRepositoryInterface            $commentsDeletionRepository,
+        private CommentsPostHeadersFindingRepositoryInterface  $postHeadersFindingRepository
     )
     {
+    }
+
+    /**
+     * @param PostBaselinedCommentsIEvent $event
+     */
+    public function onPostBaselined(PostBaselinedCommentsIEvent $event): void
+    {
+        $this->transactionFactory->createTransaction(function () use ($event) {
+            if ($this->postHeadersFindingRepository->postExists($event->getId())) {
+                $this->postEventsCommentsRepository->updatePostHeader(
+                    new UpdateExistingCommentsPostHeaderDto(
+                        $event->getId(),
+                        $event->getTitle(),
+                        $event->getTags(),
+                        $event->getVersion()
+                    )
+                );
+            } else {
+                $this->postEventsCommentsRepository->createPostHeader(
+                    new CreateNewCommentsPostHeaderDto(
+                        $event->getId(),
+                        $event->getTitle(),
+                        $event->getTags(),
+                        $event->getVersion()
+                    )
+                );
+            }
+
+        })->execute();
+
     }
 
     /**

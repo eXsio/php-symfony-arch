@@ -74,7 +74,7 @@ class TagsApi extends ApplicationEventSubscriber implements TagsApiInterface
     {
         parent::__construct($logger);
         $updater = new TagsUpdater($tagsUpdatingRepository, $tagsDeletingRepository);
-        $this->__postEventsHandlerConstruct($transactionFactory, $postEventsTagsRepository, $updater);
+        $this->__postEventsHandlerConstruct($transactionFactory, $postEventsTagsRepository, $headersFindingRepository, $updater);
         $this->__postHeadersFinderConstruct($headersFindingRepository);
         $this->__tagsFinderConstruct($tagsFindingRepository);
         $this->__commentsEventsHandlerConstruct($transactionFactory, $commentsEventHandlingRepository);

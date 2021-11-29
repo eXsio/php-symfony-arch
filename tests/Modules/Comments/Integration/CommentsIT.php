@@ -5,10 +5,10 @@ namespace App\Tests\Modules\Comments\Integration;
 use App\Modules\Comments\Api\Command\BaselineCommentsCommand;
 use App\Modules\Comments\Api\Command\CreateCommentCommand;
 use App\Modules\Comments\Api\CommentsApiInterface;
+use App\Modules\Comments\Api\Event\Inbound\PostBaselinedCommentsIEvent;
 use App\Modules\Comments\Api\Event\Inbound\PostCreatedCommentsIEvent;
 use App\Modules\Comments\Api\Event\Inbound\PostDeletedCommentsIEvent;
 use App\Modules\Comments\Api\Event\Inbound\PostUpdatedCommentsIEvent;
-use App\Modules\Comments\Api\Event\Inbound\UserRenamedCommentsIEvent;
 use App\Modules\Comments\Api\Query\FindCommentsByPostIdQuery;
 use App\Modules\Comments\Api\Query\FindLatestCommentsQuery;
 use App\Modules\Comments\Api\Query\Response\FindLatestCommentsQueryResponse;
@@ -107,6 +107,47 @@ class CommentsIT extends IntegrationTest
     /**
      * @test
      */
+    public function shouldBaselineNonExistentPost()
+    {
+        //given: there was a PostCreatedIEvent to be published
+        $event = new PostBaselinedCommentsIEvent($this->getInboundEvent("Comments/PostBaselinedCommentsIEvent"));
+
+        //when: the Event was already published
+        $this->getCommentsApi()->onPostBaselined($event);
+
+        //then: Non-existent post was Baselined
+        $posts = $this->getCommentsApi()->findPostHeaders();
+        self::assertCount(1, $posts);
+        self::assertEquals(3, $posts[0]->getVersion());
+
+    }
+
+    /**
+     * @test
+     */
+    public function shouldBaselineAlreadyExistentPost()
+    {
+        //given: there was a Post Created
+        $postId = $this->createAndUpdatePost();
+
+        //given: there was a PostCreatedIEvent to be published
+        $data = $this->getInboundEvent("Comments/PostBaselinedCommentsIEvent");
+        $data['id'] = $postId;
+        $event = new PostBaselinedCommentsIEvent($data);
+
+        //when: the Event was already published
+        $this->getCommentsApi()->onPostBaselined($event);
+
+        //then: Non-existent post was Baselined
+        $posts = $this->getCommentsApi()->findPostHeaders();
+        self::assertCount(1, $posts);
+        self::assertEquals(3, $posts[0]->getVersion());
+
+    }
+
+    /**
+     * @test
+     */
     public function shouldBaselineCommentsForPost()
     {
         //given: there was a Post Created
@@ -138,6 +179,7 @@ class CommentsIT extends IntegrationTest
         self::assertEquals($postId, $events[0]->getData()['postId']);
         self::assertCount(2, json_decode($events[0]->getData()['comments']));
     }
+
 
     private function createAndUpdatePost(): Ulid
     {

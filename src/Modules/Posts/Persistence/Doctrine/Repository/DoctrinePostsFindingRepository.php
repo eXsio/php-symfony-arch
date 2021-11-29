@@ -83,7 +83,7 @@ class DoctrinePostsFindingRepository extends DoctrinePostsRepository implements 
         $dtoClass = PostForBaselineDto::class;
         $postClass = Post::class;
         $dql = "select new $dtoClass(
-                    p.id, p.title, p.body, p.summary, p.tags, p.updatedAt, p.version
+                    p.id, p.title, p.body, p.summary, p.tags, p.createdById, p.createdByName, p.createdAt, p.updatedAt, p.version
              ) from $postClass p where p.deletedAt is null";
         if ($from != null) {
             $dql = $dql . " and p.createdAt >= :from";

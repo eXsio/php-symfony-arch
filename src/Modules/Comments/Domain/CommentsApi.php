@@ -4,8 +4,8 @@ namespace App\Modules\Comments\Domain;
 
 use App\Infrastructure\Events\Api\ApplicationEventPublisherInterface;
 use App\Infrastructure\Events\Api\ApplicationEventSubscriber;
-use App\Infrastructure\Events\Api\EventHandlerReference;
 use App\Modules\Comments\Api\CommentsApiInterface;
+use App\Modules\Comments\Api\Event\Inbound\PostBaselinedCommentsIEvent;
 use App\Modules\Comments\Api\Event\Inbound\PostCreatedCommentsIEvent;
 use App\Modules\Comments\Api\Event\Inbound\PostDeletedCommentsIEvent;
 use App\Modules\Comments\Api\Event\Inbound\PostUpdatedCommentsIEvent;
@@ -69,7 +69,7 @@ class CommentsApi extends ApplicationEventSubscriber implements CommentsApiInter
     {
         parent::__construct($logger);
         $validator = new CommentsValidator($headersFindingRepository, $commentsFindingRepository);
-        $this->__postEventsHandlerConstruct($transactionFactory, $postEventsCommentsRepository, $commentsDeletionRepository);
+        $this->__postEventsHandlerConstruct($transactionFactory, $postEventsCommentsRepository, $commentsDeletionRepository, $headersFindingRepository);
         $this->__postHeadersFinderConstruct($headersFindingRepository);
         $this->__commentsCreatorConstruct($commentsCreationRepository, $commentsFindingRepository, $transactionFactory, $eventPublisher, $validator);
         $this->__commentsFinderConstruct($commentsFindingRepository);
@@ -85,6 +85,7 @@ class CommentsApi extends ApplicationEventSubscriber implements CommentsApiInter
             PostCreatedCommentsIEvent::class => 'onPostCreated',
             PostUpdatedCommentsIEvent::class => 'onPostUpdated',
             PostDeletedCommentsIEvent::class => 'onPostDeleted',
+            PostBaselinedCommentsIEvent::class => 'onPostBaselined',
         ];
     }
 }
