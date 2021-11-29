@@ -9,14 +9,12 @@ use App\Modules\Comments\Domain\Dto\CommentWithPostDto;
 use App\Modules\Comments\Domain\Dto\CreateNewCommentDto;
 use App\Modules\Comments\Domain\Dto\CreateNewCommentsPostHeaderDto;
 use App\Modules\Comments\Domain\Dto\DeleteExistingCommentsPostHeaderDto;
-use App\Modules\Comments\Domain\Dto\UpdatedCommentsPostHeadersUserNameDto;
 use App\Modules\Comments\Domain\Dto\UpdateExistingCommentsPostHeaderDto;
 use App\Modules\Comments\Domain\Repository\CommentsCreationRepositoryInterface;
 use App\Modules\Comments\Domain\Repository\CommentsDeletionRepositoryInterface;
 use App\Modules\Comments\Domain\Repository\CommentsFindingRepositoryInterface;
 use App\Modules\Comments\Domain\Repository\CommentsPostHeadersFindingRepositoryInterface;
 use App\Modules\Comments\Domain\Repository\CommentsPostsEventsHandlingRepositoryInterface;
-use App\Modules\Comments\Domain\Repository\CommentsSecurityEventsHandlingRepositoryInterface;
 use DusanKasan\Knapsack\Collection;
 use Symfony\Component\Uid\Ulid;
 
@@ -68,7 +66,7 @@ class InMemoryCommentsRepository implements
     public function deletePostHeader(DeleteExistingCommentsPostHeaderDto $deletedPostHeader): void
     {
         self::$postHeaders = self::$postHeaders->filter(
-           function ($header) use ($deletedPostHeader) {
+            function ($header) use ($deletedPostHeader) {
                 return $header->getId() != $deletedPostHeader->getId();
             }
         )->realize();

@@ -82,7 +82,7 @@ class TagsApi extends ApplicationEventSubscriber implements TagsApiInterface
     }
 
     /**
-     * @return array<string, EventHandlerReference>
+     * @return array<string, string>
      */
     protected function subscribe(): array
     {

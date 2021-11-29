@@ -38,7 +38,6 @@ class SecurityApi implements SecurityApiInterface
      * @param LoggedInUserProviderInterface $databaseLoggedInUserProvider
      * @param UserUpdatingRepositoryInterface $updatingRepository
      * @param UserFindingRepositoryInterface $findingRepository
-     * @param LoggerInterface $logger
      * @param ValidatorInterface $validator
      * @param ApplicationEventPublisherInterface $eventPublisher
      */
@@ -49,7 +48,6 @@ class SecurityApi implements SecurityApiInterface
         LoggedInUserProviderInterface       $databaseLoggedInUserProvider,
         UserUpdatingRepositoryInterface     $updatingRepository,
         UserFindingRepositoryInterface      $findingRepository,
-        LoggerInterface                     $logger,
         ValidatorInterface                  $validator,
         ApplicationEventPublisherInterface  $eventPublisher
     )

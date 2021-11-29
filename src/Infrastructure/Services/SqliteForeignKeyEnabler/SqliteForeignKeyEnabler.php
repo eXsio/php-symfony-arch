@@ -18,6 +18,6 @@ class SqliteForeignKeyEnabler implements EventSubscriberInterface
         if (strtolower($args->getConnection()->getDatabasePlatform()->getName()) !== 'sqlite') {
             return;
         }
-        $args->getConnection()->exec('PRAGMA foreign_keys = ON;');
+        $args->getConnection()->executeStatement('PRAGMA foreign_keys = ON;');
     }
 }
