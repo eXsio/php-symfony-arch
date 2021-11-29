@@ -53,11 +53,11 @@
               aria-label="Example icon-button with heart icon">
         <mat-icon>comment</mat-icon>
       </button>
-      <button *ngIf="user" [routerLink]="'/edit/'+post.id" mat-icon-button class="example-icon favorite-icon"
+      <button *ngIf="user && user.id == post.createdById" [routerLink]="'/edit/'+post.id" mat-icon-button class="example-icon favorite-icon"
               aria-label="Example icon-button with heart icon">
         <mat-icon>edit</mat-icon>
       </button>
-      <button *ngIf="user" (click)="delete()(post.id)" mat-icon-button class="example-icon favorite-icon"
+      <button *ngIf="user && user.id == post.createdById" (click)="delete()(post.id)" mat-icon-button class="example-icon favorite-icon"
               aria-label="Example icon-button with heart icon">
         <mat-icon>delete</mat-icon>
       </button>

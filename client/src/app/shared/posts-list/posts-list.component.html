@@ -14,8 +14,8 @@
 
     <mat-card-footer class="post-footer">
       <span class="post-comments" [routerLink]="'/post/'+post.id">Comments: {{post.commentsCount}}</span>
-      <span *ngIf="user" class="post-title-spacer"></span>
-      <div *ngIf="user" class="post-actions">
+      <span *ngIf="user  && user.id == post.createdById" class="post-title-spacer"></span>
+      <div *ngIf="user  && user.id == post.createdById" class="post-actions">
         <button [routerLink]="'/edit/'+post.id" mat-icon-button class="example-icon favorite-icon"
                 aria-label="Example icon-button with heart icon">
           <mat-icon>edit</mat-icon>

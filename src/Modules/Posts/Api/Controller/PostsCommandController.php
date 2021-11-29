@@ -9,7 +9,7 @@ use App\Modules\Posts\Api\Command\UpdatePostCommand;
 use App\Modules\Posts\Api\PostsApiInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Uid\Ulid;
 
@@ -46,8 +46,8 @@ class PostsCommandController extends AbstractController
     public function updatePost(UpdatePostCommand $command, string $id): Response
     {
         $command->setId(new Ulid($id));
-        if(!$this->isGranted(Permission::EDIT, $command)) {
-            throw new UnauthorizedHttpException(Permission::EDIT);
+        if (!$this->isGranted(Permission::EDIT, $command)) {
+            throw new HttpException(403);
         }
         $this->postsApi->updatePost($command);
         return new Response();
@@ -61,8 +61,8 @@ class PostsCommandController extends AbstractController
     public function deletePost(string $id): Response
     {
         $command = new DeletePostCommand(new Ulid($id));
-        if(!$this->isGranted(Permission::DELETE, $command)) {
-            throw new UnauthorizedHttpException(Permission::DELETE);
+        if (!$this->isGranted(Permission::DELETE, $command)) {
+            throw new HttpException(403);
         }
         $this->postsApi->deletePost($command);
         return new Response();
