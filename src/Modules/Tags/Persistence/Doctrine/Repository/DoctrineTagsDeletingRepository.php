@@ -4,6 +4,7 @@ namespace App\Modules\Tags\Persistence\Doctrine\Repository;
 
 use App\Modules\Tags\Domain\Repository\TagsDeletingRepositoryInterface;
 use App\Modules\Tags\Persistence\Doctrine\Entity\Tag;
+use App\Modules\Tags\Persistence\Doctrine\Entity\TagPost;
 
 class DoctrineTagsDeletingRepository extends DoctrineTagsRepository implements TagsDeletingRepositoryInterface
 {
@@ -18,10 +19,9 @@ class DoctrineTagsDeletingRepository extends DoctrineTagsRepository implements T
             ->where(
                 $expr->notIn('tag.id',
                     $em->createQueryBuilder()
-                        ->select('subPost.id')
-                        ->from(Tag::class, 'subTag')
-                        ->innerJoin('subTag.tagPosts', 'subTp')
-                        ->innerJoin('subTp.post', 'subPost')
+                        ->select('subTag.id')
+                        ->from(TagPost::class, 'subTp')
+                        ->innerJoin('subTp.tag', 'subTag')
                         ->getDQL()
                 )
             )

@@ -45,7 +45,7 @@ class InMemoryTagsRepository implements
         self::$tags = Collection::from([]);
     }
 
-   public function createPostHeader(CreateNewTagsPostHeaderDto $newPostHeader): void
+    public function createPostHeader(CreateNewTagsPostHeaderDto $newPostHeader): void
     {
         self::$postHeaders = self::$postHeaders->append(new InMemoryTagPostHeader(
             $newPostHeader->getId(),
@@ -59,7 +59,7 @@ class InMemoryTagsRepository implements
         ));
     }
 
-   public function updatePostHeader(UpdateExistingTagsPostHeaderDto $updatedPostHeader): void
+    public function updatePostHeader(UpdateExistingTagsPostHeaderDto $updatedPostHeader): void
     {
         foreach (self::$postHeaders
                      ->filter(function ($header) use ($updatedPostHeader) {
@@ -72,16 +72,16 @@ class InMemoryTagsRepository implements
         }
     }
 
-   public function deletePostHeader(DeleteExistingTagsPostHeaderDto $deletedPostHeader): void
+    public function deletePostHeader(DeleteExistingTagsPostHeaderDto $deletedPostHeader): void
     {
         self::$postHeaders = self::$postHeaders->filter(
-           function ($header) use ($deletedPostHeader) {
+            function ($header) use ($deletedPostHeader) {
                 return $header->getId() != $deletedPostHeader->getId();
             }
         )->realize();
     }
 
-   public function findPostHeaders(): array
+    public function findPostHeaders(): array
     {
         return self::$postHeaders
             ->map(function ($header) {
@@ -122,27 +122,6 @@ class InMemoryTagsRepository implements
             }
         })->realize();
         return $usedTags;
-    }
-
-    public function addPostToTag(string $tag, Ulid $postId): void
-    {
-        $tagObj = self::$tags->find(function ($tagObj) use ($tag) {
-            return $tagObj->getTag() == $tag;
-        });
-        if ($tagObj == null) {
-            $tagObj = new InMemoryTag(new Ulid(), $tag);
-            self::$tags = self::$tags->append($tagObj);
-        }
-        $post = self::$postHeaders->find(function ($post) use ($postId) {
-            return $post->getId() == $postId;
-        });
-        if ($post != null) {
-            $tags = $post->getTags();
-            array_push($tags, $tagObj);
-            $post->setTags($tags);
-        } else {
-            throw new \RuntimeException("No Post Header: " . $postId);
-        }
     }
 
     public function findTags(): array
@@ -209,7 +188,7 @@ class InMemoryTagsRepository implements
             ->size();
     }
 
-    public function removePostFromTags(Ulid $postId): void
+    public function updatePostTags(Ulid $postId, array $tags): void
     {
         self::$postHeaders
             ->filter(function ($post) use ($postId) {
@@ -218,6 +197,30 @@ class InMemoryTagsRepository implements
             ->each(function ($post) {
                 $post->setTags([]);
             })->realize();
+        foreach ($tags as $tag) {
+            $this->addPostToTag($tag, $postId);
+        }
+    }
+
+    private function addPostToTag(string $tag, Ulid $postId): void
+    {
+        $tagObj = self::$tags->find(function ($tagObj) use ($tag) {
+            return $tagObj->getTag() == $tag;
+        });
+        if ($tagObj == null) {
+            $tagObj = new InMemoryTag(new Ulid(), $tag);
+            self::$tags = self::$tags->append($tagObj);
+        }
+        $post = self::$postHeaders->find(function ($post) use ($postId) {
+            return $post->getId() == $postId;
+        });
+        if ($post != null) {
+            $tags = $post->getTags();
+            array_push($tags, $tagObj);
+            $post->setTags($tags);
+        } else {
+            throw new \RuntimeException("No Post Header: " . $postId);
+        }
     }
 
     public function updatePostCommentsCount(UpdatePostsCommentsCountDto $commentsCount): void

@@ -6,23 +6,53 @@ use App\Modules\Tags\Domain\Repository\TagsUpdatingRepositoryInterface;
 use App\Modules\Tags\Persistence\Doctrine\Entity\Tag;
 use App\Modules\Tags\Persistence\Doctrine\Entity\TagPost;
 use App\Modules\Tags\Persistence\Doctrine\Entity\TagPostHeader;
-use Doctrine\ORM\ORMException;
 use Symfony\Component\Uid\Ulid;
 
 class DoctrineTagsUpdatingRepository extends DoctrineTagsRepository implements TagsUpdatingRepositoryInterface
 {
+
     /**
-     * @param string $tag
      * @param Ulid $postId
-     * @throws ORMException
+     * @param array $tags
      */
-    public function addPostToTag(string $tag, Ulid $postId): void
+    public function updatePostTags(Ulid $postId, array $tags): void
     {
-        $tag = $this->fetchTag($tag);
-        $tagPost = new TagPost();
-        $tagPost->setTag($tag);
-        $tagPost->setPost($this->getEntityManager()->getReference(TagPostHeader::class, $postId));
-        $this->getEntityManager()->persist($tagPost);
+        $em = $this->getEntityManager();
+        $tags = $this->fetchTags($tags);
+        $post = $em->getRepository(TagPostHeader::class)->findOneBy(['id' => $postId]);
+        $existentTags = [];
+        foreach ($post->getTagPosts() as $tagPost) {
+            $existentTag = $tagPost->getTag();
+            if (!in_array($existentTag, $tags)) {
+                $em->remove($tagPost);
+            } else {
+                array_push($existentTags, $existentTag);
+            }
+        }
+        $em->flush();
+        foreach ($tags as $tag) {
+            if (!in_array($tag, $existentTags)) {
+                $tagPost = new TagPost();
+                $tagPost->setTag($tag);
+                $tagPost->setPost($post);
+                $em->persist($tagPost);
+            }
+        }
+        $em->flush();
+    }
+
+    /**
+     * @param array $tags
+     * @return array
+     */
+    private function fetchTags(array $tags): array
+    {
+        $result = [];
+        foreach ($tags as $tag) {
+            array_push($result, $this->fetchTag($tag));
+        }
+        $this->getEntityManager()->flush();
+        return $result;
     }
 
     /**
@@ -45,33 +75,11 @@ class DoctrineTagsUpdatingRepository extends DoctrineTagsRepository implements T
      */
     private function createTag(string $tag): Tag
     {
+        $em = $this->getEntityManager();
         $result = new Tag();
         $result->setTag($tag);
-        $this->getEntityManager()->persist($result);
+        $result->setId(new Ulid());
+        $em->persist($result);
         return $result;
-    }
-
-    /**
-     * @param Ulid $postId
-     * @throws ORMException
-     */
-    public function removePostFromTags(Ulid $postId): void
-    {
-        $em = $this->getEntityManager();
-        $post = $em->getReference(TagPostHeader::class, $postId);
-        $delRes = $em->createQueryBuilder()
-            ->delete(TagPost::class, 'tp')
-            ->where('tp.post = :post')
-            ->getQuery()
-            ->setParameter("post", $post)
-            ->execute();
-
-        ///var_dump("Del Res for $postId: ".$delRes);
-        $em->flush();
-//        foreach ($em->getRepository(TagPost::class)->findAll() as $tagPost) {
-//            var_dump("existent tp for post: ".$tagPost->getPost()->getTitle());
-//            var_dump("existent tp for post: ".$tagPost->getTag()->getTag());
-//
-//        }
     }
 }

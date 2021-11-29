@@ -14,8 +14,6 @@ class Tag
 {
 
     #[ORM\Id]
-    #[ORM\GeneratedValue(strategy: "CUSTOM")]
-    #[ORM\CustomIdGenerator(class: UlidGenerator::class)]
     #[ORM\Column(type: "ulid", unique: true)]
     private Ulid $id;
 

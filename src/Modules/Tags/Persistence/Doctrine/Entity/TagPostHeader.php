@@ -2,6 +2,7 @@
 
 namespace App\Modules\Tags\Persistence\Doctrine\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Ulid;
@@ -36,7 +37,7 @@ class TagPostHeader
     private int $version;
 
     #[ORM\OneToMany(mappedBy: 'post', targetEntity: TagPost::class)]
-    private Collection $tagPosts;
+    private ?Collection $tagPosts = null;
 
     #[ORM\Column(type: "json")]
     private array $flatTags;
@@ -110,6 +111,9 @@ class TagPostHeader
      */
     public function getTagPosts(): Collection
     {
+        if($this->tagPosts === null) {
+            $this->tagPosts = new ArrayCollection();
+        }
         return $this->tagPosts;
     }
 

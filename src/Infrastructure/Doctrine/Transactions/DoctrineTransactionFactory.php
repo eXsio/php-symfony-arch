@@ -19,10 +19,7 @@ abstract class DoctrineTransactionFactory extends DoctrineEntityManagerAware imp
 
    public function createTransaction($func): TransactionInterface
     {
-        $em = $this->getEntityManager();
-        if(!$em->isOpen()) {
-            $em = $this->managerRegistry->resetManager($this->getManagerName());
-        }
+        $em = $this->managerRegistry->resetManager($this->getManagerName());
         return new DoctrineTransaction($em, $func);
     }
 }

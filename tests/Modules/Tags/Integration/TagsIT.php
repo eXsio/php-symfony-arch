@@ -89,6 +89,7 @@ class TagsIT extends IntegrationTest
 
         //then: Post Header was created - no Exception was thrown
         self::assertNotNull($result);
+
         self::assertCount(1, $result);
         self::assertTrue(isset($result[0]));
         self::assertEquals('t2', $result[0]->getTag());

@@ -26,10 +26,7 @@ class TagsUpdater
      */
    public function createUpdateTags(Ulid $postId, array $tags): void
     {
-        $this->tagsUpdatingRepository->removePostFromTags($postId);
-        foreach ($tags as $tag) {
-            $this->tagsUpdatingRepository->addPostToTag($tag, $postId);
-        }
+        $this->tagsUpdatingRepository->updatePostTags($postId, $tags);
         $this->deleteEmptyTags();
     }
 

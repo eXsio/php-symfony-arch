@@ -7,13 +7,8 @@ use Symfony\Component\Uid\Ulid;
 interface TagsUpdatingRepositoryInterface
 {
     /**
-     * @param string $tag
      * @param Ulid $postId
+     * @param array $tags
      */
-    public function addPostToTag(string $tag, Ulid $postId): void;
-
-    /**
-     * @param Ulid $postId
-     */
-    public function removePostFromTags(Ulid $postId): void;
+    public function updatePostTags(Ulid $postId, array $tags): void;
 }
