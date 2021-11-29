@@ -38,16 +38,12 @@ class Post
     #[ORM\Column(type: "datetime")]
     private \DateTime $updatedAt;
 
-    #[ORM\Column(type: "datetime")]
+    #[ORM\Column(type: "datetime", nullable: true)]
     private \DateTime $deletedAt;
 
     #[ORM\Version]
     #[ORM\Column(type: "integer")]
     private int $version;
-
-    #[ORM\OneToOne(targetEntity: PostComments::class)]
-    #[ORM\JoinColumn(name: "id", referencedColumnName: "postId")]
-    private PostComments $comments;
 
     /**
      * @return Ulid
@@ -111,22 +107,6 @@ class Post
     public function setBody(string $body): void
     {
         $this->body = $body;
-    }
-
-    /**
-     * @return PostComments
-     */
-    public function getComments(): PostComments
-    {
-        return $this->comments;
-    }
-
-    /**
-     * @param PostComments $comments
-     */
-    public function setComments(PostComments $comments): void
-    {
-        $this->comments = $comments;
     }
 
     /**

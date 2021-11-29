@@ -8,6 +8,7 @@ use App\Modules\Posts\Domain\Dto\PostForBaselineDto;
 use App\Modules\Posts\Domain\Dto\PostHeaderDto;
 use App\Modules\Posts\Domain\Repository\PostsFindingRepositoryInterface;
 use App\Modules\Posts\Persistence\Doctrine\Entity\Post;
+use App\Modules\Posts\Persistence\Doctrine\Entity\PostComments;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Symfony\Component\Uid\Ulid;
@@ -23,10 +24,11 @@ class DoctrinePostsFindingRepository extends DoctrinePostsRepository implements 
     {
         $dtoClass = PostDto::class;
         $postClass = Post::class;
+        $commentClass = PostComments::class;
         $query = $this->getEntityManager()->createQuery(
             "select new $dtoClass(
                     p.id, p.title, p.body, p.tags, c.comments, p.createdById, p.createdByName, p.createdAt, p.updatedAt, p.version
-             ) from $postClass p join p.comments c where p.deletedAt is null and p.id = :id"
+             ) from $postClass p , $commentClass c where c.postId = p.id and  p.deletedAt is null and p.id = :id"
         );
         $query->setParameter("id", $id, "ulid");
         return $query->getResult()[0];
@@ -41,11 +43,12 @@ class DoctrinePostsFindingRepository extends DoctrinePostsRepository implements 
     {
         $dtoClass = PostHeaderDto::class;
         $postClass = Post::class;
+        $commentClass = PostComments::class;
         $query = $this->getEntityManager()->createQuery(
             "select new $dtoClass(
                         p.id, p.title, p.summary, p.tags, c.commentsCount, p.createdById, p.createdByName, p.createdAt
-             ) from $postClass p join p.comments c 
-             where p.deletedAt is null
+             ) from $postClass p, $commentClass c
+             where c.postId = p.id and p.deletedAt is null
              order by p.id desc"
         )
             ->setFirstResult(($pageNo - 1) * self::PAGE_SIZE)

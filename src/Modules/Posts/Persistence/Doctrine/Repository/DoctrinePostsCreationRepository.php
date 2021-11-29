@@ -17,16 +17,8 @@ class DoctrinePostsCreationRepository extends DoctrinePostsRepository implements
      */
    public function createPost(CreateNewPostDto $newPost): Ulid
     {
-
         $id = new Ulid();
         $em = $this->getEntityManager();
-
-        $comments = new PostComments();
-        $comments->setCommentsCount(0);
-        $comments->setComments([]);
-        $comments->setPostId($id);
-        $em->persist($comments);
-        $em->flush();
 
         $post = new Post();
         $post->setId($id);
@@ -34,14 +26,19 @@ class DoctrinePostsCreationRepository extends DoctrinePostsRepository implements
         $post->setSummary($newPost->getSummary());
         $post->setBody($newPost->getBody());
         $post->setTags($newPost->getTags());
-        $post->setComments($comments);
         $post->setCreatedAt($newPost->getCreatedAt());
         $post->setUpdatedAt($newPost->getCreatedAt());
         $post->setCreatedById($newPost->getCreatedById());
         $post->setCreatedByName($newPost->getCreatedByName());
-
-
         $em->persist($post);
+        $em->flush();
+
+        $comments = new PostComments();
+        $comments->setCommentsCount(0);
+        $comments->setComments([]);
+        $comments->setPostId($id);
+        $em->persist($comments);
+
         return $id;
     }
 }
