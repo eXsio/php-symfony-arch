@@ -96,9 +96,9 @@ class PostsApi extends ApplicationEventSubscriber implements PostsApiInterface
     protected function subscribe(): array
     {
         return [
-            CommentCreatedPostsIEvent::EVENT_NAME => EventHandlerReference::create('onCommentCreated', CommentCreatedPostsIEvent::class),
-            CommentsBaselinedPostsIEvent::EVENT_NAME => EventHandlerReference::create('onCommentsBaselined', CommentsBaselinedPostsIEvent::class),
-            UserRenamedPostsIEvent::EVENT_NAME => EventHandlerReference::create('onUserRenamed', UserRenamedPostsIEvent::class),
+            EventHandlerReference::create('onCommentCreated', CommentCreatedPostsIEvent::class),
+            EventHandlerReference::create('onCommentsBaselined', CommentsBaselinedPostsIEvent::class),
+            EventHandlerReference::create('onUserRenamed', UserRenamedPostsIEvent::class),
         ];
     }
 }

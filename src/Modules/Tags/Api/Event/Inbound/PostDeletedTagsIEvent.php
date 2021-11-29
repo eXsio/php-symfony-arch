@@ -16,7 +16,7 @@ class PostDeletedTagsIEvent extends ApplicationInboundEvent
      */
     public function __construct(array $data)
     {
-        parent::__construct(self::EVENT_NAME, $data);
+        parent::__construct($data);
         $this->id = $this->ulid('id');
     }
 
@@ -27,6 +27,15 @@ class PostDeletedTagsIEvent extends ApplicationInboundEvent
     public function getId(): Ulid
     {
         return $this->id;
+    }
+
+
+    /**
+     * @return string
+     */
+    public static function getName(): string
+    {
+        return self::EVENT_NAME;
     }
 
 }

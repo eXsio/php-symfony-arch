@@ -13,13 +13,12 @@ class CommentCreatedPostsIEvent extends ApplicationInboundEvent
 
     private array $comments;
 
-
     /**
      * @param array $data
      */
     public function __construct(array $data)
     {
-        parent::__construct(self::EVENT_NAME, $data);
+        parent::__construct( $data);
         $this->postId = $this->ulid('postId');
         $this->comments = [$this->array('comment')];
     }
@@ -39,6 +38,14 @@ class CommentCreatedPostsIEvent extends ApplicationInboundEvent
     public function getComments(): array
     {
         return $this->comments;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getName(): string
+    {
+        return self::EVENT_NAME;
     }
 
 }

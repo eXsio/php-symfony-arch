@@ -18,7 +18,7 @@ class CommentsBaselinedPostsIEvent extends ApplicationInboundEvent
      */
     public function __construct(array $data)
     {
-        parent::__construct(self::EVENT_NAME, $data);
+        parent::__construct($data);
         $this->postId = $this->ulid('postId');
         $this->comments = $this->array('comments');
     }
@@ -37,6 +37,14 @@ class CommentsBaselinedPostsIEvent extends ApplicationInboundEvent
     public function getComments(): array
     {
         return $this->comments;
+    }
+
+    /**
+     * @return string
+     */
+    public static function getName(): string
+    {
+        return self::EVENT_NAME;
     }
 
 

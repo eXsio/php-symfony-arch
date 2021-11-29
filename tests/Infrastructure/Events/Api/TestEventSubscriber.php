@@ -15,8 +15,8 @@ class TestEventSubscriber extends ApplicationEventSubscriber
     public function subscribe(): array
     {
         return [
-            'TEST_EVENT' => EventHandlerReference::create('handleEvent', TestApplicationInboundEvent::class),
-            'TEST_EVENT_ERROR' => EventHandlerReference::create('handleEventError', TestApplicationInboundErrorEvent::class)
+            EventHandlerReference::create('handleEvent', TestApplicationInboundEvent::class),
+            EventHandlerReference::create('handleEventError', TestApplicationInboundErrorEvent::class)
         ];
     }
 

@@ -6,9 +6,8 @@ use App\Infrastructure\Events\ApplicationInboundEvent;
 
 class TestApplicationInboundErrorEvent extends ApplicationInboundEvent
 {
-    public function __construct(array $data)
+    public static function getName(): string
     {
-        parent::__construct("TEST_EVENT_ERROR", $data);
+        return "TEST_EVENT_ERROR";
     }
-
 }

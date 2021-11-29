@@ -17,7 +17,7 @@ class UserRenamedTagsIEvent extends ApplicationInboundEvent
      */
     public function __construct(array $data)
     {
-        parent::__construct(self::EVENT_NAME, $data);
+        parent::__construct($data);
         $this->oldLogin = $this->string('oldLogin');
         $this->newLogin = $this->string('newLogin');
     }
@@ -38,5 +38,12 @@ class UserRenamedTagsIEvent extends ApplicationInboundEvent
         return $this->newLogin;
     }
 
+    /**
+     * @return string
+     */
+    public static function getName(): string
+    {
+        return self::EVENT_NAME;
+    }
 
 }

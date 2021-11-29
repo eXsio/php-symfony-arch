@@ -37,5 +37,10 @@ class EventHandlerReference
         return new EventHandlerReference($handlerMethodName, $inboundEventClass);
     }
 
+    public function getEventName(): string
+    {
+        return call_user_func($this->inboundEventClass . '::getName');
+    }
+
 
 }

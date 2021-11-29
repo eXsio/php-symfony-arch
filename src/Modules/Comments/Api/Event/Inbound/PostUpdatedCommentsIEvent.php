@@ -23,7 +23,7 @@ class PostUpdatedCommentsIEvent extends ApplicationInboundEvent
      */
     public function __construct(array $data)
     {
-        parent::__construct(self::EVENT_NAME, $data);
+        parent::__construct($data);
         $this->id = $this->ulid('id');
         $this->title = $this->string('title');
         $this->tags = $this->array('tags');
@@ -61,5 +61,14 @@ class PostUpdatedCommentsIEvent extends ApplicationInboundEvent
     public function getLastVersion(): int
     {
         return $this->lastVersion;
+    }
+
+
+    /**
+     * @return string
+     */
+    public static function getName(): string
+    {
+        return self::EVENT_NAME;
     }
 }

@@ -18,11 +18,9 @@ abstract class ApplicationInboundEvent
     private Ulid $_eventId;
 
     /**
-     * @param string $name
      * @param array $data
      */
     public function __construct(
-        private string $name,
         private array  $data
     )
     {
@@ -118,7 +116,8 @@ abstract class ApplicationInboundEvent
             if ($nullable) {
                 return null;
             }
-            throw new RuntimeException("Event $this->name requires a field '$fieldName' to be present");
+            $name = call_user_func(get_called_class() . '::getName');
+            throw new RuntimeException("Event $name requires a field '$fieldName' to be present");
         }
         return $this->data[$fieldName];
     }
@@ -138,6 +137,8 @@ abstract class ApplicationInboundEvent
     {
         return json_encode($this->data);
     }
+
+    public static abstract function getName(): string;
 
 
 }

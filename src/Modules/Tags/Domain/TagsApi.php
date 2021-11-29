@@ -61,14 +61,14 @@ class TagsApi extends ApplicationEventSubscriber implements TagsApiInterface
      * @param TagsSecurityEventsHandlingRepositoryInterface $securityEventsHandlingRepository
      */
     public function __construct(
-        TagsTransactionFactoryInterface              $transactionFactory,
-        TagsPostEventsHandlingRepositoryInterface    $postEventsTagsRepository,
-        TagsPostHeadersFindingRepositoryInterface    $headersFindingRepository,
-        LoggerInterface                              $logger,
-        TagsUpdatingRepositoryInterface              $tagsUpdatingRepository,
-        TagsDeletingRepositoryInterface              $tagsDeletingRepository,
-        TagsFindingRepositoryInterface               $tagsFindingRepository,
-        TagsCommentsEventHandlingRepositoryInterface $commentsEventHandlingRepository,
+        TagsTransactionFactoryInterface               $transactionFactory,
+        TagsPostEventsHandlingRepositoryInterface     $postEventsTagsRepository,
+        TagsPostHeadersFindingRepositoryInterface     $headersFindingRepository,
+        LoggerInterface                               $logger,
+        TagsUpdatingRepositoryInterface               $tagsUpdatingRepository,
+        TagsDeletingRepositoryInterface               $tagsDeletingRepository,
+        TagsFindingRepositoryInterface                $tagsFindingRepository,
+        TagsCommentsEventHandlingRepositoryInterface  $commentsEventHandlingRepository,
         TagsSecurityEventsHandlingRepositoryInterface $securityEventsHandlingRepository
     )
     {
@@ -87,11 +87,11 @@ class TagsApi extends ApplicationEventSubscriber implements TagsApiInterface
     protected function subscribe(): array
     {
         return [
-            PostCreatedTagsIEvent::EVENT_NAME => EventHandlerReference::create('onPostCreated', PostCreatedTagsIEvent::class),
-            PostUpdatedTagsIEvent::EVENT_NAME => EventHandlerReference::create('onPostUpdated', PostUpdatedTagsIEvent::class),
-            PostDeletedTagsIEvent::EVENT_NAME => EventHandlerReference::create('onPostDeleted', PostDeletedTagsIEvent::class),
-            CommentsCountUpdatedTagsIEvent::EVENT_NAME => EventHandlerReference::create('onCommentsCountUpdated', CommentsCountUpdatedTagsIEvent::class),
-            UserRenamedTagsIEvent::EVENT_NAME => EventHandlerReference::create('onUserRenamed', UserRenamedTagsIEvent::class),
+            EventHandlerReference::create('onPostCreated', PostCreatedTagsIEvent::class),
+            EventHandlerReference::create('onPostUpdated', PostUpdatedTagsIEvent::class),
+            EventHandlerReference::create('onPostDeleted', PostDeletedTagsIEvent::class),
+            EventHandlerReference::create('onCommentsCountUpdated', CommentsCountUpdatedTagsIEvent::class),
+            EventHandlerReference::create('onUserRenamed', UserRenamedTagsIEvent::class),
         ];
     }
 }

@@ -16,7 +16,7 @@ class PostDeletedCommentsIEvent extends ApplicationInboundEvent
      */
     public function __construct(array $data)
     {
-        parent::__construct(PostDeletedCommentsIEvent::EVENT_NAME, $data);
+        parent::__construct($data);
         $this->id = $this->ulid('id');
     }
 
@@ -29,4 +29,12 @@ class PostDeletedCommentsIEvent extends ApplicationInboundEvent
         return $this->id;
     }
 
+
+    /**
+     * @return string
+     */
+    public static function getName(): string
+    {
+        return self::EVENT_NAME;
+    }
 }

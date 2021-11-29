@@ -54,15 +54,15 @@ abstract class ApplicationEventSubscriber implements MessageHandlerInterface
     {
         return $this
             ->subscribedHandlers
-            ->filter(function ($value, $key) use ($event) {
-                return $key == $event->getName();
+            ->filter(function ($ref) use ($event) {
+                return $ref->getEventName() == $event->getName();
             })->map(function ($value) {
                 return $value;
             })->toArray();
     }
 
     /**
-     * @return array<string, EventHandlerReference>
+     * @return array<EventHandlerReference>
      */
     protected abstract function subscribe(): array;
 

@@ -53,7 +53,6 @@ class CommentsApi extends ApplicationEventSubscriber implements CommentsApiInter
      * @param CommentsCreationRepositoryInterface $commentsCreationRepository
      * @param CommentsFindingRepositoryInterface $commentsFindingRepository
      * @param CommentsDeletionRepositoryInterface $commentsDeletionRepository
-     * @param CommentsSecurityEventsHandlingRepositoryInterface $securityEventsHandlingRepository
      * @param ApplicationEventPublisherInterface $eventPublisher
      * @param LoggerInterface $logger
      */
@@ -83,9 +82,9 @@ class CommentsApi extends ApplicationEventSubscriber implements CommentsApiInter
     protected function subscribe(): array
     {
         return [
-            PostCreatedCommentsIEvent::EVENT_NAME => EventHandlerReference::create('onPostCreated', PostCreatedCommentsIEvent::class),
-            PostUpdatedCommentsIEvent::EVENT_NAME => EventHandlerReference::create('onPostUpdated', PostUpdatedCommentsIEvent::class),
-            PostDeletedCommentsIEvent::EVENT_NAME => EventHandlerReference::create('onPostDeleted', PostDeletedCommentsIEvent::class),
+            EventHandlerReference::create('onPostCreated', PostCreatedCommentsIEvent::class),
+            EventHandlerReference::create('onPostUpdated', PostUpdatedCommentsIEvent::class),
+            EventHandlerReference::create('onPostDeleted', PostDeletedCommentsIEvent::class),
         ];
     }
 }
