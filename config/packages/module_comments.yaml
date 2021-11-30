@@ -13,9 +13,6 @@ services:
   App\Modules\Comments\Domain\Repository\CommentsPostsEventsHandlingRepositoryInterface:
     class: App\Modules\Comments\Persistence\Doctrine\Repository\DoctrineCommentsPostsEventsHandlingRepository
 
-  App\Modules\Comments\Domain\Repository\CommentsSecurityEventsHandlingRepositoryInterface:
-    class: App\Modules\Comments\Persistence\Doctrine\Repository\DoctrineCommentsSecurityEventsHandlingRepository
-
   App\Modules\Comments\Domain\Repository\CommentsPostHeadersFindingRepositoryInterface:
     class: App\Modules\Comments\Persistence\Doctrine\Repository\DoctrineCommentsPostHeadersFindingRepository
 

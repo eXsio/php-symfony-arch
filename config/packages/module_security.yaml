@@ -36,14 +36,5 @@ services:
   App\Modules\Security\Domain\Repository\UserFindingRepositoryInterface:
     class: App\Modules\Security\Persistence\Doctrine\Repository\DoctrineUserFindingRepository
 
-  App\Modules\Security\Domain\Repository\SecurityPostEventsHandlingRepositoryInterface:
-    class: App\Modules\Security\Persistence\Doctrine\Repository\DoctrineSecurityPostEventsHandlingRepository
-
-  App\Modules\Security\Domain\Repository\SecurityCommentsEventHandlingRepositoryInterface:
-    class: App\Modules\Security\Persistence\Doctrine\Repository\DoctrineSecurityCommentsEventHandlingRepository
-
-  App\Modules\Security\Domain\Repository\UserPostHeadersFindingRepositoryInterface:
-    class: App\Modules\Security\Persistence\Doctrine\Repository\DoctrineUserPostHeadersFindingRepository
-
   App\Infrastructure\Security\LoggedInUserProviderInterface $databaseLoggedInUserProvider:
     class: App\Modules\Security\Domain\Provider\SymfonyDatabaseLoggedInUserProvider
