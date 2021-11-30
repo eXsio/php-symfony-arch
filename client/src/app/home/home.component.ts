@@ -54,6 +54,7 @@ export class HomeComponent extends PostActionsAwareComponent {
 
   afterDelete(): void {
     this.loadPosts(this.pageNo);
+    this.loadTags();
   }
 
 

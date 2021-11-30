@@ -61,15 +61,15 @@ class InMemoryTagsRepository implements
 
     public function updatePostHeader(UpdateExistingTagsPostHeaderDto $updatedPostHeader): void
     {
-        foreach (self::$postHeaders
-                     ->filter(function ($header) use ($updatedPostHeader) {
-                         return $header->getId() == $updatedPostHeader->getId() && $header->getVersion() <= $updatedPostHeader->getVersion();
-                     })
-                     ->toArray() as $header) {
-            $header->setTitle($updatedPostHeader->getTitle());
-            $header->setSummary($updatedPostHeader->getSummary());
-            $header->setVersion($updatedPostHeader->getVersion());
-        }
+        self::$postHeaders
+            ->filter(function ($header) use ($updatedPostHeader) {
+                return $header->getId() == $updatedPostHeader->getId() && $header->getVersion() <= $updatedPostHeader->getVersion();
+            })
+            ->each(function ($header) use ($updatedPostHeader) {
+                $header->setTitle($updatedPostHeader->getTitle());
+                $header->setSummary($updatedPostHeader->getSummary());
+                $header->setVersion($updatedPostHeader->getVersion());
+            })->realize();
     }
 
     public function deletePostHeader(DeleteExistingTagsPostHeaderDto $deletedPostHeader): void

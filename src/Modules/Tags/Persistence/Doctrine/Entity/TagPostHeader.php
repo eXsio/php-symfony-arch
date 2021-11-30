@@ -36,7 +36,7 @@ class TagPostHeader
     #[ORM\Column(type: "integer")]
     private int $version;
 
-    #[ORM\OneToMany(mappedBy: 'post', targetEntity: TagPost::class)]
+    #[ORM\OneToMany(mappedBy: 'post', targetEntity: TagPost::class, cascade: ['remove'], orphanRemoval: true)]
     private ?Collection $tagPosts = null;
 
     #[ORM\Column(type: "json")]
@@ -111,7 +111,7 @@ class TagPostHeader
      */
     public function getTagPosts(): Collection
     {
-        if($this->tagPosts === null) {
+        if ($this->tagPosts === null) {
             $this->tagPosts = new ArrayCollection();
         }
         return $this->tagPosts;

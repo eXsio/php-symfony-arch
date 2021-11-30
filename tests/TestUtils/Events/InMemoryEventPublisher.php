@@ -36,15 +36,13 @@ class InMemoryEventPublisher implements ApplicationEventPublisherInterface
      */
     public static function get(string $eventClass): array
     {
-        $result = [];
-        foreach (InMemoryEventPublisher::$publishedEvents
-                     ->filter(function ($event) use ($eventClass) {
-                         return $event::class == $eventClass;
-                     })
-                     ->toArray() as $event) {
-            array_push($result, $event);
-        }
-        return $result;
+        return array_values(
+            InMemoryEventPublisher::$publishedEvents
+                ->filter(function ($event) use ($eventClass) {
+                    return $event::class == $eventClass;
+                })
+                ->toArray()
+        );
     }
 
     public static function assertEventData(array $expectedData, ApplicationOutboundEvent $event)

@@ -4,12 +4,13 @@ namespace App\Tests\TestUtils\Transaction;
 
 use App\Infrastructure\Transactions\TransactionInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use DusanKasan\Knapsack\Collection;
 
 class InMemoryTransaction implements TransactionInterface
 {
 
-    private ArrayCollection $afterCommit;
-    private ArrayCollection $afterRollback;
+    private Collection $afterCommit;
+    private Collection $afterRollback;
 
     /**
      * @param mixed $func
@@ -18,8 +19,8 @@ class InMemoryTransaction implements TransactionInterface
         private mixed $func
     )
     {
-        $this->afterCommit = new ArrayCollection();
-        $this->afterRollback = new ArrayCollection();
+        $this->afterCommit = Collection::from([]);
+        $this->afterRollback = Collection::from([]);
     }
 
     /**
@@ -31,14 +32,18 @@ class InMemoryTransaction implements TransactionInterface
         try {
             $handler = $this->func;
             $result = $handler();
-            foreach ($this->afterCommit->toArray() as $rollbackFn) {
-                $rollbackFn($result);
-            }
+            $this->afterCommit
+                ->each(function ($successFn) use ($result) {
+                    $successFn($result);
+                })
+                ->realize();
             return $result;
         } catch (\Exception $e) {
-            foreach ($this->afterRollback->toArray() as $rollbackFn) {
-                $rollbackFn();
-            }
+            $this->afterRollback
+                ->each(function ($rollbackFn) {
+                    $rollbackFn();
+                })
+                ->realize();
             throw $e;
         }
     }
@@ -50,7 +55,7 @@ class InMemoryTransaction implements TransactionInterface
      */
    public function afterCommit($func): TransactionInterface
     {
-        $this->afterCommit->add($func);
+        $this->afterCommit = $this->afterCommit->append($func);
         return $this;
     }
 
@@ -60,7 +65,7 @@ class InMemoryTransaction implements TransactionInterface
      */
    public function afterRollback($func): TransactionInterface
     {
-        $this->afterRollback->add($func);
+        $this->afterRollback = $this->afterRollback->append($func);
         return $this;
     }
 }

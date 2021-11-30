@@ -3,13 +3,13 @@
 namespace App\Infrastructure\Doctrine\Transactions;
 
 use App\Infrastructure\Transactions\TransactionInterface;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
+use DusanKasan\Knapsack\Collection;
 
 class DoctrineTransaction implements TransactionInterface
 {
-    private ArrayCollection $afterCommit;
-    private ArrayCollection $afterRollback;
+    private Collection $afterCommit;
+    private Collection $afterRollback;
 
     /**
      * @param EntityManagerInterface $entityManager
@@ -20,8 +20,8 @@ class DoctrineTransaction implements TransactionInterface
         private mixed                  $func
     )
     {
-        $this->afterCommit = new ArrayCollection();
-        $this->afterRollback = new ArrayCollection();
+        $this->afterCommit = Collection::from([]);
+        $this->afterRollback = Collection::from([]);
     }
 
     /**
@@ -35,15 +35,19 @@ class DoctrineTransaction implements TransactionInterface
     {
         try {
             $result = $this->entityManager->wrapInTransaction($this->func);
-            foreach ($this->afterCommit->toArray() as $rollbackFn) {
-                $rollbackFn($result);
-            }
+            $this->afterCommit
+                ->each(function ($successFn) use ($result) {
+                    $successFn($result);
+                })
+                ->realize();
             $this->cleanup();
             return $result;
         } catch (\Exception $e) {
-            foreach ($this->afterRollback->toArray() as $rollbackFn) {
-                $rollbackFn();
-            }
+            $this->afterRollback
+                ->each(function ($rollbackFn) {
+                    $rollbackFn();
+                })
+                ->realize();
             $this->cleanup();
             throw $e;
         }
@@ -55,7 +59,7 @@ class DoctrineTransaction implements TransactionInterface
      */
     public function afterCommit($func): self
     {
-        $this->afterCommit->add($func);
+        $this->afterCommit = $this->afterCommit->append($func);
         return $this;
     }
 
@@ -65,7 +69,7 @@ class DoctrineTransaction implements TransactionInterface
      */
     public function afterRollback($func): self
     {
-        $this->afterRollback->add($func);
+        $this->afterRollback = $this->afterRollback->append($func);
         return $this;
     }
 

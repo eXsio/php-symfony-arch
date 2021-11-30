@@ -41,7 +41,7 @@ class InMemoryPostsRepository implements
     }
 
 
-   public function createPost(CreateNewPostDto $newPost): Ulid
+    public function createPost(CreateNewPostDto $newPost): Ulid
     {
         $id = new Ulid();
         self::$posts = self::$posts->append(
@@ -61,7 +61,7 @@ class InMemoryPostsRepository implements
         return $id;
     }
 
-   public function deletePost(DeleteExistingPostDto $dto): void
+    public function deletePost(DeleteExistingPostDto $dto): void
     {
         self::$posts = Collection::from(
             self::$posts
@@ -72,20 +72,21 @@ class InMemoryPostsRepository implements
         );
     }
 
-   public function updatePost(UpdateExistingPostDto $dto): void
+    public function updatePost(UpdateExistingPostDto $dto): void
     {
-        foreach (self::$posts
-                     ->filter(function ($post) use ($dto) {
-                         return $post->getId() == $dto->getId();
-                     })
-                     ->toArray() as $post) {
-            $post->setTitle($dto->getTitle());
-            $post->setBody($dto->getBody());
-            $post->setSummary($dto->getSummary());
-            $post->setTags($dto->getTags());
-            $post->setUpdatedAt(new \DateTime());
-            $post->setVersion($post->getVersion() + 1);
-        }
+        self::$posts
+            ->filter(function ($post) use ($dto) {
+                return $post->getId() == $dto->getId();
+            })
+            ->each(function ($post) use ($dto) {
+                $post->setTitle($dto->getTitle());
+                $post->setBody($dto->getBody());
+                $post->setSummary($dto->getSummary());
+                $post->setTags($dto->getTags());
+                $post->setUpdatedAt(new \DateTime());
+                $post->setVersion($post->getVersion() + 1);
+            })
+            ->realize();
     }
 
     public function findPost(Ulid $id): ?PostDto
@@ -111,20 +112,21 @@ class InMemoryPostsRepository implements
     {
         $from = ($pageNo - 1) * self::PAGE_SIZE;
         $to = $from + self::PAGE_SIZE;
-        $slice = self::$posts->slice($from, $to)->toArray();
-        $data = [];
-        foreach ($slice as $item) {
-            array_push($data, new PostHeaderDto(
-                $item->getId(),
-                $item->getTitle(),
-                $item->getSummary(),
-                $item->getTags(),
-                count($item->getComments()),
-                $item->getCreatedById(),
-                $item->getCreatedByName(),
-                $item->getCreatedAt()
-            ));
-        }
+        $data = self::$posts
+            ->slice($from, $to)
+            ->map(function ($item) {
+                return new PostHeaderDto(
+                    $item->getId(),
+                    $item->getTitle(),
+                    $item->getSummary(),
+                    $item->getTags(),
+                    count($item->getComments()),
+                    $item->getCreatedById(),
+                    $item->getCreatedByName(),
+                    $item->getCreatedAt()
+                );
+            })
+            ->toArray();
         return new Page($data, self::$posts->size(), $pageNo, self::PAGE_SIZE);
     }
 
@@ -136,12 +138,12 @@ class InMemoryPostsRepository implements
         if ($post == null) {
             throw new \RuntimeException("Unable to Find Post For Comment");
         }
-        if($append) {
-            $data = $post->getComments();
+        if ($append) {
+            $data = Collection::from($post->getComments());
             foreach ($updatedComments->getComments() as $newComment) {
-                array_push($data, $newComment);
+                $data = $data->append($newComment);
             }
-            $post->setComments($data);
+            $post->setComments($data->toArray());
         } else {
             $post->setComments($updatedComments->getComments());
         }

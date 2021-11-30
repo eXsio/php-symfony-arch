@@ -20,7 +20,21 @@ class DoctrineTagsUpdatingRepository extends DoctrineTagsRepository implements T
         $em = $this->getEntityManager();
         $tags = $this->fetchTags($tags);
         $post = $em->getRepository(TagPostHeader::class)->findOneBy(['id' => $postId]);
+        $existentTags = $this->removeDeletedTags($post, $tags);
+        $em->flush();
+        $this->addNewTags($tags, $existentTags, $post);
+        $em->flush();
+    }
+
+    /**
+     * @param mixed $post
+     * @param array $tags
+     * @return array
+     */
+    private function removeDeletedTags(mixed $post, array $tags): array
+    {
         $existentTags = [];
+        $em = $this->getEntityManager();
         foreach ($post->getTagPosts() as $tagPost) {
             $existentTag = $tagPost->getTag();
             if (!in_array($existentTag, $tags)) {
@@ -29,7 +43,17 @@ class DoctrineTagsUpdatingRepository extends DoctrineTagsRepository implements T
                 array_push($existentTags, $existentTag);
             }
         }
-        $em->flush();
+        return $existentTags;
+    }
+
+    /**
+     * @param array $tags
+     * @param array $existentTags
+     * @param TagPostHeader $post
+     */
+    private function addNewTags(array $tags, array $existentTags, TagPostHeader $post): void
+    {
+        $em = $this->getEntityManager();
         foreach ($tags as $tag) {
             if (!in_array($tag, $existentTags)) {
                 $tagPost = new TagPost();
@@ -38,7 +62,6 @@ class DoctrineTagsUpdatingRepository extends DoctrineTagsRepository implements T
                 $em->persist($tagPost);
             }
         }
-        $em->flush();
     }
 
     /**

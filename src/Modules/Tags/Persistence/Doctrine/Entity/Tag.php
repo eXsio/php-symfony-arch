@@ -18,7 +18,7 @@ class Tag
     #[ORM\Column(type: "string", unique: true)]
     private string $tag;
 
-    #[ORM\OneToMany(mappedBy: 'tag', targetEntity: TagPost::class)]
+    #[ORM\OneToMany(mappedBy: 'tag', targetEntity: TagPost::class, cascade: ['remove'], orphanRemoval: true)]
     private Collection $tagPosts;
 
 
@@ -69,8 +69,6 @@ class Tag
     {
         $this->tagPosts = $tagPosts;
     }
-
-
 
 
 }

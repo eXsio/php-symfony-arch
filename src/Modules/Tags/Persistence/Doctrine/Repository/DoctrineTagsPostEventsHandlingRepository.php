@@ -6,7 +6,6 @@ use App\Modules\Tags\Domain\Dto\CreateNewTagsPostHeaderDto;
 use App\Modules\Tags\Domain\Dto\DeleteExistingTagsPostHeaderDto;
 use App\Modules\Tags\Domain\Dto\UpdateExistingTagsPostHeaderDto;
 use App\Modules\Tags\Domain\Repository\TagsPostEventsHandlingRepositoryInterface;
-use App\Modules\Tags\Persistence\Doctrine\Entity\TagPost;
 use App\Modules\Tags\Persistence\Doctrine\Entity\TagPostHeader;
 
 class DoctrineTagsPostEventsHandlingRepository extends DoctrineTagsRepository implements TagsPostEventsHandlingRepositoryInterface
@@ -14,7 +13,7 @@ class DoctrineTagsPostEventsHandlingRepository extends DoctrineTagsRepository im
     /**
      * @param CreateNewTagsPostHeaderDto $newPostHeader
      */
-   public function createPostHeader(CreateNewTagsPostHeaderDto $newPostHeader): void
+    public function createPostHeader(CreateNewTagsPostHeaderDto $newPostHeader): void
     {
         $post = new TagPostHeader();
         $post->setId($newPostHeader->getId());
@@ -32,7 +31,7 @@ class DoctrineTagsPostEventsHandlingRepository extends DoctrineTagsRepository im
     /**
      * @param UpdateExistingTagsPostHeaderDto $updatedPostHeader
      */
-   public function updatePostHeader(UpdateExistingTagsPostHeaderDto $updatedPostHeader): void
+    public function updatePostHeader(UpdateExistingTagsPostHeaderDto $updatedPostHeader): void
     {
         $this->getEntityManager()
             ->createQueryBuilder()
@@ -54,25 +53,9 @@ class DoctrineTagsPostEventsHandlingRepository extends DoctrineTagsRepository im
     /**
      * @param DeleteExistingTagsPostHeaderDto $deletedPostHeader
      */
-   public function deletePostHeader(DeleteExistingTagsPostHeaderDto $deletedPostHeader): void
+    public function deletePostHeader(DeleteExistingTagsPostHeaderDto $deletedPostHeader): void
     {
-        $entityManager = $this->getEntityManager();
-        $entityManager
-            ->createQueryBuilder()
-            ->delete(TagPost::class, 'tp')
-            ->where('tp.post = :post')
-            ->setParameter('post', $entityManager->getReference(TagPostHeader::class, $deletedPostHeader->getId()))
-            ->getQuery()
-            ->execute();
-
-        $entityManager->flush();
-
-        $entityManager
-            ->createQueryBuilder()
-            ->delete(TagPostHeader::class, 'p')
-            ->where('p.id = :id')
-            ->setParameter('id', $deletedPostHeader->getId(), 'ulid')
-            ->getQuery()
-            ->execute();
+        $em = $this->getEntityManager();
+        $em->remove($em->getReference(TagPostHeader::class, $deletedPostHeader->getId()));
     }
 }

@@ -4,6 +4,7 @@ namespace App\Modules\Tags\Domain;
 
 use App\Infrastructure\Events\Api\ApplicationEventSubscriber;
 use App\Modules\Tags\Api\Event\Inbound\CommentsCountUpdatedTagsIEvent;
+use App\Modules\Tags\Api\Event\Inbound\PostBaselinedTagsIEvent;
 use App\Modules\Tags\Api\Event\Inbound\PostCreatedTagsIEvent;
 use App\Modules\Tags\Api\Event\Inbound\PostDeletedTagsIEvent;
 use App\Modules\Tags\Api\Event\Inbound\PostUpdatedTagsIEvent;
@@ -86,6 +87,7 @@ class TagsApi extends ApplicationEventSubscriber implements TagsApiInterface
     protected function subscribe(): array
     {
         return [
+            PostBaselinedTagsIEvent::class => 'onPostBaselined',
             PostCreatedTagsIEvent::class => 'onPostCreated',
             PostUpdatedTagsIEvent::class => 'onPostUpdated',
             PostDeletedTagsIEvent::class => 'onPostDeleted',
