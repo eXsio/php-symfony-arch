@@ -46,5 +46,3 @@ npm run start-with-backend
 ```
 
 - navigate to http://localhost:4200/
-  - user: admin@exsio.com
-  - pwd: admin
