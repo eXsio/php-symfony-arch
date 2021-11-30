@@ -10,6 +10,13 @@ trait SecurityHttpTrait
 
     use SerializationTrait;
 
+    public function logout(): string
+    {
+        $client = $this->getClient();
+        $client->request('POST', '/api/logout/');
+        return $client->getResponse()->getContent();
+    }
+
     /**
      * @return KernelBrowser
      */

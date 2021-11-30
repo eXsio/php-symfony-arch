@@ -21,6 +21,19 @@ class SecurityIT extends SecurityIntegrationTest
     /**
      * @test
      */
+    public function shouldLogOut(): void
+    {
+        //when:
+        $response = $this->logout();
+
+        //then:
+        self::assertResponseIsSuccessful();
+        self::assertEquals("Successfully Logged Out", $response);
+    }
+
+    /**
+     * @test
+     */
     public function shouldCreateNewUserAndUpdateIt(): void
     {
         //given: There is a new user to be created
