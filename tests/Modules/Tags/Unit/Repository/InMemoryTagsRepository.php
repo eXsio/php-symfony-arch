@@ -126,11 +126,14 @@ class InMemoryTagsRepository implements
 
     public function findTags(): array
     {
-        return array_values(self::$tags->map(function ($tag) {
-            return new TagDto($tag->getTag(), $this->countPosts($tag));
-        })->sort(function ($tag1, $tag2) {
-            return $tag1->getPostsCount() > $tag2->getPostsCount();
-        })->toArray());
+        return array_values(
+            self::$tags
+                ->map(function ($tag) {
+                    return new TagDto($tag->getTag(), $this->countPosts($tag));
+                })->sort(function ($tag1, $tag2) {
+                    return $tag1->getPostsCount() > $tag2->getPostsCount();
+                })->toArray()
+        );
     }
 
     public function findPostHeadersByTag(string $tag, int $pageNo): Page
@@ -141,7 +144,7 @@ class InMemoryTagsRepository implements
             ->filter(function ($post) use ($tag) {
                 return Collection::from($post->getTags())
                         ->filter(function ($postTag) use ($tag) {
-                            return $postTag->getTag() == $tag->getTag();
+                            return $postTag->getTag() == $tag;
                         })
                         ->size() > 0;
             })->size();
@@ -149,7 +152,7 @@ class InMemoryTagsRepository implements
             ->filter(function ($post) use ($tag) {
                 return Collection::from($post->getTags())
                         ->filter(function ($postTag) use ($tag) {
-                            return $postTag->getTag() == $tag->getTag();
+                            return $postTag->getTag() == $tag;
                         })
                         ->size() > 0;
             })
