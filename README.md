@@ -7,7 +7,9 @@
 
 This is a Demo Application made as a Proof of Concept of a Modular, Microservice-ready Architecture for Symfony Framework. 
  It contains a simple, but fully functional Blog, similar in scope to the [Official Symfony Demo](https://github.com/symfony/demo). 
-For More information please visit [Kode Krunch](https://www.kode-krunch.com/).
+For More information please visit [Kode Krunch](https://www.kode-krunch.com/):
+- [PHP: Symfony Demo meets Modular, Microservice-ready Architecture - Part 1](https://www.kode-krunch.com/2021/11/php-symfony-modular-architecture-demo-part-1.html)
+- [PHP: Symfony Demo meets Modular, Microservice-ready Architecture - Part 2](https://www.kode-krunch.com/2021/12/php-symfony-modular-architecture-demo-part-2.html)
 
 ## Running the app locally:
 
