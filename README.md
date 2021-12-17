@@ -36,7 +36,7 @@ git clone https://github.com/eXsio/php-symfony-arch.git
 cd php-symfony-arch/
 composer install
 bin/console lexik:jwt:generate-keypair
-symfony server:start
+symfony server:start --no-tls
 ```
 
 ### Running the Front-end:
