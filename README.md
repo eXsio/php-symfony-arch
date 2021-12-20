@@ -47,4 +47,8 @@ npm install
 npm run start-with-backend
 ```
 
-- navigate to http://localhost:4200/
+### navigate to:
+
+```
+http://localhost:4200/
+```
